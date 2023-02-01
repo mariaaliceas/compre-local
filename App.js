@@ -1,153 +1,316 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import RNPickerSelect from "react-native-picker-select";
+import Icon from 'react-native-ico-material-design';
 
-export default function App() {
-  return (
-    <>
-      <SafeAreaView style={styles.containerSafeArea}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Pagina Inicial</Text>
-        </View>
-        <ScrollView style={styles.container} >
-          <View style={styles.greetingContainer}>
-            <Text style={styles.greetingText}>Olá, Usuário</Text>
-            <Image
-              style={styles.avatar}
-              source={require('./assets/avatar.png')} />
+var iconHeight = 26;
+var iconWidth = 26;
+
+export default class extends React.Component {
+
+  state = {
+    screenText: 'Press a button'
+  }
+
+  changeText = (text) => {
+    console.log(text + ' has been pressed!');
+    this.setState({
+      screenText: text
+    })
+  }
+
+  render() {
+    return (
+      <>
+        <SafeAreaView style={styles.containerSafeArea}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Pagina Inicial</Text>
           </View>
-          <View style={styles.cardsContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Do que você precisa?</Text>
+          <ScrollView style={styles.container} >
+            <View style={styles.greetingContainer}>
+              <Text style={styles.greetingText}>Olá, Usuário</Text>
+              <Image
+                style={styles.avatar}
+                source={require('./assets/avatar.png')} />
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Nova Compra</Text>
-              <Text style={styles.cardSubtitle}>Ver negóciois perto de você</Text>
-              <Text style={styles.cardSubtitle}>Destaques:</Text>
-              <ScrollView 
-                horizontal={true} 
-                style={styles.horizontalContainer} 
-                showsHorizontalScrollIndicator={false}
-              >
-                <View style={styles.horizontalContainerContent}>
-                  <TouchableOpacity>
-                    <View style={styles.horizontalCardContainer}>
-                      <Image source={require('./assets/bar_beto.png')} style={styles.image} />
-                      <View style={styles.textContainer}>
-                        <Text>Bar do Beto</Text>
-                        <Text>4/5 estrelas</Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+            <View style={styles.cardsContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Do que você precisa?</Text>
+                <View style={{width: '90%', height: 5, backgroundColor: 'green'}} />
+                <RNPickerSelect
+                  useNativeAndroidPickerStyle={false}
+                  style={pickerStyle}
+                  placeholder={{ label: "Todos", value: null }}
+                  onValueChange={(value) => console.log(value)}
+                  items={[
+                      { label: "JavaScript", value: "JavaScript" },
+                      { label: "TypeScript", value: "TypeScript" },
+                      { label: "Python", value: "Python" },
+                      { label: "Java", value: "Java" },
+                      { label: "C++", value: "C++" },
+                      { label: "C", value: "C" },
+                  ]}
+               />
+                <TextInput
+                  style={inputStyle}
+                  placeholder="Digite sua busca"
+                  keyboardType="default"
+                />
+              </View>
+            
+              <View style={styles.card}>
+                <View>
+                  <Text style={styles.cardTitle}>Nova Compra</Text>
+                  <Text style={styles.cardSubtitle}>Ver negóciois perto de você</Text>
                 </View>
-
-                <View style={styles.horizontalContainerContent}>
-                  <TouchableOpacity>
-                    <View style={styles.horizontalCardContainer}>
-                      <Image source={require('./assets/capim_conveniencia.png')} style={styles.image} />
-                      <View style={styles.textContainer}>
-                        <Text>Capim Conveniência</Text>
-                        <Text>4/5 estrelas</Text>
+                {/* <View><FontAwesomeIcon icon={ faArrowRight } /></View> */}
+                <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
+                <Text style={styles.cardSubtitle}>Destaques:</Text>
+                <ScrollView 
+                  horizontal={true} 
+                  style={styles.horizontalContainer} 
+                  showsHorizontalScrollIndicator={false}
+                >
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/bar_beto.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Bar do Beto</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                </View> 
-
-                <View style={styles.horizontalContainerContent}>
-                  <TouchableOpacity>
-                    <View style={styles.horizontalCardContainer}>
-                      <Image source={require('./assets/riacho_roupas.png')} style={styles.image} />
-                      <View style={styles.textContainer}>
-                        <Text>Riacho Roupas</Text>
-                        <Text>4/5 estrelas</Text>
+                    </TouchableOpacity>
+                  </View>
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/capim_conveniencia.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Capim Conveniência</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                </View> 
-
-                <View style={styles.horizontalContainerContent}>
-                  <TouchableOpacity>
-                    <View style={styles.horizontalCardContainer}>
-                      <Image source={require('./assets/lanchonete_alemao.png')} style={styles.image} />
-                      <View style={styles.textContainer}>
-                        <Text>Riacho Roupas</Text>
-                        <Text>4/5 estrelas</Text>
+                    </TouchableOpacity>
+                  </View> 
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/riacho_roupas.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Riacho Roupas</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                </View> 
+                    </TouchableOpacity>
+                  </View> 
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/lanchonete_alemao.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Riacho Roupas</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View> 
+                </ScrollView>
+              </View>
+  
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Contrate um serviço</Text>
+                <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
+                <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
+                <ScrollView 
+                  horizontal={true} 
+                  style={styles.horizontalContainer} 
+                  showsHorizontalScrollIndicator={false}
+                >  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/jair_jardinagem.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Jair Jardinagem</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/eduardo_encanador.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Eduardo Encanador</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View>  
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/elias_eletricista.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Elias Eletricista</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View>  
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/diana_diarista.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Diana Diarista</Text>
+                          <Text>4/5 estrelas</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View>  
+  
+                </ScrollView>
+              </View>
+  
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Ofertas</Text>
+                <Text style={styles.cardSubtitle}>Confira os melhores preços</Text>
+                <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
+                <Text style={styles.cardSubtitle}>Destaques:</Text>
+                <ScrollView 
+                  horizontal={true} 
+                  style={styles.horizontalContainer} 
+                  showsHorizontalScrollIndicator={false}
+                >  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/laranja_pera.jpg')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Laranja Pera</Text>
+                          <Text style={styles.textContainer.subtitle}>Capim Conveniencia</Text>
+                          <Text style={styles.textContainer.price}>R$ 3,40/kg (-15%)</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View> 
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/batata_frita.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Proção Bata-frita G</Text>
+                          <Text style={styles.textContainer.subtitle}>Bar do Beto</Text>
+                          <Text style={styles.textContainer.price}>R$ 8,00/kg (-25%)</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View> 
+  
+                  <View style={styles.horizontalContainerContent}>
+                    <TouchableOpacity>
+                      <View style={styles.horizontalCardContainer}>
+                        <Image source={require('./assets/coca-cola.png')} style={styles.image} />
+                        <View style={styles.textContainer}>
+                          <Text style={styles.textContainer.text}>Refrigerante 350ml</Text>
+                          <Text style={styles.textContainer.subtitle}>Bar do Beto</Text>
+                          <Text style={styles.textContainer.price}>R$ 3,50</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View> 
+  
+                </ScrollView>
+              </View>
 
-              </ScrollView>
+              <View>
+                <Text>{this.state.screenText}</Text>
+              </View>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Contrate um serviço</Text>
-              <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
-              <ScrollView 
-                horizontal={true} 
-                style={styles.horizontalContainer} 
-                showsHorizontalScrollIndicator={false}
-              >  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Jair Jardinagem"  
-                        color="#FF3D00"
-                    />  
-                </View>  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Eduardo Encanador"  
-                        color="#3D00FF"  
-                    />  
-                </View>  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Elias Eletricista"  
-                        color="#FFFF3D"  
-                    />  
-                </View>  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Diana Diarista"  
-                        color="#FF3DFF"  
-                    />  
-                </View>  
-              </ScrollView>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Ofertas</Text>
-              <Text style={styles.cardSubtitle}>Confira os melhores preços</Text>
-              <Text style={styles.cardSubtitle}>Destaques:</Text>
-              <ScrollView 
-                horizontal={true} 
-                style={styles.horizontalContainer} 
-                showsHorizontalScrollIndicator={false}
-              >  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Laranja Pera"  
-                        color="#FF3D00"
-                    />  
+          </ScrollView>
+        </SafeAreaView>
+        <View style={navContainer.navContainer}>
+                <View style={navContainer.navBar}>
+                  <Pressable onPress={() => this.changeText('shopping')} style={navContainer.iconBehave}
+                  android_ripple={{borderless: true, radius: 50}}>
+                    <Icon name="shopping-cart" height={iconHeight} width={iconWidth} color="#448aff" />
+                  </Pressable>
+
+                  <Pressable onPress={() => this.changeText('Home')} style={navContainer.iconBehave}
+                  android_ripple={{borderless: true, radius: 50}}>
+                    <Icon name="home-button" height={iconHeight} width={iconWidth} color="#448aff" />
+                  </Pressable>
+
+                  <Pressable onPress={() => this.changeText('User')} style={navContainer.iconBehave}
+                  android_ripple={{borderless: true, radius: 50}}>
+                    <Icon name="user-shape" height={iconHeight} width={iconWidth} color="#448aff" />
+                  </Pressable>
                 </View>
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Proção Btata-frita G"  
-                        color="#3D00FF"  
-                    />  
-                </View>  
-                <View style={styles.horizontalContainerContent}>  
-                    <Button
-                        title="Refrigerante 350ml"  
-                        color="#FFFF3D"  
-                    />  
-                </View>  
-              </ScrollView>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  )
+              </View>
+      </>
+    )
+  }
 }
+const pickerStyle = {
+  inputIOS: {
+      color: 'white',
+      paddingHorizontal: 10,
+      paddingVertical: 10,
+      marginBottom: 10,
+      marginTop: 20,
+      backgroundColor: 'white',
+      borderRadius: 5,
+      width: '50%'
+  },
+  placeholder: {
+      color: 'black',
+    },
+  inputAndroid: {
+    color: 'white',
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 20,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    width: '50%'
+  },
+};
+
+const inputStyle = {
+  backgroundColor: 'white',
+  padding: 10,
+  borderRadius: 5,
+  width: '90%',
+  marginTop: 15
+};
+
+const navContainer = StyleSheet.create({
+  navContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    bottom: 20
+  },
+  navBar: {
+    flexDirection: 'row',
+    backgroundColor: '#eee',
+    width: '90%',
+    justifyContent: 'space-evenly',
+    borderRadius: 40
+  },
+  iconBehave: {
+    padding: 14
+  }
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -167,8 +330,21 @@ const styles = StyleSheet.create({
     flex : 1,
     alignItems : 'center',
     justifyContent : 'center',
-    marginTop: 15,
-    marginRight: 20
+    marginTop: 5,
+    marginRight: 20,
+    text:{
+      fontSize: 20,
+      fontWeight: '700',
+    },
+    subtitle: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: 'green'
+    },
+    price: {
+      color: 'green',
+      fontWeight: 'light'
+    }
   },
   image: {
     width: 80,
@@ -234,7 +410,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'lightgreen',
     width: '100%',
-    height: 220,
+    height: 230,
     alignItems: 'left',
     justifyContent: 'center',
     borderRadius: 10,
