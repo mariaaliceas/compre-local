@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,SafeAreaView} from 'react-native';
+import {cadastroComercio1} from './cadastroComercio1';
 export default function startLogin(){
     return(
         
@@ -9,7 +10,9 @@ export default function startLogin(){
             <TouchableOpacity style={styles.botao}>
                 <Text  style={styles.textoBotao}>Continuar como Usuário</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao}  onPress={() =>
+        navigation.navigate('cadastroComercio1')
+      }>
                 <Text  style={styles.textoBotao}>Cadastre seu negócio</Text>
             </TouchableOpacity>
             

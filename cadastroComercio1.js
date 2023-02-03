@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
-
+import {cadastroComercio2} from './cadastroComercio2'
 
 export default function cadastro(){
     return(
@@ -30,7 +30,9 @@ export default function cadastro(){
         
         <View style={styles.containerBotao2}>
         <TouchableOpacity style={styles.botao2} >
-            <Text style={styles.textoBotao2} >Próximo</Text>
+            <Text style={styles.textoBotao2}  onPress={() =>
+        navigation.navigate('cadastroComercio2')
+      }>Próximo</Text>
         </TouchableOpacity>
         </View>
         </View>
