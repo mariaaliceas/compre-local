@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Alert, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Logo() {
 
@@ -9,8 +10,16 @@ export default function Logo() {
         style={styles.avatar}
         source={require('../../assets/capim_conveniencia.png')}
       />
-      <Text style={styles.text}>Capim Conveniência</Text>
-      
+      <View>
+        <Text style={styles.text}>Capim Conveniência</Text>
+        <View style={styles.stars}>
+          <Icon size={15} color='#00bb22' name='star'></Icon>
+          <Icon size={15} color='#00bb22' name='star'></Icon>
+          <Icon size={15} color='#00bb22' name='star'></Icon>
+          <Icon size={15} color='#00bb22' name='star'></Icon>
+          <Icon size={15} color='#00bb22' name='star'></Icon>
+        </View>
+      </View>
     </View>
   );
 
@@ -31,8 +40,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    padding: '30px',
-    fontWeight: "bold"
+    paddingLeft:40,
+    fontWeight: "bold",
+    paddingTop:30,
+    fontSize:15
+  },
+  stars:{
+    flexDirection: 'row',
+    paddingLeft:40
   }
 });
 

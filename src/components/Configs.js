@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet, Label } from 'react-native';
 
+
 export default function Configs() {
     return (
         <View>
@@ -22,13 +23,16 @@ export default function Configs() {
             </View>
             <Text style={styles.fontBlack} >Seus produtos:</Text>
             <View style={styles.optA}>
-                <Button color='#e0ffe1' style={styles.opt} title="Produtos" />
+                <Button color='#00bb22' style={styles.opt} title="Produtos" />
             </View>
             <View style={styles.optA}>
-                <Button color='#e0ffe1' style={styles.opt} title="Encomendas" />
+                <Button color='#00bb22' style={styles.opt} title="Encomendas" />
             </View>
             <View style={styles.optA}>
-                <Button color='#e0ffe1' style={styles.opt} title="Panificadora" />
+                <Button color='#00bb22' style={styles.opt} title="Ver avaliações" />
+            </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Ver histórico de venda" />
             </View>
         </View>
     );
@@ -37,7 +41,7 @@ export default function Configs() {
 const styles = StyleSheet.create({
     button: {
         marginRight: 10,
-        
+
     },
     input: {
         backgroundColor: '#BEBEBE',
@@ -57,24 +61,29 @@ const styles = StyleSheet.create({
         borderRadius: '3px',
         marginRight: 10
     },
-    pad:{
-        marginRight:10,        
-        marginBottom:10,
+    pad: {
+        marginRight: 10,
+        marginBottom: 10,
         borderRadius: '3px',
     },
-    fontBlack:{
-        color:'black',
-        fontWeight: '500'
+    fontBlack: {
+        color: 'black',
+        fontWeight: '500',
+        paddingBottom:5
     },
-    optA:{
-        marginRight:10,        
-        marginBottom:10,
+    optA: {
+        marginRight: 10,
+        marginBottom: 10,
         borderRadius: '3px',
-        color:'#00bb22'
+        color: '#00bb22',
+        height: 30,
+
     },
-    opt:{
-        color:'#00bb22'
-        
+
+    opt: {
+        color: '#ffff',
+
+
     },
 })
 
