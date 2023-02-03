@@ -6,7 +6,6 @@ import Product from './src/components/Product';
 import Headers from './src/components/headers';
 
 
-
 export default function App() {
   return (
     <View style={styles.container}>

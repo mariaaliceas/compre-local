@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Alert, Button } from 'react-native';
 
-
 export default function Logo() {
 
   return (

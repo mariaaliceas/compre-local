@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         color:'#00bb22'
     },
     opt:{
+        color:'#00bb22'
         
     },
 })
