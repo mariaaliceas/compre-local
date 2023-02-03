@@ -1,16 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Config from './src/components/Config';
+import Logo from './src/components/logo';
 import Configs from './src/components/Configs';
 import Product from './src/components/Product';
+import Headers from './src/components/headers';
 
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-    <Config></Config>
-    <Configs></Configs>
+      <Headers></Headers>
+      <Logo></Logo>
+      <Configs></Configs>
     </View>
   );
 }
@@ -20,6 +22,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     flex: 1,
     backgroundColor: 'white',
-    paddingLeft:'10px'    
+    paddingLeft: '10px'
   }
 });

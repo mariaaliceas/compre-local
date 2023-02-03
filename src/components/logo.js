@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Alert, Button } from 'react-native';
 
 
-export default function Config() {
+export default function Logo() {
 
   return (
     <View style={styles.container}>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignSelf: 'left',
     flexDirection: 'row',
-    padding: 34
+    padding: 24
   },
   avatar: {
     width: 100,
