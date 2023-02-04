@@ -7,6 +7,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Profile from './screens/ProfileScreen';
 import Cart from './screens/CartScreen';
+import ItensBarDoBeto from './screens/ItensBarDoBetoScreen';
+import ItensCapimConveniencia from './screens/ItensCapimConvenienciaScreen';
+import FinalizarCompra from './screens/FinalizarCompraScreen';
+import PedidoConfirmado from './screens/PedidoConfirmadoScreen';
 
 var iconHeight = 26;
 var iconWidth = 26;
@@ -52,7 +56,6 @@ const HomeScreen = ({ navigation }) => {
                     <Text style={styles.cardTitle}>Nova Compra</Text>
                     <Text style={styles.cardSubtitle}>Ver negóciois perto de você</Text>
                   </View>
-                  {/* <View><FontAwesomeIcon icon={ faArrowRight } /></View> */}
                   <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
                   <Text style={styles.cardSubtitle}>Destaques:</Text>
                   <ScrollView 
@@ -280,6 +283,34 @@ function App() {
             component={Cart}
             options={{
                 title: 'Seu Carrinho',
+            }} 
+        />
+        <Stack.Screen 
+            name="ItensCapimConveniencia" 
+            component={ItensCapimConveniencia}
+            options={{
+                title: 'Itens',
+            }} 
+        />
+        <Stack.Screen 
+            name="ItensBarDoBeto" 
+            component={ItensBarDoBeto}
+            options={{
+                title: 'Itens',
+            }} 
+        />
+        <Stack.Screen 
+            name="FinalizarCompra" 
+            component={FinalizarCompra}
+            options={{
+                title: 'Finalizar Compra',
+            }} 
+        />
+        <Stack.Screen 
+            name="PedidoConfirmado" 
+            component={PedidoConfirmado}
+            options={{
+                title: 'Pedido Confirmado',
             }} 
         />
       </Stack.Navigator>
