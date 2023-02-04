@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet, Label } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from 'react-router-dom';
+import { Product } from './product';
 
-
-export default function Configs() {
+export default function Configs(parametros) {
+    console.log(parametros)
+    const goToScreen2 = () => {
+        parametros.nave.navigation.push("Produto");
+    };
     return (
         <View>
             <Text style={styles.fontBlack} >Endereço</Text>
@@ -11,11 +17,11 @@ export default function Configs() {
             <TextInput style={styles.input} defaultValue='44-99999999'></TextInput>
             <Text style={styles.fontBlack}>Horário de atendimento</Text>
             <View style={styles.inline}>
-                <TextInput style={styles.inputA} defaultValue='08:00'></TextInput>-
+                <TextInput style={styles.inputA} defaultValue='08:00'></TextInput>
                 <TextInput style={styles.inputA} defaultValue='12:30'></TextInput>
             </View>
             <View style={styles.inline}>
-                <TextInput style={styles.inputA} defaultValue='13:30'></TextInput>-
+                <TextInput style={styles.inputA} defaultValue='13:30'></TextInput>
                 <TextInput style={styles.inputA} defaultValue='20:00'></TextInput>
             </View>
             <View style={styles.pad}>
@@ -23,7 +29,8 @@ export default function Configs() {
             </View>
             <Text style={styles.fontBlack} >Seus produtos:</Text>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Produtos" />
+                <Button color='#00bb22' style={styles.opt} title="Produtos" onPress={goToScreen2}>
+                </Button>
             </View>
             <View style={styles.optA}>
                 <Button color='#00bb22' style={styles.opt} title="Encomendas" />
@@ -64,12 +71,13 @@ const styles = StyleSheet.create({
     pad: {
         marginRight: 10,
         marginBottom: 10,
+        marginTop: 10,
         borderRadius: '3px',
     },
     fontBlack: {
         color: 'black',
         fontWeight: '500',
-        paddingBottom:5
+        paddingBottom: 5
     },
     optA: {
         marginRight: 10,
