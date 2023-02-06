@@ -5,7 +5,7 @@ import { useNavigation } from 'react-router-dom';
 import { Product } from './product';
 
 export default function Configs(parametros) {
-    console.log(parametros)
+    //console.log(parametros)
     const goToScreen2 = () => {
         parametros.nave.navigation.push("Produto");
     };

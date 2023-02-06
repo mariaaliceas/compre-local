@@ -1,13 +1,18 @@
 import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from 'react-router-dom';
+import {Categoria} from './categ';
 Icon.loadFont();
 
-export default function Product() {
+export default function Product(parametros) {
+    const goToScreen3 = () => {
+        parametros.nave.navigation.push("Categoria");
+    };    
     return (
-        <View>
+        <View nave={navigation}>
             <View style={styles.prod}>
-                <Button color='#00bb22' title="Ver histórico de venda" />
+                <Button color='#00bb22' title="Alterar configurações da categoria" onPress={goToScreen3}/>
             </View>
             <View style={styles.img}>
                 <Image
