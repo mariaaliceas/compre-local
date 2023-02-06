@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,SafeAreaView} from 'react-native';
-import {login} from './login'
-import {cadastro} from './cadastro'
+
 
 export default function startLogin(){
 
     return(
         
-        <SafeAreaView style={styles.container}>     
+        <SafeAreaView style={styles.container}>   
+        
         <Text style={styles.texto1}>BEM VINDO!</Text>
         <Text style={styles.texto2}>Agradeçemos sua atitude de apoiar o comercio local</Text>  
         <View style={styles.containerBotao}>
