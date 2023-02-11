@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {startLogin} from '../comprelocal/src/startLogin';
 import {NavigationContainer} from '@react-navigation/native';
