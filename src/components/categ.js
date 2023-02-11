@@ -10,19 +10,19 @@ export default function Categoria(parametros) {
     const goToScreen3 = () => {
         parametros.nave.navigation.push("Categoria");
     };
-
-    <View>
-        <Text style={styles.fontBlack} >Nome da categoria</Text>
-        <TextInput style={styles.input} defaultValue='Produtos'></TextInput>
-        <Text style={styles.fontBlack}>Descrição da categoria</Text>
-        <TextInput style={styles.input} defaultValue='Compre direto pelo app! Delivery ou Retirada na loja'></TextInput>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Alterar imagem da capa" />
-        </View>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
-        </View>
-    </View>
+    return (
+        <View>
+            <Text style={styles.fontBlack} >Nome da categoria</Text>
+            <TextInput style={styles.input} defaultValue='Produtos'></TextInput>
+            <Text style={styles.fontBlack}>Descrição da categoria</Text>
+            <TextInput style={styles.input} defaultValue='Compre direto pelo app! Delivery ou Retirada na loja'></TextInput>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Alterar imagem da capa" />
+            </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
+            </View>
+        </View>)
 }
 
 

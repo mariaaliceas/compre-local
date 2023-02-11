@@ -9,6 +9,9 @@ export default function Configs(parametros) {
     const goToScreen2 = () => {
         parametros.nave.navigation.push("Produto");
     };
+    const goToScreen4 = () => {
+        parametros.nave.navigation.push("Frete");
+    };
     return (
         <View>
             <Text style={styles.fontBlack} >Endereço</Text>
@@ -25,7 +28,7 @@ export default function Configs(parametros) {
                 <TextInput style={styles.inputA} defaultValue='20:00'></TextInput>
             </View>
             <View style={styles.pad}>
-                <Button color='#00bb22' style={styles.button} title="Configurar frete" />
+                <Button color='#00bb22' style={styles.button} title="Configurar frete" onPress={goToScreen4} />
             </View>
             <Text style={styles.fontBlack} >Seus produtos:</Text>
             <View style={styles.optA}>

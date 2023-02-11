@@ -8,7 +8,7 @@ export default function Frete() {
     return (
         <View>
         <Text style={styles.fontBlack} >Distância máxima</Text>
-        <TextInput style={styles.input} defaultValue='Rua'></TextInput>
+        <TextInput style={styles.input} defaultValue='10 km'></TextInput>
         <Text style={styles.fontBlack}>Telefone</Text>
         <TextInput style={styles.input} defaultValue='44-99999999'></TextInput>
         <Text style={styles.fontBlack}>Horário de atendimento</Text>
@@ -20,23 +20,7 @@ export default function Frete() {
             <TextInput style={styles.inputA} defaultValue='13:30'></TextInput>
             <TextInput style={styles.inputA} defaultValue='20:00'></TextInput>
         </View>
-        <View style={styles.pad}>
-            <Button color='#00bb22' style={styles.button} title="Configurar frete" />
-        </View>
-        <Text style={styles.fontBlack} >Seus produtos:</Text>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Produtos" onPress={goToScreen2}>
-            </Button>
-        </View>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Encomendas" />
-        </View>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Ver avaliações" />
-        </View>
-        <View style={styles.optA}>
-            <Button color='#00bb22' style={styles.opt} title="Ver histórico de venda" />
-        </View>
+        
     </View>
     );
 }

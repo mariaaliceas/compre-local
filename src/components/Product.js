@@ -5,10 +5,11 @@ import { useNavigation } from 'react-router-dom';
 import {Categoria} from './categ';
 Icon.loadFont();
 
-export default function Product(parametros) {
+    export default function Product({navigation}) {
     const goToScreen3 = () => {
-        parametros.nave.navigation.push("Categoria");
-    };    
+        navigation.push("Categoria");
+    };
+    console.log(navigation);    
     return (
         <View nave={navigation}>
             <View style={styles.prod}>

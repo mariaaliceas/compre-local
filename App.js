@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Configs from './src/components/Configs';
 import Product from './src/components/product';
 import HomeComercio from './src/components/homeComercio';
+import Categoria from './src/components/categ';
+import Frete from './src/components/frete';
 Icon.loadFont();
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +21,10 @@ export default function App() {
           component={Product} />
         <Stack.Screen name="Configs"
           component={Configs} />
+        <Stack.Screen name="Categoria"
+          component={Categoria} />
+          <Stack.Screen name="Frete"
+          component={Frete} />
       </Stack.Navigator>
     </NavigationContainer>
   );
