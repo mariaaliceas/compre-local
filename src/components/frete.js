@@ -2,26 +2,62 @@ import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
+import { RadioButton } from 'react-native-paper';
 Icon.loadFont();
 
-export default function Frete() {   
+export default function Frete() {
     return (
         <View>
-        <Text style={styles.fontBlack} >Distância máxima</Text>
-        <TextInput style={styles.input} defaultValue='10 km'></TextInput>
-        <Text style={styles.fontBlack}>Telefone</Text>
-        <TextInput style={styles.input} defaultValue='44-99999999'></TextInput>
-        <Text style={styles.fontBlack}>Horário de atendimento</Text>
-        <View style={styles.inline}>
-            <TextInput style={styles.inputA} defaultValue='08:00'></TextInput>
-            <TextInput style={styles.inputA} defaultValue='12:30'></TextInput>
+            <Text style={styles.fontBlack} >Distância máxima</Text>
+            <TextInput style={styles.input} defaultValue='10 km'></TextInput>
+            <View style={styles.btnRadio}>
+                <RadioButton
+                    value="first" status='unchecked' />
+                <Text style={styles.fntBtnRadio}>Taxa fixa</Text>
+            </View>
+            <View style={styles.btnRadio}>
+                <RadioButton color='#00bb22'
+                    value="first" status='checked' />
+                <Text style={styles.fntBtnRadio}>Taxa variável</Text>
+            </View>
+            <View style={styles.btnRadio}>
+                <RadioButton
+                    value="first" status='unchecked' />
+                <Text style={styles.fntBtnRadio}>Frete grátis</Text>
+            </View>
+            <View style={styles.options}>
+                <View style={styles.inLineView}>
+                    <View style={styles.inLineValue}>
+                        <Text style={styles.fntBtnRadio}>Valor</Text>
+                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
+                    </View>
+                    <View>
+                        <Text style={styles.fntBtnRadio}>Distância Limite</Text>
+                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
+                    </View>
+                </View>
+                <View style={styles.inLineView}>
+                    <View style={styles.inLineValue}>
+                        <Text style={styles.fntBtnRadio}>Valor</Text>
+                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
+                    </View>
+                    <View>
+                        <Text style={styles.fntBtnRadio}>Distância Limite</Text>
+                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
+                    </View>
+                </View>
+                <View style={styles.inLineView}>
+                    <View style={styles.inLineValue}>
+                        <Text style={styles.fntBtnRadio}>Valor</Text>
+                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
+                    </View>
+                    <View>
+                        <Text style={styles.fntBtnRadio}>Distância Limite</Text>
+                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
+                    </View>
+                </View>
+            </View>
         </View>
-        <View style={styles.inline}>
-            <TextInput style={styles.inputA} defaultValue='13:30'></TextInput>
-            <TextInput style={styles.inputA} defaultValue='20:00'></TextInput>
-        </View>
-        
-    </View>
     );
 }
 
@@ -34,7 +70,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#BEBEBE',
         color: '#808080',
         borderRadius: '3px',
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: 5,
+        marginLeft: 8
     },
     inline: {
         flexDirection: 'row',
@@ -43,10 +81,10 @@ const styles = StyleSheet.create({
     inputA: {
         backgroundColor: '#BEBEBE',
         color: '#808080',
-        width: 50,
-        textAlign: 'center',
+        width: 150,
+        textAlign: 'left',
         borderRadius: '3px',
-        marginRight: 10
+        marginRight: 10,
     },
     pad: {
         marginRight: 10,
@@ -57,7 +95,9 @@ const styles = StyleSheet.create({
     fontBlack: {
         color: 'black',
         fontWeight: '500',
-        paddingBottom: 5
+        paddingBottom: 5,
+        paddingTop: 5,
+        marginLeft: 8
     },
     optA: {
         marginRight: 10,
@@ -65,13 +105,25 @@ const styles = StyleSheet.create({
         borderRadius: '3px',
         color: '#00bb22',
         height: 30,
-
     },
-
     opt: {
         color: '#ffff',
-
-
     },
+    btnRadio: {
+        flexDirection: 'row',
+    },
+    fntBtnRadio: {
+        marginTop: 9,
+        fontWeight: '500',
+    },
+    inLineView: {
+        flexDirection: 'row',
+        fontWeight: '500',
+        marginTop: 5,
+        marginLeft: 8
+    },
+    options: {
+        marginTop: 5,
+    }
 })
 

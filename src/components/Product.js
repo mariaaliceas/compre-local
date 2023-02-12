@@ -2,18 +2,22 @@ import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
-import {Categoria} from './categ';
+import { Categoria } from './categ';
+import { EditaProduto } from './editProduct';
 Icon.loadFont();
 
-    export default function Product({navigation}) {
+export default function Product({ navigation }) {
     const goToScreen3 = () => {
         navigation.push("Categoria");
     };
-    console.log(navigation);    
+    const goToScreen5 = () => {
+        navigation.push("EditaProduto");
+    };
+    //console.log(navigation);    
     return (
         <View nave={navigation}>
             <View style={styles.prod}>
-                <Button color='#00bb22' title="Alterar configurações da categoria" onPress={goToScreen3}/>
+                <Button color='#00bb22' title="Alterar configurações da categoria" onPress={goToScreen3} />
             </View>
             <View style={styles.img}>
                 <Image
@@ -26,7 +30,7 @@ Icon.loadFont();
                     <Text style={styles.fontes}>Estoque: 30kg</Text>
                 </View>
                 <View style={styles.arrowright}>
-                    <Icon size={25} color='#00bb22' name='arrow-right'></Icon>
+                    <Icon size={25} color='#00bb22' name='arrow-right' onPress={goToScreen5}></Icon>
                 </View>
             </View>
             <View style={styles.img}>
@@ -112,8 +116,8 @@ const styles = StyleSheet.create({
     },
     arrowright: {
         alignSelf: 'right',
-        paddingLeft:120,
-        paddingTop: 30 
+        paddingLeft: 120,
+        paddingTop: 30
     },
 });
 

@@ -7,6 +7,7 @@ import Product from './src/components/product';
 import HomeComercio from './src/components/homeComercio';
 import Categoria from './src/components/categ';
 import Frete from './src/components/frete';
+import EditaProduto from './src/components/editProduct';
 Icon.loadFont();
 
 const Stack = createNativeStackNavigator();
@@ -23,8 +24,10 @@ export default function App() {
           component={Configs} />
         <Stack.Screen name="Categoria"
           component={Categoria} />
-          <Stack.Screen name="Frete"
+        <Stack.Screen name="Frete"
           component={Frete} />
+        <Stack.Screen name="EditaProduto"
+          component={EditaProduto} />
       </Stack.Navigator>
     </NavigationContainer>
   );

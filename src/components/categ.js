@@ -6,10 +6,6 @@ import { Product } from './product';
 Icon.loadFont();
 
 export default function Categoria(parametros) {
-    //console.log(parametros)
-    const goToScreen3 = () => {
-        parametros.nave.navigation.push("Categoria");
-    };
     return (
         <View>
             <Text style={styles.fontBlack} >Nome da categoria</Text>
@@ -35,7 +31,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#BEBEBE',
         color: '#808080',
         borderRadius: '3px',
-        marginRight: 10
+        marginRight: 10,
+        marginBottom:5,
+        marginLeft:8
     },
     inline: {
         flexDirection: 'row',
@@ -58,15 +56,18 @@ const styles = StyleSheet.create({
     fontBlack: {
         color: 'black',
         fontWeight: '500',
-        paddingBottom: 5
+        paddingBottom: 5,
+        paddingTop:5,
+        marginLeft:8
     },
     optA: {
+        color: '#00bb22',
         marginRight: 10,
         marginBottom: 10,
         borderRadius: '3px',
-        color: '#00bb22',
         height: 30,
-
+        paddingLeft: 10,
+        marginTop:10
     },
 
     opt: {
