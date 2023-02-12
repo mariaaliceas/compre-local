@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         alignSelf: 'left'
     },
     img: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingLeft: 10
     },
     texto: {
         paddingLeft: 10

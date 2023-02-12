@@ -42,12 +42,14 @@ export default function EditaProduto(parametros) {
                 <TextInput style={styles.input} defaultValue='Laranja'></TextInput>
             </View>
             <View>
-                <Text  style={styles.fontBlack}>Estoque</Text>
+                <Text style={styles.fontBlack}>Estoque</Text>
                 <View style={styles.img}>
                     <View style={styles.pl}>
                         <TextInput style={styles.input} defaultValue='30'></TextInput>
                     </View>
-                    <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'} 
+                    <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
+                        buttonTextStyle={styles.fntDpdown}
+                        rowStyle={styles.prod}
                         data={typesOfW}
                         onSelect={(selectedItem, index) => {
                         }}
@@ -59,6 +61,37 @@ export default function EditaProduto(parametros) {
                         }}
                     />
                 </View>
+            </View>
+            <View>
+                <Text style={styles.fontBlack}>Preço</Text>
+                <View style={styles.img}>
+                    <View style={styles.pl}>
+                        <TextInput style={styles.input} defaultValue='R$ 4,00'></TextInput>
+                    </View>
+                    <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
+                        buttonTextStyle={styles.fntDpdown}
+                        rowStyle={styles.prod}
+                        dropdownBackgroundColor={styles.prod}
+                        data={typesOfW}
+                        onSelect={(selectedItem, index) => {
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem;
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            return item;
+                        }}
+                    />
+                </View>
+            </View>
+            <View style={styles.optA}>
+                <Button color='#FF6347' style={styles.optD} title="Excluir produto" />
+            </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Alterar imagem" />
+            </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
             </View>
         </View>
     );
@@ -72,7 +105,8 @@ const styles = StyleSheet.create({
         alignSelf: 'left'
     },
     img: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingBottom:5
     },
     texto: {
         paddingLeft: 10
@@ -101,7 +135,8 @@ const styles = StyleSheet.create({
         color: '#808080',
         borderRadius: '3px',
         marginRight: 10,
-        paddingLeft: 10
+        paddingLeft: 10,
+        marginBottom: 10,
     },
     fontBlack: {
         color: 'black',
@@ -117,8 +152,29 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginBottom: 10,
         borderRadius: '3px',
+        height: 25,
+        paddingLeft: 1,
+        color: '#00bb22',
+        paddingBottom:5
+    },
+    fntDpdown: {
+        fontSize:15,
+        textAlign:'left'
+    },
+    optA: {
+        color: '#00bb22',
+        marginRight: 10,
+        marginBottom: 10,
+        borderRadius: '3px',
         height: 30,
         paddingLeft: 10,
+        marginTop:10
+    },
+
+    opt: {
+        color: '#ffff',
+
+
     },
 })
 

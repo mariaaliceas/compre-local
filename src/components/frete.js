@@ -57,6 +57,9 @@ export default function Frete() {
                     </View>
                 </View>
             </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
+            </View>
         </View>
     );
 }
@@ -105,6 +108,8 @@ const styles = StyleSheet.create({
         borderRadius: '3px',
         color: '#00bb22',
         height: 30,
+        paddingTop:10,
+        marginLeft: 8
     },
     opt: {
         color: '#ffff',
