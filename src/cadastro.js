@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
-import {login} from '../login';
+import {login} from './login';
 import {finalCadastro} from './finalCadastro';
 
 
