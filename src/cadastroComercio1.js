@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
 import {cadastroComercio2} from './cadastroComercio2'
 
-export default function cadastro(){
+export default function cadastro1(){
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Informe os dados de sua Empresa</Text>
@@ -20,11 +20,11 @@ export default function cadastro(){
         </View>
         
         
-        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' secureTextEntry={true} />
-        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' secureTextEntry={true} />
-        <TextInput style={styles.botao} placeholder='CNPJ' secureTextEntry={true} />
-        <TextInput style={styles.botao} placeholder='CPF do titular' secureTextEntry={true} />
-        <TextInput style={styles.botao} placeholder='RG do titular' secureTextEntry={true} />
+        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' />
+        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' />
+        <TextInput style={styles.botao} placeholder='CNPJ' />
+        <TextInput style={styles.botao} placeholder='CPF do titular' />
+        <TextInput style={styles.botao} placeholder='RG do titular' />
        
 
         
