@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
 
 
-export default function cadastro(){
+export default function cadastro3(){
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Tudo pronto!</Text>

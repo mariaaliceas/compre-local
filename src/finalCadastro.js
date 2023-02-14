@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,SafeAreaView} from 'react-native';
 import {cadastroComercio1} from './cadastroComercio1';
-export default function startLogin(){
+export default function finalCadastro(){
     return(
         
         <SafeAreaView style={styles.container}>     

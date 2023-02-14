@@ -10,8 +10,8 @@ export default function cadastro(){
         <Text style={styles.textoContainer}>Crie sua conta para começar</Text>
         <View style={styles.containerBotao}>
         <TextInput style={styles.botao} placeholder='Nome Completo' />
-        <TextInput style={styles.botao} placeholder='Telefone' secureTextEntry={true} />
-        <TextInput style={styles.botao} placeholder='Email' secureTextEntry={true} />
+        <TextInput style={styles.botao} placeholder='Telefone' />
+        <TextInput style={styles.botao} placeholder='Email' />
         <TextInput style={styles.botao} placeholder='Senha' secureTextEntry={true} />
         <TextInput style={styles.botao} placeholder='Confirme sua senha' secureTextEntry={true} />
        
