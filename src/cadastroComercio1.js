@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
 import {cadastroComercio2} from './cadastroComercio2'
@@ -110,5 +111,4 @@ const styles=StyleSheet.create({
     display:'flex',
     alignItems:'center',
     
-    }
-})
+    }})
