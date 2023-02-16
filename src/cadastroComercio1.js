@@ -19,7 +19,8 @@ export default function cadastro1(){
         <TextInput style={styles.botaoEndereco} placeholder='Número' />      
         </View>
         
-        
+        <TextInput style={styles.botao} placeholder='Bairro' />
+
         <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' />
         <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' />
         <TextInput style={styles.botao} placeholder='CNPJ' />
