@@ -1,12 +1,12 @@
-
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {login} from '../comprelocal/src/login';
-import {cadastro} from '../comprelocal/src/cadastro';
-import {finalCadastro} from '../comprelocal/src/finalCadastro';
-import {cadastroComercio1} from '../comprelocal/src/cadastroComercio1';
-import {cadastroComercio2} from '../comprelocal/src/cadastroComercio2';
+import {login} from './src/login';
+import {cadastro} from './src/cadastro';
+import {finalCadastro} from './src/finalCadastro';
+import {cadastroComercio1} from './src/cadastroComercio1';
+import {cadastroComercio2} from './src/cadastroComercio2';
 const Stack = createNativeStackNavigator();
 const styles=StyleSheet.create({
   container:{

@@ -4,16 +4,16 @@
     "slug": "comprelocal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./compre-local/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./compre-local/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/f60f2632-6685-4314-b8f5-e164bf139489"
+      "fallbackToCacheTimeout": 0
+      
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,20 +23,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./compre-local/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./compre-local/assets/favicon.png"
     },
     "extra": {
       "eas": {
         "projectId": "f60f2632-6685-4314-b8f5-e164bf139489"
       }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
     }
+    
+    
   }
 }
