@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
 import {cadastroComercio2} from './cadastroComercio2'
 
-export default function cadastro1(){
+const cadastroComercio1=({navigation})=>{
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Informe os dados de sua Empresa</Text>
@@ -112,3 +112,5 @@ const styles=StyleSheet.create({
     alignItems:'center',
     
     }})
+
+export default cadastroComercio1;

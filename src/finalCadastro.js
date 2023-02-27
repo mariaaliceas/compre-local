@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,SafeAreaView} from 'react-native';
 import {cadastroComercio1} from './cadastroComercio1';
-export default function finalCadastro(){
+const finalCadastro=({navigation})=>{
     return(
         
         <SafeAreaView style={styles.container}>     
@@ -69,3 +69,5 @@ const styles=StyleSheet.create({
     
     }
 });
+
+export default finalCadastro;

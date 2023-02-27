@@ -4,7 +4,8 @@ import {login} from './login';
 import {finalCadastro} from './finalCadastro';
 
 
-export default function cadastro(){
+
+const cadastro=({navigation})=>{
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Crie sua conta para começar</Text>
@@ -82,3 +83,5 @@ const styles=StyleSheet.create({
     
     }
 });
+
+export default cadastro;

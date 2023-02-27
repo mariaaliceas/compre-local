@@ -3,7 +3,7 @@ import {Text, View,TextInput,StyleSheet,TouchableOpacity } from 'react-native';
 
 
 
-export default function login(){
+const login=({navigation})=>{
     return(
         <View style={styles.container}>
         <Text style={styles.texto}>Bem vindo de volta!</Text>
@@ -68,3 +68,4 @@ const styles=StyleSheet.create({
     
     
 })
+export default login;
