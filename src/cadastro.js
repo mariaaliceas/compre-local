@@ -44,7 +44,7 @@ const styles=StyleSheet.create({
     flex:1
     },
     textoContainer:{
-    marginTop:200,
+    marginTop:140,
     marginBottom:15,
     color:'white',
     fontSize:25

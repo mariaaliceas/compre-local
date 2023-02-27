@@ -8,10 +8,7 @@ const cadastroComercio1=({navigation})=>{
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Informe os dados de sua Empresa</Text>
         
-        <View>
         
-        
-        </View>
         <View style={styles.containerBotao}>
         <TextInput style={styles.botao} placeholder='Nome Empresa' />
         
@@ -56,7 +53,7 @@ const styles=StyleSheet.create({
     marginBottom:12,
     color:'white',
     fontWeight:'bold',
-    marginTop:200,
+    marginTop:140,
     fontSize:20
     
     },
@@ -99,8 +96,11 @@ const styles=StyleSheet.create({
     padding:10,
     borderRadius:5,
     backgroundColor:'white',
+    marginTop:6,
     marginBottom:5,
-    width:80,
+    marginLeft:150,
+    width:100,
+    height:40,
     display:'flex',
     alignItems:'center',
     },
