@@ -5,7 +5,7 @@ module.exports = {
         port: 3306,
         database: "compreLocal",
         user: "root",
-        password: "Cl@udio.2016"
+        password: "Senha para acessar o mysql"
     },
     pool: {
         min: 2,
