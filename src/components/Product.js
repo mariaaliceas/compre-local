@@ -13,6 +13,9 @@ export default function Product({ navigation }) {
     const goToScreen5 = () => {
         navigation.push("EditaProduto");
     };
+    const goToScreen6 = () => {
+        navigation.push("AdicionaProduto");
+    }
     //console.log(navigation);    
     return (
         <View nave={navigation}>
@@ -76,7 +79,7 @@ export default function Product({ navigation }) {
                 </View>
             </View>
             <View style={styles.prod}>
-                <Button color='#00bb22' title="Adicionar produto" />
+                <Button color='#00bb22' title="Adicionar produto" onPress={goToScreen6}/>
             </View>
         </View>
     );

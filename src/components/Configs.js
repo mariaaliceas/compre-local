@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, B
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
 import { Product } from './product';
+import {Feed} from './feed';
 
 export default function Configs(parametros) {
     //console.log(parametros)
@@ -12,6 +13,12 @@ export default function Configs(parametros) {
     const goToScreen4 = () => {
         parametros.nave.navigation.push("Frete");
     };
+    const goToScreen7 = () => {
+        parametros.nave.navigation.push("Feed");
+    };
+    const goToScreen8 = () => {
+        parametros.nave.navigation.push("Encomenda");
+    }
     return (
         <View>
             <Text style={styles.fontBlack} >Endereço</Text>
@@ -30,13 +37,16 @@ export default function Configs(parametros) {
             <View style={styles.pad}>
                 <Button color='#00bb22' style={styles.button} title="Configurar frete" onPress={goToScreen4} />
             </View>
-            <Text style={styles.fontBlack} >Seus produtos:</Text>
+            <Text style={styles.fontBlack} >Suas opções:</Text>
             <View style={styles.optA}>
                 <Button color='#00bb22' style={styles.opt} title="Produtos" onPress={goToScreen2}>
                 </Button>
             </View>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Encomendas" />
+                <Button color='#00bb22' style={styles.opt} title="Feed de sua loja" onPress={goToScreen7} />
+            </View>
+            <View style={styles.optA}>
+                <Button color='#00bb22' style={styles.opt} title="Encomendas" onPress={goToScreen8} />
             </View>
             <View style={styles.optA}>
                 <Button color='#00bb22' style={styles.opt} title="Ver avaliações" />
