@@ -8,36 +8,45 @@ import Encomenda from './encomenda';
 Icon.loadFont();
 
 export default function Feed() {
-    const goToScreen8 = () => {
-        navigation.push("Encomenda");
-    };
+
     return (
         <View>
-        <Logo></Logo>
+            <Logo></Logo>
+            <Text style={styles.fontBlack} >Solicitações ativas:</Text>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Novo pedido" />
+                <Button color='#00bb22' style={styles.opt} title="Novo pedido nº 001" />
             </View>
             <View style={styles.optA}>
-                <Button color='#f7a138' style={styles.opt} title="Nova encomenda" />
+                <Button color='#f7a138' style={styles.opt} title="Nova encomenda nº 002" />
             </View>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Novo pedido" />
+                <Button color='#00bb22' style={styles.opt} title="Novo pedido nº 003" />
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-        optA: {
+    optA: {
         marginRight: 10,
         marginBottom: 10,
         borderRadius: '3px',
         color: '#00bb22',
         height: 30,
-        paddingTop:10,
         marginLeft: 8
     },
     opt: {
         color: '#ffff',
-    }
+    },
+    fontBlack: {
+        color: 'black',
+        fontWeight: '500',
+        paddingBottom: 1,
+        marginRight: 10,
+        marginBottom: 10,
+        borderRadius: '3px',
+        height: 30,
+        paddingTop: 10,
+        marginLeft: 8
+    },
 })
