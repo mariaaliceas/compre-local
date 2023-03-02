@@ -4,9 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
 import { RadioButton } from 'react-native-paper';
 import Logo from './logo';
+import Encomenda from './encomenda';
 Icon.loadFont();
 
 export default function Feed() {
+    const goToScreen8 = () => {
+        navigation.push("Encomenda");
+    };
     return (
         <View>
         <Logo></Logo>

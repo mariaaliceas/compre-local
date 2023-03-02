@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
 import { Product } from './product';
 import {Feed} from './feed';
+import {Encomendas} from './encomenda';
 
 export default function Configs(parametros) {
     //console.log(parametros)
