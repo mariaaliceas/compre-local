@@ -8,7 +8,7 @@ INSERT INTO carrinho (idUsuario, total) VALUES
   (2, 75.00),
   (3, 30.00);
   
-INSERT INTO pedido (codigo, delivery, horarioEntrega, previsaoMinEntrega, previsaoMaxEntrega, metodoPagamento, statusPedido, idUsuario) VALUES
+INSERT INTO pedido (codigo, isDelivery, horarioEntrega, previsaoMinEntrega, previsaoMaxEntrega, tpParagamento, stPedido, idUsuario) VALUES
   ('P123', TRUE, '2023-02-18 15:00:00', 30, 45, 'Cartão de Crédito', 'Em Preparação', 1),
   ('P456', FALSE, NULL, 60, 75, 'Dinheiro', 'Aguardando Pagamento', 2),
   ('P789', TRUE, '2023-02-18 20:00:00', 45, 60, 'Cartão de Débito', 'Enviado', 3);
@@ -29,5 +29,5 @@ INSERT INTO itemCompra (quantidade, valorTotal, observacoes, idCarrinho, idPedid
   (2, 30.0, 'sem açúcar', 1, 1),
   (1, 8.0, 'marca X', 2, 2),
   (3, 10.5, 'embalagem menor', 1, 3),
-  (4, 22.0, 'promoção da semana', 3, 4),
-  (2, 15.0, NULL, 2, 5);
+  (4, 22.0, 'promoção da semana', 3, 2),
+  (2, 15.0, NULL, 2, 1);
