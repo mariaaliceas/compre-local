@@ -13,4 +13,7 @@ module.exports = (app) => {
         .get(app.api.categories.getById)
         .put(app.api.categories.save)
         .delete(app.api.categories.remove)
+
+    app.route("/comercios")
+        .get(app.api.comercios.get)
 }

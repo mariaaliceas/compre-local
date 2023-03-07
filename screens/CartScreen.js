@@ -1,67 +1,55 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
-// const data = [
-//   {
-//     id: 1,
-//     image: require('../assets/capim_conveniencia.png'),
-//     text: 'Capim Conveniência',
-//     subtitle: '6 itens',
-//     route: 'ItensCapimConveniencia'
-//   },
-//   {
-//     id: 2,
-//     image: require('../assets/bar_beto.png'),
-//     text: 'Bar do Beto',
-//     subtitle: '3 itens',
-//     route: 'ItensBarDoBeto'
-//   },
-// ];
-
-// const Item = ({ image, text, subtitle, route, navigation }) => (
-//   <TouchableOpacity style={styles.itemContainer}
-//     onPress={() => navigation.navigate(route)}
-//   >
-//     <Image source={image} style={styles.image} />
-//     <View>
-//       <Text style={styles.title}>{text}</Text>
-//       <Text style={styles.subtitle}>{subtitle}</Text>
-//     </View>
-//     <View style={styles.arrowContainer}>
-//       <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
-//     </View>
-//   </TouchableOpacity>
-// );
-
 const Cart = ({ navigation }) => {
+
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getComercios = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/comercios');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getComercios();
+  }, []);
+
   return (
-    <View>
-      <TouchableOpacity style={styles.itemContainer}
-      onPress={() => navigation.navigate('ItensCapimConveniencia')}
-      >
-      <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
-      <View>
-        <Text style={styles.title}>Capim Conveniencia</Text>
-        <Text style={styles.subtitle}>6 itens</Text>
-      </View>
-      <View style={styles.arrowContainer}>
-        <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
-      </View>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer}
-    onPress={() => navigation.navigate('ItensBarDoBeto')}
-    >
-      <Image source={require('../assets/bar_beto.png')} style={styles.image} />
-      <View>
-        <Text style={styles.title}>Bar do Beto</Text>
-        <Text style={styles.subtitle}>3 itens</Text>
-      </View>
-      <View style={styles.arrowContainer}>
-        <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
-      </View>
-    </TouchableOpacity>
-  </View>
+    <View style={{flex: 1, padding: 24}}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={data}
+          keyExtractor={({cnpj}) => cnpj}
+          renderItem={({item}) => (
+            <View>
+              <TouchableOpacity style={styles.itemContainer}
+              onPress={() => navigation.navigate('ItensCapimConveniencia')}
+              >
+                <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
+                <View>
+                  <Text style={styles.title}>{item.nomeComercio}</Text>
+                  <Text style={styles.subtitle}>6 itens</Text>
+                </View>
+                <View style={styles.arrowContainer}>
+                  <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+      )}
+    </View>
   );
 };
 
@@ -78,7 +66,7 @@ const styles = StyleSheet.create({
     marginRight: 16
   },
   title: {
-    fontSize: 24
+    fontSize: 20
   },
   subtitle: {
     fontSize: 14
