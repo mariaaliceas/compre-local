@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Alert, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function Logo() {
-
+export default function Logo(props) {
+  console.log(props.imagem);
   return (
     <View style={styles.container}>
       <Image
@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    paddingLeft:40,
+    paddingLeft: 40,
     fontWeight: "bold",
-    paddingTop:30,
-    fontSize:15
+    paddingTop: 30,
+    fontSize: 15
   },
-  stars:{
+  stars: {
     flexDirection: 'row',
-    paddingLeft:40
+    paddingLeft: 40
   }
 });
 

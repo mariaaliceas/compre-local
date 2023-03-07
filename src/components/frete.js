@@ -5,58 +5,55 @@ import { useNavigation } from 'react-router-dom';
 import { RadioButton } from 'react-native-paper';
 Icon.loadFont();
 
-export default function Frete() {
+export default function Frete(props) {
+    console.log(props);
+    const frete = props.route.params.frete;
+    const [checked, setChecked] = useState(frete.valores.length === 0 ? 2: frete.valores.length > 1 ? 1 : 0);
+    
     return (
         <View>
             <Text style={styles.fontBlack} >Distância máxima</Text>
-            <TextInput style={styles.input} defaultValue='10 km'></TextInput>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Taxa fixa</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton color='#00bb22'
-                    value="first" status='checked' />
-                <Text style={styles.fntBtnRadio}>Taxa variável</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Frete grátis</Text>
-            </View>
-            <View style={styles.options}>
-                <View style={styles.inLineView}>
+            <TextInput style={styles.input} defaultValue={frete.distanciaMax}></TextInput>
+            {['Taxa fixa', 'Taxa variável', 'Frete grátis'].map((data, key) => {
+                return (
+                    <View key={key}>
+                        {checked === key ?
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22'
+                                    value="first" status='checked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                            :
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22' onPress={() => { setChecked(key) }}
+                                    value="first" status='unchecked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                        }
+                    </View>
+                )
+            })}
+
+            {checked === 1 ? frete.valores.map((valor) => {
+                return (<View style={styles.inLineView}>
                     <View style={styles.inLineValue}>
                         <Text style={styles.fntBtnRadio}>Valor</Text>
-                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
+                        <TextInput style={styles.inputA} defaultValue={valor.valor}></TextInput>
                     </View>
                     <View>
                         <Text style={styles.fntBtnRadio}>Distância Limite</Text>
-                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
+                        <TextInput style={styles.inputA} defaultValue={valor.distanciaLim}></TextInput>
                     </View>
-                </View>
-                <View style={styles.inLineView}>
+                </View>)
+            }) : <></>}
+            {checked === 0 ? frete.valores.map((valor) => {
+                return (<View style={styles.inLineView}>
                     <View style={styles.inLineValue}>
                         <Text style={styles.fntBtnRadio}>Valor</Text>
-                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
+                        <TextInput style={styles.inputA} defaultValue={valor.valor}></TextInput>
                     </View>
-                    <View>
-                        <Text style={styles.fntBtnRadio}>Distância Limite</Text>
-                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
-                    </View>
-                </View>
-                <View style={styles.inLineView}>
-                    <View style={styles.inLineValue}>
-                        <Text style={styles.fntBtnRadio}>Valor</Text>
-                        <TextInput style={styles.inputA} defaultValue='R$ 2,00'></TextInput>
-                    </View>
-                    <View>
-                        <Text style={styles.fntBtnRadio}>Distância Limite</Text>
-                        <TextInput style={styles.inputA} defaultValue='10 Km'></TextInput>
-                    </View>
-                </View>
-            </View>
+                </View>)
+            }) : <></>}
             <View style={styles.optA}>
                 <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
             </View>
@@ -108,7 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: '3px',
         color: '#00bb22',
         height: 30,
-        paddingTop:10,
+        paddingTop: 10,
         marginLeft: 8
     },
     opt: {

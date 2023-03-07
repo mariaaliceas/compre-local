@@ -12,28 +12,31 @@ export default function Configs(parametros) {
         parametros.nave.navigation.push("Produto");
     };
     const goToScreen4 = () => {
-        parametros.nave.navigation.push("Frete");
+        parametros.nave.navigation.push("Frete",{frete:parametros.comercio.frete});
     };
     const goToScreen7 = () => {
         parametros.nave.navigation.push("Feed");
     };
     const goToScreen8 = () => {
         parametros.nave.navigation.push("Encomenda");
+    
     }
+    
+
     return (
         <View>
             <Text style={styles.fontBlack} >Endereço</Text>
-            <TextInput style={styles.input} defaultValue='Rua'></TextInput>
+            <TextInput style={styles.input} defaultValue={parametros.comercio.endereco}></TextInput>
             <Text style={styles.fontBlack}>Telefone</Text>
-            <TextInput style={styles.input} defaultValue='44-99999999'></TextInput>
+            <TextInput style={styles.input} defaultValue={parametros.comercio.telefone}></TextInput>
             <Text style={styles.fontBlack}>Horário de atendimento</Text>
             <View style={styles.inline}>
-                <TextInput style={styles.inputA} defaultValue='08:00'></TextInput>
-                <TextInput style={styles.inputA} defaultValue='12:30'></TextInput>
+                <TextInput style={styles.inputA} defaultValue={parametros.comercio.horarios.entrada}></TextInput>
+                <TextInput style={styles.inputA} defaultValue={parametros.comercio.horarios.saidaA}></TextInput>
             </View>
             <View style={styles.inline}>
-                <TextInput style={styles.inputA} defaultValue='13:30'></TextInput>
-                <TextInput style={styles.inputA} defaultValue='20:00'></TextInput>
+                <TextInput style={styles.inputA} defaultValue={parametros.comercio.horarios.entradaA}></TextInput>
+                <TextInput style={styles.inputA} defaultValue={parametros.comercio.horarios.saida}></TextInput>
             </View>
             <View style={styles.pad}>
                 <Button color='#00bb22' style={styles.button} title="Configurar frete" onPress={goToScreen4} />
