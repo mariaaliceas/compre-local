@@ -9,7 +9,7 @@ const Cart = ({ navigation }) => {
 
   const getComercios = async () => {
     try {
-      const response = await fetch('http://localhost:3002/comercios');
+      const response = await fetch('http://192.168.237.154:3002/carrinho');
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -26,7 +26,7 @@ const Cart = ({ navigation }) => {
   return (
     <View style={{flex: 1, padding: 24}}>
       {isLoading ? (
-        <ActivityIndicator />
+        <View />
       ) : (
         <FlatList
           data={data}
@@ -39,7 +39,7 @@ const Cart = ({ navigation }) => {
                 <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
                 <View>
                   <Text style={styles.title}>{item.nomeComercio}</Text>
-                  <Text style={styles.subtitle}>6 itens</Text>
+                  <Text style={styles.subtitle}>{item.total} iten(s)</Text>
                 </View>
                 <View style={styles.arrowContainer}>
                   <Ionicons name="arrow-forward-outline" size={40} color="#006600" />

@@ -14,6 +14,6 @@ module.exports = (app) => {
         .put(app.api.categories.save)
         .delete(app.api.categories.remove)
 
-    app.route("/comercios")
-        .get(app.api.comercios.get)
+    app.route("/carrinho")
+        .get(app.api.carrinho.get)
 }
