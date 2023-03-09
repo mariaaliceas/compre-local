@@ -9,7 +9,7 @@ const Cart = ({ navigation }) => {
 
   const getCarrinho = async () => {
     try {
-      const response = await fetch('http://192.168.237.154:3002/carrinho');
+      const response = await fetch('http://localhost:3002/carrinho');
       const json = await response.json();
       setData(json);
     } catch (error) {
