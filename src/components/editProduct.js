@@ -7,45 +7,65 @@ import { RadioButton } from 'react-native-paper';
 import SelectDropdown from 'react-native-select-dropdown';
 Icon.loadFont();
 
-export default function EditaProduto(parametros) {
+export default function EditaProduto(props) {
+    const produto = props.route.params.produto;
     const typesOfW = ["Kg", "Unid"];
+    let tipoVenda = 0;
+    if (produto.tipoVenda === 'Encomenda') {
+        tipoVenda = 1;
+    }
+    if (produto.tipoVenda === 'Chat') {
+        tipoVenda = 2;
+    }
+    const [checked, setChecked] = useState(tipoVenda);
+    let img;
+    if (produto.imagem === 'orange') {
+        img = require('../../assets/laranja.png');
+    }
+    if (produto.imagem === 'lemon') {
+        img = require('../../assets/limao.png');
+    }
     return (
         <View>
             <View style={styles.img}>
                 <Image
                     style={styles.avatar}
-                    source={require('../../assets/laranja.png')}
+                    source={img}
                 />
                 <View style={styles.texto}>
-                    <Text style={styles.font}>Laranja</Text>
-                    <Text style={styles.fonte}>R$ 3,00</Text>
-                    <Text style={styles.fontes}>Estoque: 30kg</Text>
+                    <Text style={styles.font}>{produto.nome}</Text>
+                    <Text style={styles.fonte}>{produto.preco}</Text>
+                    <Text style={styles.fontes}>Estoque: {produto.estoque}Kg</Text>
                 </View>
             </View>
-            <View style={styles.btnRadio}>
-                <RadioButton color='#00bb22'
-                    value="first" status='checked' />
-                <Text style={styles.fntBtnRadio}>Varejo</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Encomenda</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Apenas chat</Text>
-            </View>
+            {['Varejo', 'Encomenda', 'Apenas chat'].map((data, key) => {
+                return (
+                    <View key={key}>
+                        {checked === key ?
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22'
+                                    value="first" status='checked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                            :
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22' onPress={() => { setChecked(key) }}
+                                    value="first" status='unchecked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                        }
+                    </View>
+                )
+            })}
             <Text style={styles.fontBlack} >Nome</Text>
             <View style={styles.pl}>
-                <TextInput style={styles.input} defaultValue='Laranja'></TextInput>
+                <TextInput style={styles.input} defaultValue={produto.nome}></TextInput>
             </View>
             <View>
                 <Text style={styles.fontBlack}>Estoque</Text>
                 <View style={styles.img}>
                     <View style={styles.pl}>
-                        <TextInput style={styles.input} defaultValue='30'></TextInput>
+                        <TextInput style={styles.input} defaultValue={produto.estoque}></TextInput>
                     </View>
                     <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
                         buttonTextStyle={styles.fntDpdown}
@@ -66,7 +86,7 @@ export default function EditaProduto(parametros) {
                 <Text style={styles.fontBlack}>Preço</Text>
                 <View style={styles.img}>
                     <View style={styles.pl}>
-                        <TextInput style={styles.input} defaultValue='R$ 4,00'></TextInput>
+                        <TextInput style={styles.input} defaultValue={produto.preco}></TextInput>
                     </View>
                     <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
                         buttonTextStyle={styles.fntDpdown}
@@ -106,7 +126,7 @@ const styles = StyleSheet.create({
     },
     img: {
         flexDirection: 'row',
-        paddingBottom:5
+        paddingBottom: 5
     },
     texto: {
         paddingLeft: 10
@@ -155,11 +175,11 @@ const styles = StyleSheet.create({
         height: 25,
         paddingLeft: 1,
         color: '#00bb22',
-        paddingBottom:5
+        paddingBottom: 5
     },
     fntDpdown: {
-        fontSize:15,
-        textAlign:'left'
+        fontSize: 15,
+        textAlign: 'left'
     },
     optA: {
         color: '#00bb22',
@@ -168,7 +188,7 @@ const styles = StyleSheet.create({
         borderRadius: '3px',
         height: 30,
         paddingLeft: 10,
-        marginTop:10
+        marginTop: 10
     },
 
     opt: {

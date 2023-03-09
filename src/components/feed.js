@@ -7,21 +7,25 @@ import Logo from './logo';
 import Encomenda from './encomenda';
 Icon.loadFont();
 
-export default function Feed() {
-
+export default function Feed(props) {
+    const imagem = props.route.params.imagem;
+    const solicitacoes = props.route.params.solicitacoesAtivas;
     return (
         <View>
-            <Logo></Logo>
+            <Logo imagem={imagem}></Logo>
             <Text style={styles.fontBlack} >Solicitações ativas:</Text>
-            <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Novo pedido nº 001" />
-            </View>
-            <View style={styles.optA}>
-                <Button color='#f7a138' style={styles.opt} title="Nova encomenda nº 002" />
-            </View>
-            <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Novo pedido nº 003" />
-            </View>
+            {solicitacoes.map((solicitacao) => {
+                if (solicitacao.tipoVenda === 'pedido') {
+                    return (<View style={styles.optA}>
+                        <Button color='#00bb22' style={styles.opt} title={'Novo pedido nº ' + solicitacao.numero} />
+                    </View>)
+                }
+                if (solicitacao.tipoVenda === 'encomenda') {
+                    return (<View style={styles.optA}>
+                        <Button color='#f7a138' style={styles.opt} title={'Nova encomenda nº' + solicitacao.numero} />
+                    </View>)
+                }
+            })}
         </View>
     );
 }

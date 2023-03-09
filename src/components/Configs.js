@@ -3,25 +3,28 @@ import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, B
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
 import { Product } from './product';
-import {Feed} from './feed';
-import {Encomendas} from './encomenda';
+import { Feed } from './feed';
+import { Encomendas } from './encomenda';
 
 export default function Configs(parametros) {
     //console.log(parametros)
     const goToScreen2 = () => {
-        parametros.nave.navigation.push("Produto",{produtos:parametros.comercio.produtos});
+        parametros.nave.navigation.push("Produto", { produtos: parametros.comercio.produtos });
     };
     const goToScreen4 = () => {
-        parametros.nave.navigation.push("Frete",{frete:parametros.comercio.frete});
+        parametros.nave.navigation.push("Frete", { frete: parametros.comercio.frete });
     };
     const goToScreen7 = () => {
-        parametros.nave.navigation.push("Feed");
+        parametros.nave.navigation.push("Feed", {
+            imagem: parametros.comercio.imagem,
+            solicitacoesAtivas: parametros.comercio.solicitacoesAtivas
+        });
     };
     const goToScreen8 = () => {
         parametros.nave.navigation.push("Encomenda");
-    
+
     }
-    
+
 
     return (
         <View>

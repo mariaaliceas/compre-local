@@ -38,6 +38,14 @@ export default function HomeComercio(navigation) {
             preco: 'R$ 2,00',
             estoque: '50',
             tipoVenda: 'Encomenda'
+        }],
+        solicitacoesAtivas: [{
+            tipoVenda: 'pedido',
+            numero: '001'
+        },
+        {
+            tipoVenda: 'encomenda',
+            numero: '002'
         }]
     }
 

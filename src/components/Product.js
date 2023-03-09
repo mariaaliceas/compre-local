@@ -12,8 +12,9 @@ export default function Product(props) {
     const goToScreen3 = () => {
         navigation.push("Categoria");
     };
-    const goToScreen5 = () => {
-        navigation.push("EditaProduto");
+    const goToScreen5 = (produto) => {
+        navigation.push("EditaProduto", {produto:produto});
+
     };
     const goToScreen6 = () => {
         navigation.push("AdicionaProduto");
@@ -42,7 +43,7 @@ export default function Product(props) {
                         <Text style={styles.fontes}>Estoque: {produto.estoque}Kg</Text>
                     </View>
                     <View style={styles.arrowright}>
-                        <Icon size={25} color='#00bb22' name='arrow-right' onPress={goToScreen5}></Icon>
+                        <Icon size={25} color='#00bb22' name='arrow-right' onPress={() => goToScreen5(produto)}></Icon>
                     </View>
                 </View>)
             })}

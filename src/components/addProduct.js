@@ -9,32 +9,37 @@ Icon.loadFont();
 
 export default function AdicionaProduto(parametros) {
     const typesOfW = ["Kg", "Unid"];
+    const [checked, setChecked] = useState(0);
     return (
         <View>
             <Text style={styles.fontBlack} >Nome do produto</Text>
             <View>
                 <TextInput style={styles.input} defaultValue='Nome do produto'></TextInput>
             </View>
-            <View style={styles.btnRadio}>
-                <RadioButton color='#00bb22'
-                    value="first" status='checked' />
-                <Text style={styles.fntBtnRadio}>Varejo</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Encomenda</Text>
-            </View>
-            <View style={styles.btnRadio}>
-                <RadioButton
-                    value="first" status='unchecked' />
-                <Text style={styles.fntBtnRadio}>Apenas chat</Text>
-            </View>
+            {['Varejo', 'Encomenda', 'Apenas chat'].map((data, key) => {
+                return (
+                    <View key={key}>
+                        {checked === key ?
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22'
+                                    value="first" status='checked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                            :
+                            <View style={styles.btnRadio}>
+                                <RadioButton color='#00bb22' onPress={() => { setChecked(key) }}
+                                    value="first" status='unchecked' />
+                                <Text style={styles.fntBtnRadio} >{data}</Text>
+                            </View>
+                        }
+                    </View>
+                )
+            })}
             <View>
                 <Text style={styles.fontBlack}>Preço</Text>
                 <View style={styles.img}>
                     <View style={styles.pl}>
-                        <TextInput style={styles.input} defaultValue='R$ 4,00'></TextInput>
+                        <TextInput style={styles.input} defaultValue='R$ 0,00'></TextInput>
                     </View>
                     <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
                         buttonTextStyle={styles.fntDpdown}
@@ -55,7 +60,7 @@ export default function AdicionaProduto(parametros) {
                 <Text style={styles.fontBlack}>Estoque</Text>
                 <View style={styles.img}>
                     <View style={styles.pl}>
-                        <TextInput style={styles.input} defaultValue='30'></TextInput>
+                        <TextInput style={styles.input} defaultValue='0'></TextInput>
                     </View>
                     <SelectDropdown buttonStyle={styles.prod} defaultValue={'Kg'}
                         buttonTextStyle={styles.fntDpdown}
