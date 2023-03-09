@@ -9,7 +9,7 @@ import {Encomendas} from './encomenda';
 export default function Configs(parametros) {
     //console.log(parametros)
     const goToScreen2 = () => {
-        parametros.nave.navigation.push("Produto");
+        parametros.nave.navigation.push("Produto",{produtos:parametros.comercio.produtos});
     };
     const goToScreen4 = () => {
         parametros.nave.navigation.push("Frete",{frete:parametros.comercio.frete});

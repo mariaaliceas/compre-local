@@ -6,7 +6,9 @@ import { Categoria } from './categ';
 import { EditaProduto } from './editProduct';
 Icon.loadFont();
 
-export default function Product({ navigation }) {
+export default function Product(props) {
+    const navigation = props.navigation;
+    const produtos = props.route.params.produtos;
     const goToScreen3 = () => {
         navigation.push("Categoria");
     };
@@ -16,70 +18,37 @@ export default function Product({ navigation }) {
     const goToScreen6 = () => {
         navigation.push("AdicionaProduto");
     }
-    //console.log(navigation);    
     return (
         <View nave={navigation}>
             <View style={styles.prod}>
                 <Button color='#00bb22' title="Alterar configurações da categoria" onPress={goToScreen3} />
             </View>
-            <View style={styles.img}>
-                <Image
-                    style={styles.avatar}
-                    source={require('../../assets/laranja.png')}
-                />
-                <View style={styles.texto}>
-                    <Text style={styles.font}>Laranja</Text>
-                    <Text style={styles.fonte}>R$ 3,00</Text>
-                    <Text style={styles.fontes}>Estoque: 30kg</Text>
-                </View>
-                <View style={styles.arrowright}>
-                    <Icon size={25} color='#00bb22' name='arrow-right' onPress={goToScreen5}></Icon>
-                </View>
-            </View>
-            <View style={styles.img}>
-                <Image
-                    style={styles.avatar}
-                    source={require('../../assets/maça.png')}
-                />
-                <View style={styles.texto}>
-                    <Text style={styles.font}>Maça Fuji</Text>
-                    <Text style={styles.fonte}>R$ 7,00</Text>
-                    <Text style={styles.fontes}>Estoque: 35kg</Text>
-                </View>
-                <View style={styles.arrowright}>
-                    <Icon size={25} color='#00bb22' name='arrow-right'></Icon>
-                </View>
-            </View>
-            <View style={styles.img}>
-                <Image
-                    style={styles.avatar}
-                    source={require('../../assets/limao.png')}
-                />
-                <View style={styles.texto}>
-                    <Text style={styles.font}>Limão Taiti</Text>
-                    <Text style={styles.fonte}>R$ 4,00 </Text>
-                    <Text style={styles.fontes}>Estoque: 25kg</Text>
-                </View>
-                <View style={styles.arrowright}>
-                    <Icon size={25} color='#00bb22' name='arrow-right'></Icon>
-                </View>
-            </View>
-            <View style={styles.img}>
-                <Image
-                    style={styles.avatar}
-                    source={require('../../assets/leite.png')}
-                />
-                <View style={styles.texto}>
-                    <Text style={styles.font}>Leite</Text>
-                    <Text style={styles.fonte}>R$ 3,00</Text>
-                    <Text style={styles.fontes}>Estoque: 30kg</Text>
-                </View>
-                <View style={styles.arrowright}>
-                    <Icon size={25} color='#00bb22' name='arrow-right'></Icon>
-                </View>
-            </View>
+            {produtos.map((produto) => {
+                let img;
+                if (produto.imagem === 'orange') {
+                    img = require('../../assets/laranja.png');
+                }
+                if (produto.imagem === 'lemon') {
+                    img = require('../../assets/limao.png');
+                }
+                return (<View style={styles.img}>
+                    <Image
+                        style={styles.avatar}
+                        source={img}
+                    />
+                    <View style={styles.texto}>
+                        <Text style={styles.font}>{produto.nome}</Text>
+                        <Text style={styles.fonte}>{produto.preco}</Text>
+                        <Text style={styles.fontes}>Estoque: {produto.estoque}Kg</Text>
+                    </View>
+                    <View style={styles.arrowright}>
+                        <Icon size={25} color='#00bb22' name='arrow-right' onPress={goToScreen5}></Icon>
+                    </View>
+                </View>)
+            })}
+            
             <View style={styles.prod}>
-                <Button color='#00bb22' title="Adicionar produto" onPress={goToScreen6}/>
+                <Button color='#00bb22' title="Adicionar produto" onPress={goToScreen6} />
             </View>
         </View>
     );

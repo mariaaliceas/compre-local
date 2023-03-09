@@ -8,7 +8,7 @@ import Headers from './headers';
 export default function HomeComercio(navigation) {
 
     const capim = {
-        imagem: '../../assets/capim_conveniencia.png',
+        imagem: 'capim_conveniencia',
         endereco: 'Rua',
         telefone: '99-99999999',
         horarios: {
@@ -24,8 +24,23 @@ export default function HomeComercio(navigation) {
                 valor: 'R$2,00',
                 distanciaLim: '10 km'
             }]
-        }
+        },
+        produtos: [{
+            nome: 'Laranja',
+            imagem: 'orange',
+            preco: 'R$ 3,00',
+            estoque: '30',
+            tipoVenda: 'Varejo'
+        },
+        {
+            nome: 'Limão',
+            imagem: 'lemon',
+            preco: 'R$ 2,00',
+            estoque: '50',
+            tipoVenda: 'Encomenda'
+        }]
     }
+
 
     return (
         <View style={styles.container}>

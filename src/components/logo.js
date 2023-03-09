@@ -3,12 +3,16 @@ import { View, Text, StyleSheet, SafeAreaView, Image, Alert, Button } from 'reac
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Logo(props) {
-  console.log(props.imagem);
+  let img;
+  if (props.imagem === 'capim_conveniencia') {
+    img = require('../../assets/capim_conveniencia.png');
+  }
+
   return (
     <View style={styles.container}>
       <Image
         style={styles.avatar}
-        source={require('../../assets/capim_conveniencia.png')}
+        source={img}
       />
       <View>
         <Text style={styles.text}>Capim Conveniência</Text>
