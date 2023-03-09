@@ -7,7 +7,7 @@ const Cart = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const getComercios = async () => {
+  const getCarrinho = async () => {
     try {
       const response = await fetch('http://192.168.237.154:3002/carrinho');
       const json = await response.json();
@@ -20,7 +20,7 @@ const Cart = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getComercios();
+    getCarrinho();
   }, []);
 
   return (
