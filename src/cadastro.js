@@ -9,6 +9,9 @@ var email='';
 var telefone='';
 var senha='';
 var confirma='';
+
+/* antes de chamar a funcao criar, onPress chamava 
+o navigation para 'finalCadastro'*/
 const criar=()=>{
 
     //Testando somente as condicoes de validacao
@@ -35,6 +38,7 @@ const cadastro=({navigation})=>{
 
         
         <View style={styles.containerBotao2}>
+            
         <TouchableOpacity style={styles.botao2}  onPress={() =>criar()}
        >
             <Text style={styles.textoBotao2} >Criar conta</Text>
