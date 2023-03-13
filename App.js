@@ -10,7 +10,6 @@ import cadastroComercio2 from './src/cadastroComercio2';
 import cadastroComercio3 from './src/cadastroComercio3';
 
 
-
 const telaInicial=({navigation})=>{
   return(
     <>    
