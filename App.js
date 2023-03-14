@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, TouchableOpacity, TextInput, Pressable, FlatList } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import Icon from 'react-native-ico-material-design';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,6 +11,8 @@ import ItensBarDoBeto from './screens/ItensBarDoBetoScreen';
 import ItensCapimConveniencia from './screens/ItensCapimConvenienciaScreen';
 import FinalizarCompra from './screens/FinalizarCompraScreen';
 import PedidoConfirmado from './screens/PedidoConfirmadoScreen';
+import Comercio from './src/components/Comercio';
+import Servicos from './src/components/Servicos';
 
 var iconHeight = 26;
 var iconWidth = 26;
@@ -58,7 +60,8 @@ const HomeScreen = ({ navigation }) => {
                   </View>
                   <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
                   <Text style={styles.cardSubtitle}>Destaques:</Text>
-                  <ScrollView 
+                  <Comercio />
+                  {/* <ScrollView 
                     horizontal={true} 
                     style={styles.horizontalContainer} 
                     showsHorizontalScrollIndicator={false}
@@ -110,14 +113,15 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                       </TouchableOpacity>
                     </View> 
-                  </ScrollView>
+                  </ScrollView> */}
                 </View>
     
                 <View style={styles.card}>
                   <Text style={styles.cardTitle}>Contrate um serviço</Text>
                   <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
                   <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
-                  <ScrollView 
+                  <Servicos />
+                  {/* <ScrollView 
                     horizontal={true} 
                     style={styles.horizontalContainer} 
                     showsHorizontalScrollIndicator={false}
@@ -170,7 +174,7 @@ const HomeScreen = ({ navigation }) => {
                       </TouchableOpacity>
                     </View>  
     
-                  </ScrollView>
+                  </ScrollView> */}
                 </View>
     
                 <View style={styles.card}>

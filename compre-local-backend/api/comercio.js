@@ -5,6 +5,22 @@ module.exports = (app) => {
         return res.json(comercios);
     }
 
+    const getComercioByTipo = async (req, res) => {
+        const tpComercio = req.params.tpComercio;
+
+        if (!tpComercio) {
+            return res.status(400).json({ err: "Tipo de comércio não informado" });
+        }
+
+        comercios = await app.database("comercio").where({ tpComercio: tpComercio });
+
+        if (!comercios) {
+            return res.status(200).json({ success: "Não foram encontrados comercios para o tipo informado" });
+        }
+
+        return res.json(comercios);
+    }
+
     const getById = async (req, res) => {
         const idCategory = req.params.id;
 
@@ -65,5 +81,5 @@ module.exports = (app) => {
         res.status(204).json({success: "Categoria excluída com sucesso"});
     }
 
-    return { get }
+    return { get, getComercioByTipo }
 }

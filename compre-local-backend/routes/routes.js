@@ -16,4 +16,7 @@ module.exports = (app) => {
 
     app.route("/carrinho")
         .get(app.api.carrinho.get)
+
+    app.route("/comercio/:tpComercio")
+        .get(app.api.comercio.getComercioByTipo)
 }
