@@ -9,7 +9,6 @@ exports.up = function(knex) {
         table.string("telefone", 12).notNullable();
         table.string("email", 100).notNullable();
         table.string("senha", 255).notNullable();
-        table.string("confirma", 255).notNullable();
 
 
     })

@@ -21,13 +21,8 @@ module.exports = (app) => {
             return res.json({error: "Email já cadastrado"});
         }
         else{
-            if(!usuario.email || !usuario.telefone || !usuario.nome ||!usuario.senha || !usuario.confirma){
+            if(!usuario.email || !usuario.telefone || !usuario.nome ||!usuario.senha){
                 return res.status(400).json({ err: "Preencha os campos corretamente!"});
-
-            }
-            else if(usuario.senha!=usuario.confirma){
-                return res.status(400).json({ err: "Confirme a senha corretamente!"});
-
 
             }
             else{

@@ -4,27 +4,59 @@ import { Alert,StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-na
 import {login} from './login';
 import {finalCadastro} from './finalCadastro';
 
-var nome='';
-var email='';
-var telefone='';
-var senha='';
-var confirma='';
 
-/* antes de chamar a funcao criar, onPress chamava 
-o navigation para 'finalCadastro'*/
-const criar=()=>{
 
-    //Testando somente as condicoes de validacao
-    if((nome && telefone && email && senha && confirma)!='' && (senha==confirma)){
-        Alert.alert('Cadastro realizado','Continue explorando o app')
-    }
-    else{
-        Alert.alert('Erro no cadastro', 'Preencha os campos corretamente!')
-    }
-    
-}
 
 const cadastro=({navigation})=>{
+    var nome='';
+    var email='';
+    var telefone='';
+    var senha='';
+    const submit = () => {
+        const enviar = {
+            nome,
+            email,
+            telefone,
+            senha,
+        };
+        fetch('http://localhost:3002/usuarioCadastro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(enviar),
+        })
+        .then(async res => { 
+            try {
+                const jsonRes = await res.json();
+                if (res.status !== 200) {
+                    console.log(jsonRes.message)
+                    Alert.alert('Erro no registro do cadastro','Tente novamente mais tarde')
+                } else {
+                    
+                    console.log(jsonRes.message);
+                    return navigation.navigate('finalCadastro')
+                }
+            } catch (err) {
+                console.log(err);
+            };
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+
+    const criar=()=>{
+
+    //Testando somente as condicoes de validacao
+     if((nome && telefone && email && senha && confirma)!=''){
+        //Alert.alert('Cadastro realizado','Continue explorando o app')
+        submit();
+    }
+     else{
+        Alert.alert('Erro no cadastro', 'Preencha os campos corretamente!')
+    }
+}  
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Crie sua conta para começar</Text>
@@ -33,7 +65,7 @@ const cadastro=({navigation})=>{
         <TextInput style={styles.botao} placeholder='Telefone'  onChangeText={text=>telefone=text}/>
         <TextInput style={styles.botao} placeholder='Email'  onChangeText={text=>email=text}/>
         <TextInput style={styles.botao} placeholder='Senha' secureTextEntry={true} onChangeText={text=>senha=text}/>
-        <TextInput style={styles.botao} placeholder='Confirme sua senha' secureTextEntry={true} onChangeText={text=>confirma=text} />
+        
        
 
         
