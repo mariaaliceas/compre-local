@@ -1,56 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
+import axios from 'axios';
 
 const Cart = ({ navigation }) => {
-
-  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const getCarrinho = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/carrinho');
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getCarrinho();
+    const fetchData = async () => {
+      const result = await axios.get('http://localhost:3002/carrinho');
+      // console.log(result.data);
+      setData(result.data);
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <View style={{flex: 1, padding: 24}}>
-      {isLoading ? (
-        <View />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={({cnpj}) => cnpj}
-          renderItem={({item}) => (
+    <View>
+      {data.map(item => (
+        <View key={item.cnpj}>
+          <TouchableOpacity style={styles.itemContainer}
+          onPress={() => navigation.navigate('ItensCarrinho', {
+            carrinhoId: item.idCarrinho,
+            comercioName: item.nomeComercio
+          })}
+          >
+            <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
             <View>
-              <TouchableOpacity style={styles.itemContainer}
-              onPress={() => navigation.navigate('ItensCapimConveniencia')}
-              >
-                <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
-                <View>
-                  <Text style={styles.title}>{item.nomeComercio}</Text>
-                  <Text style={styles.subtitle}>{item.total} iten(s)</Text>
-                </View>
-                <View style={styles.arrowContainer}>
-                  <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
-                </View>
-              </TouchableOpacity>
+              <Text style={styles.title}>{item.nomeComercio}</Text>
+              <Text style={styles.subtitle}>{item.total} iten(s)</Text>
             </View>
-          )}
-        />
-      )}
+            <View style={styles.arrowContainer}>
+              <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
+            </View>
+          </TouchableOpacity>
+        </View>
+      ))}
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({

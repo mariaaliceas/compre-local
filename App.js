@@ -7,8 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Profile from './screens/ProfileScreen';
 import Cart from './screens/CartScreen';
-import ItensBarDoBeto from './screens/ItensBarDoBetoScreen';
-import ItensCapimConveniencia from './screens/ItensCapimConvenienciaScreen';
+// import ItensBarDoBeto from './screens/ItensBarDoBetoScreen';
+// import ItensCapimConveniencia from './screens/ItensCapimConvenienciaScreen';
+import ItensCarrinho from './screens/ItensCarrinho';
 import FinalizarCompra from './screens/FinalizarCompraScreen';
 import PedidoConfirmado from './screens/PedidoConfirmadoScreen';
 import Comercio from './src/components/Comercio';
@@ -290,19 +291,19 @@ function App() {
             }} 
         />
         <Stack.Screen 
-            name="ItensCapimConveniencia" 
-            component={ItensCapimConveniencia}
+            name="ItensCarrinho" 
+            component={ItensCarrinho}
             options={{
                 title: 'Itens',
             }} 
         />
-        <Stack.Screen 
+        {/* <Stack.Screen 
             name="ItensBarDoBeto" 
             component={ItensBarDoBeto}
             options={{
                 title: 'Itens',
             }} 
-        />
+        /> */}
         <Stack.Screen 
             name="FinalizarCompra" 
             component={FinalizarCompra}

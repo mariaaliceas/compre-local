@@ -19,4 +19,7 @@ module.exports = (app) => {
 
     app.route("/comercio/:tpComercio")
         .get(app.api.comercio.getComercioByTipo)
+
+    app.route("/itens-carrinho/:idCarrinho")
+        .get(app.api.item_carrinho.getItensByIdCarrinho)
 }

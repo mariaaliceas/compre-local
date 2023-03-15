@@ -1,60 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Text, View, FlatList, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
-const data = [
-  {
-    id: 1,
-    image: require('../assets/capim_conveniencia.png'),
-    text: 'Leite 1L',
-    subtitle: 'R$ 3,50/un',
-    quantidade: 1
-  },
-  {
-    id: 2,
-    image: require('../assets/capim_conveniencia.png'),
-    text: 'Refrigerante 350ml',
-    subtitle: 'R$ 3,50/un',
-    quantidade: 2
-  },
-  {
-    id: 3,
-    image: require('../assets/capim_conveniencia.png'),
-    text: 'Salgadinho 75g',
-    subtitle: 'R$ 5,0/un',
-    quantidade: 2
-  },
-  {
-    id: 4,
-    image: require('../assets/capim_conveniencia.png'),
-    text: 'Leite 1L',
-    subtitle: 'R$ 3,50/un',
-    quantidade: 1
-  },
-  {
-    id: 5,
-    image: require('../assets/capim_conveniencia.png'),
-    text: 'Iogurte 100ml',
-    subtitle: 'R$ 3,50/un',
-    quantidade: 1
-  },
-];
-  
-// const ItensCapimConveniencia = ({ navigation }) => {
-//   return (
-//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-//       <TouchableOpacity style={styles.itemContainer}
-//         onPress={() => navigation.navigate('ItensCapimConveniencia')}
-//         >
-//         <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
-//         <View>
-//           <Text style={styles.title}>Capim Conveniencia</Text>
-//           <Text style={styles.subtitle}>6 itens</Text>
-//         </View>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
+import axios from 'axios';
 
 const Item = ({ image, text, subtitle, quantidade }) => (
   <View style={styles.itemContainer}>
@@ -67,22 +14,45 @@ const Item = ({ image, text, subtitle, quantidade }) => (
   </View>
 );
 
-const ItensCapimConveniencia = ({ navigation }) => {
+const ItensCarrinho = ({ route, navigation }) => {
+  const params = route.params;
+  const idCarrinho = params.carrinhoId;
+  const nomeComercio = params.comercioName;
+  console.log(params);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('http://localhost:3002/itens-carrinho/' + idCarrinho);
+      console.log(result.data);
+      setData(result.data);
+    };
+
+    fetchData();
+  }, []);
+
+  const total = data.reduce((accumulator, item) => accumulator + item.valorTotal, 0);
+
   return (
     <ScrollView>
       <View>
         <View style={styles.itemContainer}>
           <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />
           <View>
-            <Text style={styles.title}>Capim Conveniencia</Text>
+            <Text style={styles.title}>{nomeComercio}</Text>
           </View>
         </View>
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
-        <FlatList
-          data={data}
-          renderItem={({ item }) => <Item image={item.image} text={item.text} subtitle={item.subtitle} quantidade={item.quantidade} />}
-          keyExtractor={item => item.id.toString()}
-        />
+        <View>
+          {data.map(item => (
+            <Item
+            key={item.idItemCompra}
+            image={require('../assets/capim_conveniencia.png')}
+            text={item.nome}
+            subtitle={item.preco + '/' + item.unidadeMedida}
+            quantidade={item.quantidade} />
+          ))}
+        </View>
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
         <TouchableOpacity 
           style={styles.itemContainer}
@@ -90,7 +60,7 @@ const ItensCapimConveniencia = ({ navigation }) => {
         >
           <View>
             <Text style={styles.title}>Confirmar compra</Text>
-            <Text style={styles.subtitle}>Total: R$ 24,00</Text>
+            <Text style={styles.subtitle}>Total: R$ {total}</Text>
           </View>
           <View style={styles.arrowContainer}>
             <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
@@ -130,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
   
-export default ItensCapimConveniencia;
+export default ItensCarrinho;
