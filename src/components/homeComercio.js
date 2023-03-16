@@ -41,7 +41,37 @@ export default function HomeComercio(navigation) {
         }],
         solicitacoesAtivas: [{
             tipoVenda: 'pedido',
-            numero: '001'
+            numero: '001',
+            valor: 'R$ 10,00',
+            dataPedido: '11/02/2023',
+            dataEntrega: '11/02/2023',
+            volume: 'Kg',
+            quantidade: '1',
+            produto:'Laranja',
+            pagamento: 'Dinheiro'
+        },
+        {
+            tipoVenda: 'encomenda',
+            numero: '002',
+            valor: 'R$ 50,00',
+            dataPedido: '13/02/2023',
+            dataEntrega: '15/02/2023',
+            volume: 'Kg',
+            quantidade: '5',
+            produto:'Pão de ló',
+            pagamento: 'Cartão'
+
+        }],
+        histVendas: [{
+            tipoVenda: 'pedido',
+            numero: '001',
+            valor: 'R$ 10,00',
+            dataPedido: '11/02/2023',
+            dataEntrega: '11/02/2023',
+            volume: 'Kg',
+            quantidade: '1',
+            produto:'Laranja',
+            pagamento: 'Dinheiro'
         },
         {
             tipoVenda: 'encomenda',
@@ -55,6 +85,7 @@ export default function HomeComercio(navigation) {
             pagamento: 'Cartão'
 
         }]
+        
     }
 
 

@@ -12,6 +12,8 @@ import AdicionaProduto from './src/components/addProduct';
 import Feed from './src/components/feed';
 import Encomenda from './src/components/encomenda';
 import detEncomenda from './src/components/detEncomenda';
+import detPedido from './src/components/detPedido';
+import histVendas from './src/components/histVenda';
 Icon.loadFont();
 
 const Stack = createNativeStackNavigator();
@@ -38,8 +40,12 @@ export default function App() {
           component={Feed} />
         <Stack.Screen name="Encomenda"
           component={Encomenda} />
-          <Stack.Screen name="detEncomenda"
+        <Stack.Screen name="detEncomenda"
           component={detEncomenda} />
+          <Stack.Screen name="detPedido"
+          component={detPedido} />
+          <Stack.Screen name="histVendas"
+          component={histVendas} />
       </Stack.Navigator>
     </NavigationContainer>
   );

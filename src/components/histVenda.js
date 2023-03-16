@@ -7,7 +7,7 @@ import Logo from './logo';
 import Encomenda from './encomenda';
 Icon.loadFont();
 
-export default function Feed(props) {
+export default function HistVenda(props) {
     const goToScreen9 = (encomenda) => {
         props.navigation.push("detEncomenda", {encomenda});
     }
@@ -15,20 +15,20 @@ export default function Feed(props) {
         props.navigation.push("detPedido", {pedido});
     }
     const imagem = props.route.params.imagem;
-    const solicitacoes = props.route.params.solicitacoesAtivas;
+    const histVendas = props.route.params.histVendas;
     return (
         <View>
             <Logo imagem={imagem}></Logo>
-            <Text style={styles.fontBlack} >Solicitações ativas:</Text>
-            {solicitacoes.map((solicitacao) => {
-                if (solicitacao.tipoVenda === 'pedido') {
+            <Text style={styles.fontBlack} >Vendas</Text>
+            {histVendas.map((histVenda) => {
+                if (histVenda.tipoVenda === 'pedido') {
                     return (<View style={styles.optA}>
-                        <Button color='#00bb22' style={styles.opt} title={'Novo pedido nº ' + solicitacao.numero} onPress={() => goToScreen10(solicitacao)}/>
+                        <Button color='#00bb22' style={styles.opt} title={'Pedido nº ' + histVenda.numero} onPress={() => goToScreen10(histVenda)}/>
                     </View>)
                 }
-                if (solicitacao.tipoVenda === 'encomenda') {
+                if (histVenda.tipoVenda === 'encomenda') {
                     return (<View style={styles.optA}>
-                        <Button color='#f7a138' style={styles.opt} title={'Nova encomenda nº' + solicitacao.numero} onPress={() => goToScreen9(solicitacao)}/>
+                        <Button color='#f7a138' style={styles.opt} title={'Encomenda nº' + histVenda.numero} onPress={() => goToScreen9(histVenda)}/>
                     </View>)
                 }
             })}

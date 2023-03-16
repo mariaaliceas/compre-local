@@ -28,6 +28,12 @@ export default function Configs(parametros) {
         });
 
     }
+    const goToScreen11 = () => {
+        parametros.nave.navigation.push("histVendas", {
+            imagem: parametros.comercio.imagem,
+            histVendas: parametros.comercio.histVendas
+        });
+    };
 
 
     return (
@@ -63,7 +69,7 @@ export default function Configs(parametros) {
                 <Button color='#00bb22' style={styles.opt} title="Ver avaliações" />
             </View>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Ver histórico de venda" />
+                <Button color='#00bb22' style={styles.opt} title="Ver histórico de venda" onPress={goToScreen11} />
             </View>
         </View>
     );
