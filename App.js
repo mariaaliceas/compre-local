@@ -38,7 +38,7 @@ export default function App() {
           component={Feed} />
         <Stack.Screen name="Encomenda"
           component={Encomenda} />
-          <Stack.Screen name="detncomenda"
+          <Stack.Screen name="detEncomenda"
           component={detEncomenda} />
       </Stack.Navigator>
     </NavigationContainer>

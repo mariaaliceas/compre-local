@@ -7,27 +7,35 @@ import { EditaProduto } from './editProduct';
 
 Icon.loadFont();
 
-export default function detEncomenda(parametros) {
+export default function detEncomenda(props) {
+    const encomenda = props.route.params.encomenda;
     return (
-        <View nave={navigation}>
-            <View style={styles.img}>
-                <Image
-                    style={styles.avatar}
-                    source={require('../../assets/laranja.png')}
-                />
-                <View style={styles.texto}>
-                    <Text style={styles.font}>Laranja</Text>
-                    <Text style={styles.fonte}>R$ 3,00</Text>
-                    <Text style={styles.fontes}>Quantidade: 3kg</Text>
+        <View>
+            <Text style={styles.fontBlack} >Nome do produto</Text>
+            <View>
+                <TextInput style={styles.input} defaultValue={encomenda.produto}></TextInput>
+            </View>
+            <View>
+                <Text style={styles.fontBlack}>Preço</Text>
+                <View style={styles.img}>
+                    <View style={styles.pl}>
+                        <TextInput style={styles.input} defaultValue={encomenda.valor}></TextInput>
+                    </View>
+                    <View>
+                        <Text>Quantidade:{encomenda.quantidade}</Text>
+                        <Text>Volume:{encomenda.volume}</Text>
+                    </View>
                 </View>
             </View>
-            <View style={styles.texto}>
-                <Text style={styles.font}>Pagamento na entrega</Text>
-                <Text style={styles.fonte}>R$ 30,00</Text>
-                <Text style={styles.fontes}>Quantidade: 3kg</Text>
+            <View>
+                <Text style={styles.fontBlack}>Detalhes:</Text>
+                <Text>Data da encomenda: {encomenda.dataPedido}</Text>
+                <Text>Data da entrega: {encomenda.dataEntrega}</Text>
+                <Text>Forma de Pagamento: {encomenda.pagamento}</Text>
+                
             </View>
-            <View style={styles.prod}>
-                <Button color='#00bb22' title="Adicionar produto" />
+            <View style={styles.optA}>
+                <Button color='#FF8C00' style={styles.optD} title="Cancelar" />
             </View>
         </View>
     );

@@ -45,7 +45,15 @@ export default function HomeComercio(navigation) {
         },
         {
             tipoVenda: 'encomenda',
-            numero: '002'
+            numero: '002',
+            valor: 'R$ 50,00',
+            dataPedido: '13/02/2023',
+            dataEntrega: '15/02/2023',
+            volume: 'Kg',
+            quantidade: '5',
+            produto:'Pão de ló',
+            pagamento: 'Cartão'
+
         }]
     }
 

@@ -5,24 +5,26 @@ import { useNavigation } from 'react-router-dom';
 import { Categoria } from './categ';
 import { EditaProduto } from './editProduct';
 import { Configs } from './Configs';
-import {DetEcomenda} from './detEncomenda'; 
+import { DetEcomenda } from './detEncomenda';
+import Logo from './logo';
 Icon.loadFont();
 
-export default function Encomenda(parametros) {
-    const goToScreen9 = () => {
-        parametros.nave.navigation.push("detEncomenda");
+export default function Encomenda(props) {
+    console.log(props)
+    const goToScreen9 = (encomenda) => {
+        props.navigation.push("detEncomenda", {encomenda});
     }
+    const imagem = props.route.params.imagem;
+    const encomendas = props.route.params.encomendas;
     return (
         <View>
-            <View style={styles.optA}>
-                <Button color='#f7a138' style={styles.opt} title="Encomenda nº 001" onPress={goToScreen9}/>
-            </View>
-            <View style={styles.optA}>
-                <Button color='#f7a138' style={styles.opt} title="Encomenda nº 002" />
-            </View>
-            <View style={styles.optA}>
-                <Button color='#f7a138' style={styles.opt} title="Encomenda nº 003" />
-            </View>
+            <Logo imagem={imagem}></Logo>
+            <Text style={styles.fontBlack} >Encomendas ativas:</Text>
+            {encomendas.map((encomenda) => {
+                return (<View style={styles.optA}>
+                    <Button color='#f7a138' style={styles.opt} title={'Encomenda nº' + encomenda.numero} onPress={() => goToScreen9(encomenda)}/>
+                </View>)
+            })}
         </View>
     );
 }

@@ -21,7 +21,11 @@ export default function Configs(parametros) {
         });
     };
     const goToScreen8 = () => {
-        parametros.nave.navigation.push("Encomenda");
+        parametros.nave.navigation.push("Encomenda", {
+            imagem: parametros.comercio.imagem,
+            encomendas: parametros.comercio.solicitacoesAtivas.filter((solicitacao) => solicitacao.tipoVenda === 'encomenda'),
+            nave: parametros.nave.navigation
+        });
 
     }
 
