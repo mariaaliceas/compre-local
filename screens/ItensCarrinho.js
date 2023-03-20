@@ -16,15 +16,14 @@ const Item = ({ image, text, subtitle, quantidade }) => (
 
 const ItensCarrinho = ({ route, navigation }) => {
   const params = route.params;
-  const idCarrinho = params.carrinhoId;
-  const nomeComercio = params.comercioName;
-  console.log(params);
+  const comercio = params.comercio;
+  const idCarrinho = comercio.idCarrinho;
+  const nomeComercio = comercio.nomeComercio;
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3002/itens-carrinho/' + idCarrinho);
-      console.log(result.data);
+      const result = await axios.get('http://192.168.237.136:3002/itens-carrinho/' + idCarrinho);
       setData(result.data);
     };
 
@@ -56,11 +55,15 @@ const ItensCarrinho = ({ route, navigation }) => {
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
         <TouchableOpacity 
           style={styles.itemContainer}
-          onPress={() => navigation.navigate('FinalizarCompra')}  
+          onPress={() => navigation.navigate('FinalizarCompra', {
+            usuario: route.params.usuario,
+            comercio: comercio,
+            total: total
+          })}  
         >
           <View>
             <Text style={styles.title}>Confirmar compra</Text>
-            <Text style={styles.subtitle}>Total: R$ {total}</Text>
+            <Text style={styles.subtitle}>Total: R$ {total.toFixed(2)}</Text>
           </View>
           <View style={styles.arrowContainer}>
             <Ionicons name="arrow-forward-outline" size={40} color="#006600" />

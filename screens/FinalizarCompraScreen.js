@@ -1,46 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-import RNPickerSelect from "react-native-picker-select";
 import Icon from 'react-native-ico-material-design';
 import Checkbox from 'expo-checkbox';
+import axios from 'axios';
 
-const FinalizarCompra = ({ navigation }) => {
+const FinalizarCompra = ({ route, navigation }) => {
+    const params = route.params;
+    const comercio = params.comercio;
     const [isChecked, setChecked] = useState(true);
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios.get('http://192.168.237.136:3002/users/' + params.usuario);
+          const user = result.data;
+          setUser(user);
+        };
+    
+        fetchData();
+      }, []);
 
   return (
     <ScrollView automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.itemContainer}>
             <Image source={require('../assets/bar_beto.png')} style={styles.image} />
             <View>
-            <Text style={styles.title}>Bar do Beto</Text>
+            <Text style={styles.title}>{comercio.nomeComercio}</Text>
             </View>
         </View>
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
         <View style={{backgroundColor: 'lightgreen', width: '90%', marginLeft:20, marginTop: 10, borderRadius: 10}}>
-            <Text style={styles.title}>Total: R$ 28,00</Text>
+            <Text style={styles.title}>Total: R$ {route.params.total}</Text>
         </View>
         <View style={{marginLeft:20, marginRight: 20}}>
-            <RNPickerSelect
-                useNativeAndroidPickerStyle={false}
-                style={pickerStyle}
-                placeholder={{ label: "Entrega", value: 'Entrega' }}
-                onValueChange={(value) => console.log(value)}
-                items={[
-                    { label: "Retirada", value: "Retirada" },
-                ]}
-            />
+            <View style={{backgroundColor: 'white', width: '100%', marginTop: 10, borderRadius: 5}}>
+                <Text style={styles.adress}>Entrega</Text>
+            </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <RNPickerSelect
-                    useNativeAndroidPickerStyle={false}
-                    style={pickerStyle}
-                    placeholder={{ label: "Endereço 1", value: 'Rua dos bobos, 00' }}
-                    onValueChange={(value) => console.log(value)}
-                    items={[
-                        { label: "Endereço 2", value: "Avenida Brasil, 1234" },
-                    ]}
-                />
-                <View style={{marginLeft: 50}}>
-                    <Text style={{fontSize:20}}>Rua dos bobos, 00</Text>
+                <View style={{backgroundColor: 'white', width: '30%', marginTop: 10, borderRadius: 5}}>
+                    <Text style={styles.adress}>Endereco</Text>
+                </View>
+                <View style={{marginLeft: 10}}>
+                    <Text style={{fontSize:20}}>{user.map(item => item.endereco)}</Text>
                     <Text style={{color: 'green', fontSize: 20}}>(Frete: R$ 4,00)</Text>
                 </View>
             </View>
@@ -48,12 +49,8 @@ const FinalizarCompra = ({ navigation }) => {
             <View >
                 <Text style={styles.title}>Selecione o método de pagamento</Text>
                 <View style={{marginVertical: 5, flexDirection: 'row', alignItems: 'center'}}>
-                    <Checkbox style={styles.checkbox} value={true} onValueChange={setChecked} />
-                    <Text style={{color:'gray', fontSize: 20}}>Cartão de crédito/débito</Text>
-                </View>
-                <View style={{marginVertical: 5, flexDirection: 'row', alignItems: 'center'}}>
-                    <Checkbox style={styles.checkbox} disabled value={false} onValueChange={setChecked} />
-                    <Text style={{color:'gray', fontSize: 20}}>Dinheiro</Text>
+                    <Checkbox style={styles.checkbox} value={isChecked} onValueChange={setChecked} />
+                    <Text style={{color:'black', fontSize: 20}}>Cartão de crédito/débito</Text>
                 </View>
             </View>
 
@@ -69,7 +66,10 @@ const FinalizarCompra = ({ navigation }) => {
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity 
                     style={{width: '90%', padding:10, backgroundColor: 'green', borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}
-                    onPress={() => navigation.navigate('PedidoConfirmado')}
+                    onPress={() => navigation.navigate('PedidoConfirmado', {
+                        usuario: route.params.usuario,
+                        comercio: comercio
+                      })}
                 >
                     <Text style={{color: 'white', fontSize: 24}}>Finalizar Compra</Text>
                     <Icon name="shopping-cart" height={20} width={20} color="white" />
@@ -82,7 +82,7 @@ const FinalizarCompra = ({ navigation }) => {
 
 const pickerStyle = {
     inputIOS: {
-        color: 'white',
+        color: 'black',
         padding: 20,
         marginBottom: 10,
         marginTop: 20,
@@ -130,6 +130,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'green',
     padding: 10
+  },
+  adress: {
+    fontSize: 14,
+    color: 'black',
+    padding: 15
+  },
+  adressContent: {
+    flex:1,
+    flexWrap: 'wrap'
   },
   subtitle: {
     fontSize: 14

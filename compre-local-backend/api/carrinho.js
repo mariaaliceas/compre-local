@@ -1,8 +1,14 @@
 module.exports = (app) => {
     const get = async (req, res) => {
+        const idUsuario = req.params.idUsuario;
+
+        if (!idUsuario) {
+            return res.status(400).json({ err: "Id do usuário não informado"});
+        }
+
         const comercios = await app.database("carrinho")
             .join("comercio", "carrinho.idComercio", "comercio.idComercio")
-            .where("idUsuario", 1)
+            .where("idUsuario", idUsuario)
             .select("*");
 
         return res.json(comercios);

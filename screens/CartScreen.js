@@ -3,13 +3,16 @@ import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react
 import { Ionicons } from "@expo/vector-icons";
 import axios from 'axios';
 
-const Cart = ({ navigation }) => {
+const Cart = ({ route, navigation }) => {
+  const params = route.params;
+  const usuario = params.usuario;
+  const idUsuario = usuario[0].idUsuario;
+  
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3002/carrinho');
-      // console.log(result.data);
+      const result = await axios.get('http://192.168.237.136:3002/carrinho/' + idUsuario);
       setData(result.data);
     };
 
@@ -22,8 +25,8 @@ const Cart = ({ navigation }) => {
         <View key={item.cnpj}>
           <TouchableOpacity style={styles.itemContainer}
           onPress={() => navigation.navigate('ItensCarrinho', {
-            carrinhoId: item.idCarrinho,
-            comercioName: item.nomeComercio
+            comercio: item,
+            usuario: idUsuario
           })}
           >
             <Image source={require('../assets/capim_conveniencia.png')} style={styles.image} />

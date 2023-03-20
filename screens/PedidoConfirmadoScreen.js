@@ -2,13 +2,16 @@ import React from "react";
 import { Text, View, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
   
-const PedidoConfirmado = ({ navigation }) => {
+const PedidoConfirmado = ({ route, navigation }) => {
+  const params = route.params;
+  const comercio = params.comercio;
+
   return (
     <ScrollView automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.itemContainer}>
             <Image source={require('../assets/bar_beto.png')} style={styles.image} />
             <View>
-            <Text style={styles.title}>Bar do Beto</Text>
+            <Text style={styles.title}>{comercio.nomeComercio}</Text>
             </View>
         </View>
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />

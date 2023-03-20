@@ -3,14 +3,14 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { Ionicons } from "@expo/vector-icons";
 import axios from 'axios';
 
-const Comercio = () => {
+const Comercio = ( usuario ) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3002/comercio/comercio');
-      console.log(result.data);
+      const result = await axios.get('http://192.168.237.136:3002/comercio/comercio');
       setData(result.data);
+      // console.log(data);
     };
 
     fetchData();

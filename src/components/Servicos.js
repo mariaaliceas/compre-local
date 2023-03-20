@@ -3,13 +3,12 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { Ionicons } from "@expo/vector-icons";
 import axios from 'axios';
 
-const Servicos = () => {
+const Servicos = ( usuario ) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3002/comercio/servico');
-      console.log(result.data);
+      const result = await axios.get('http://192.168.237.136:3002/comercio/servico');
       setData(result.data);
     };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, TouchableOpacity, TextInput, Pressable, FlatList } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import Icon from 'react-native-ico-material-design';
@@ -7,24 +7,37 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Profile from './screens/ProfileScreen';
 import Cart from './screens/CartScreen';
-// import ItensBarDoBeto from './screens/ItensBarDoBetoScreen';
-// import ItensCapimConveniencia from './screens/ItensCapimConvenienciaScreen';
 import ItensCarrinho from './screens/ItensCarrinho';
 import FinalizarCompra from './screens/FinalizarCompraScreen';
 import PedidoConfirmado from './screens/PedidoConfirmadoScreen';
 import Comercio from './src/components/Comercio';
 import Servicos from './src/components/Servicos';
+import axios from 'axios';
 
 var iconHeight = 26;
 var iconWidth = 26;
+var userId = 1;
 
 const HomeScreen = ({ navigation }) => {
+  const [usuarioInfo, setUser] = useState([]);
+  const [language, setLanguage] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('http://192.168.237.136:3002/users/' + userId);
+      const user = result.data;
+      setUser(user);
+    };
+
+    fetchData();
+  }, []);
+
     return (
         <>
           <SafeAreaView style={styles.containerSafeArea}>
             <ScrollView style={styles.container} >
               <View style={styles.greetingContainer}>
-                <Text style={styles.greetingText}>Olá, Usuário</Text>
+                <Text style={styles.greetingText}>Olá, {usuarioInfo.map(user=>(user.nome))}</Text>
                 <Image
                   style={styles.avatar}
                   source={require('./assets/avatar.png')} />
@@ -36,15 +49,15 @@ const HomeScreen = ({ navigation }) => {
                   <RNPickerSelect
                     useNativeAndroidPickerStyle={false}
                     style={pickerStyle}
-                    placeholder={{ label: "Todos", value: null }}
-                    onValueChange={(value) => console.log(value)}
+                    selectedValue={language}
+                    onValueChange={(language) => setLanguage(language)}
+                    placeholder={{
+                      label: 'Escolha uma opção',
+                      value: null,
+                    }}
                     items={[
-                        { label: "JavaScript", value: "JavaScript" },
-                        { label: "TypeScript", value: "TypeScript" },
-                        { label: "Python", value: "Python" },
-                        { label: "Java", value: "Java" },
-                        { label: "C++", value: "C++" },
-                        { label: "C", value: "C" },
+                        { label: "Comercio", value: "comercio" },
+                        { label: "Servico", value: "servico" },
                     ]}
                  />
                   <TextInput
@@ -61,121 +74,14 @@ const HomeScreen = ({ navigation }) => {
                   </View>
                   <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
                   <Text style={styles.cardSubtitle}>Destaques:</Text>
-                  <Comercio />
-                  {/* <ScrollView 
-                    horizontal={true} 
-                    style={styles.horizontalContainer} 
-                    showsHorizontalScrollIndicator={false}
-                  >
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/bar_beto.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Bar do Beto</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/capim_conveniencia.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Capim Conveniência</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/riacho_roupas.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Riacho Roupas</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/lanchonete_alemao.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Riacho Roupas</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-                  </ScrollView> */}
+                  <Comercio usuario={usuarioInfo} />
                 </View>
     
                 <View style={styles.card}>
                   <Text style={styles.cardTitle}>Contrate um serviço</Text>
                   <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
                   <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
-                  <Servicos />
-                  {/* <ScrollView 
-                    horizontal={true} 
-                    style={styles.horizontalContainer} 
-                    showsHorizontalScrollIndicator={false}
-                  >  
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/jair_jardinagem.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Jair Jardinagem</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/eduardo_encanador.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Eduardo Encanador</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>  
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/elias_eletricista.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Elias Eletricista</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>  
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/diana_diarista.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Diana Diarista</Text>
-                            <Text>4/5 estrelas</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>  
-    
-                  </ScrollView> */}
+                  <Servicos usuario={usuarioInfo} />
                 </View>
     
                 <View style={styles.card}>
@@ -235,14 +141,17 @@ const HomeScreen = ({ navigation }) => {
           <View style={navContainer.navContainer}>
                   <View style={navContainer.navBar}>
                     <Pressable 
-                        onPress={() => navigation.navigate('Cart')}
+                        onPress={() => navigation.navigate('Cart', {
+                          usuario: usuarioInfo
+                        })}
                         style={navContainer.iconBehave}
                         android_ripple={{borderless: true, radius: 50}}
                     >
                       <Icon name="shopping-cart" height={iconHeight} width={iconWidth} color="green" />
                     </Pressable>
   
-                    <Pressable onPress={() => {}} style={navContainer.iconBehave}
+                    <Pressable onPress={() => navigation.navigate('Home')} 
+                    style={navContainer.iconBehave}
                     android_ripple={{borderless: true, radius: 50}}>
                       <Icon name="home-button" height={iconHeight} width={iconWidth} color="green" />
                     </Pressable>
@@ -297,13 +206,6 @@ function App() {
                 title: 'Itens',
             }} 
         />
-        {/* <Stack.Screen 
-            name="ItensBarDoBeto" 
-            component={ItensBarDoBeto}
-            options={{
-                title: 'Itens',
-            }} 
-        /> */}
         <Stack.Screen 
             name="FinalizarCompra" 
             component={FinalizarCompra}
@@ -325,7 +227,7 @@ function App() {
 
 const pickerStyle = {
     inputIOS: {
-        color: 'white',
+        color: 'black',
         paddingHorizontal: 10,
         paddingVertical: 10,
         marginBottom: 10,

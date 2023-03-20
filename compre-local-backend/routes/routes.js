@@ -4,6 +4,9 @@ module.exports = (app) => {
         .get(app.api.users.get)
         .post(app.api.users.save)
 
+    app.route("/users/:idUser")
+        .get(app.api.users.getUserbyIdUser)
+
     app.route("/categories")
         .get(app.api.categories.get)
         .post(app.api.categories.save)
@@ -14,7 +17,7 @@ module.exports = (app) => {
         .put(app.api.categories.save)
         .delete(app.api.categories.remove)
 
-    app.route("/carrinho")
+    app.route("/carrinho/:idUsuario")
         .get(app.api.carrinho.get)
 
     app.route("/comercio/:tpComercio")
