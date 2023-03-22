@@ -1,9 +1,45 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
-import {cadastroComercio2} from './cadastroComercio2'
+import { StyleSheet, Text, View,TouchableOpacity,TextInput, Alert} from 'react-native';
+import {cadastroComercio2} from './cadastroComercio2';
+import axios from 'axios'
 
 const cadastroComercio1=({navigation})=>{
+    var nome='';
+    var endereco='';
+    var numero='';
+    var bairro='';
+    var cnpj='';
+    var cpf='';
+    var rg='';
+
+    const criar=()=>{
+        if((nome && endereco && numero && bairro && cnpj && cpf && rg)!=''){
+            axios.put('http://192.168.1.11:3002/comercio')
+        .then((res) => { 
+                
+                if (res.status !== 200) {
+                    //console.log(jsonRes.message)
+                    Alert.alert('Erro no Cadastro','Tente novamente')
+                } else {
+                    
+                    //console.log(jsonRes.message);
+                    //Alert.alert("Login feito com sucesso")
+                    navigation.navigate('cadastroComercio2')
+                }
+            
+        })
+        .catch((err) => {
+            Alert.alert('Erro no login','Não foi possível realizar o login')
+            //console.log(err);
+        });
+
+        }
+        else{
+            Alert.alert('Erro no Cadastro', 'Preencha os campos obrigatórios corretamente')
+        }
+    }
+
     return(
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Informe os dados de sua Empresa</Text>
@@ -28,10 +64,8 @@ const cadastroComercio1=({navigation})=>{
 
         
         <View style={styles.containerBotao2}>
-        <TouchableOpacity style={styles.botao2} >
-            <Text style={styles.textoBotao2}  onPress={() =>
-        navigation.navigate('cadastroComercio2')
-      }>Próximo</Text>
+        <TouchableOpacity style={styles.botao2}  onPress={()=>criar()}>
+            <Text style={styles.textoBotao2} >Próximo</Text>
         </TouchableOpacity>
         </View>
         </View>

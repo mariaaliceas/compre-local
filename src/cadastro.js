@@ -3,7 +3,7 @@ import React, { useState} from 'react';
 import { Alert,StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
 import {login} from './login';
 import {finalCadastro} from './finalCadastro';
-import Axios from 'axios'
+import axios from 'axios'
 
 
 
@@ -12,66 +12,35 @@ const cadastro=({navigation})=>{
     var email='';
     var telefone='';
     var senha='';
-    const submit = () => {
-        /*
-        const enviar = {
-            "nome":nome,
-            "email":email,
-            "telefone":telefone,
-            "senha":senha,
-        };
-        */
-       
-        const enviar = {
-            nome,
-            email,
-            telefone,
-            senha
-        }
-        
-        fetch('http://192.168.1.11:3002/usuarioCadastro', {
-            method: 'GET',
-            
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            
-            //body: JSON.stringify(enviar),
-            //body: enviar,
-        })
+   
+    const criar=()=>{
 
-        //Axios.get("http://192.168.1.11:3002/usuarioCadastro")
-        .then(async res => { 
-            try {
-                const jsonRes = await res.json();
+    
+     if((nome && telefone && email && senha)!='' && (senha.length>7)){
+        
+        axios.put('http://192.168.1.11:3002/usuarioCadastro',{
+            nome:nome,
+            email:email,
+            telefone:telefone,
+            senha:senha,
+        })
+        .then((res) => { 
+                
                 if (res.status !== 200) {
                     //console.log(jsonRes.message)
-                    Alert.alert('Erro no registro do cadastro','Tente novamente mais tarde')
+                    Alert.alert('Erro no registro do cadastro','Email já cadastrado')
                 } else {
                     
                     //console.log(jsonRes.message);
-                    Alert.alert("Cadastro realizado")
+                    //Alert.alert("Cadastro realizado")
                     return navigation.navigate('finalCadastro')
                 }
-            } catch (err) {
-                Alert.alert('Erro dentro do then')
-                //console.log(err);
-            };
+            
         })
-        .catch(err => {
-            Alert.alert('Erro fora do then')
+        .catch((err) => {
+            Alert.alert('Erro no cadastro','Não foi possível realizar o cadastro')
             //console.log(err);
         });
-        
-       
-    };
-
-    const criar=()=>{
-
-    //Testando somente as condicoes de validacao
-     if((nome && telefone && email && senha)!='' && (senha.length>7)){
-        //Alert.alert('Cadastro realizado','Continue explorando o app')
-        submit();
     }
     else if((nome || telefone || email || senha)==''){
         

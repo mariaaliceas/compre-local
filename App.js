@@ -7,7 +7,7 @@ import cadastro from './src/cadastro';
 import finalCadastro from './src/finalCadastro';
 import cadastroComercio1 from './src/cadastroComercio1';
 import cadastroComercio2 from './src/cadastroComercio2';
-import cadastroComercio3 from './src/cadastroComercio3';
+
 
 
 const telaInicial=({navigation})=>{
@@ -32,9 +32,7 @@ const telaInicial=({navigation})=>{
              >
             <Text style={styles.textoBotao}>Fazer Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botao} >
-            <Text style={styles.textoBotao}>Continuar como Google</Text>
-          </TouchableOpacity>
+          
 
         </View>
       </SafeAreaView>
@@ -56,7 +54,6 @@ export default function App() {
       <Stack.Screen name="cadastro" component={cadastro} />
       <Stack.Screen name="cadastroComercio1" component={cadastroComercio1}/>
       <Stack.Screen name="cadastroComercio2" component={cadastroComercio2} />
-      <Stack.Screen name="cadastroComercio3" component={cadastroComercio3} />
       <Stack.Screen name="finalCadastro" component={finalCadastro} />
 
 
