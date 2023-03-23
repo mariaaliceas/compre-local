@@ -25,4 +25,11 @@ module.exports = (app) => {
 
     app.route("/itens-carrinho/:idCarrinho")
         .get(app.api.item_carrinho.getItensByIdCarrinho)
+
+    app.route("/compra/finalizar-pedido")
+        .get(app.api.pedido.get)
+        .post(app.api.pedido.save)
+
+    app.route("/compra/finalizar-carrinho-itens-compra")
+        .post(app.api.pedido.alterCarrinho)
 }

@@ -67,22 +67,9 @@ const HomeScreen = ({ navigation }) => {
                   />
                 </View>
               
-                <View style={styles.card}>
-                  <View>
-                    <Text style={styles.cardTitle}>Nova Compra</Text>
-                    <Text style={styles.cardSubtitle}>Ver negóciois perto de você</Text>
-                  </View>
-                  <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
-                  <Text style={styles.cardSubtitle}>Destaques:</Text>
-                  <Comercio usuario={usuarioInfo} />
-                </View>
+                <Comercio usuario={usuarioInfo} />
     
-                <View style={styles.card}>
-                  <Text style={styles.cardTitle}>Contrate um serviço</Text>
-                  <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
-                  <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
-                  <Servicos usuario={usuarioInfo} />
-                </View>
+                <Servicos usuario={usuarioInfo} />
     
                 <View style={styles.card}>
                   <Text style={styles.cardTitle}>Ofertas</Text>

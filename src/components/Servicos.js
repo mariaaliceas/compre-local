@@ -16,11 +16,15 @@ const Servicos = ( usuario ) => {
   }, []);
 
   return (
-    <ScrollView 
-    horizontal={true} 
-    style={styles.horizontalContainer} 
-    showsHorizontalScrollIndicator={false}
-  >
+    <View style={styles.card}>
+      <Text style={styles.cardTitle}>Contrate um serviço</Text>
+      <Text style={styles.cardSubtitle}>Veja quem está disponível para sua localização</Text>
+      <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
+      <ScrollView 
+      horizontal={true} 
+      style={styles.horizontalContainer} 
+      showsHorizontalScrollIndicator={false}
+      >
       {data.map(item => (
         <View key={item.cnpj} style={styles.horizontalContainerContent}>
           <TouchableOpacity>
@@ -33,7 +37,8 @@ const Servicos = ( usuario ) => {
           </TouchableOpacity>
         </View>
       ))}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -74,6 +79,31 @@ const styles = StyleSheet.create({
       backgroundColor:"white", 
       borderRadius: 10, 
       margin:5 
+    },
+    card: {
+      backgroundColor: 'lightgreen',
+      width: '100%',
+      height: 230,
+      alignItems: 'left',
+      justifyContent: 'center',
+      borderRadius: 10,
+      margin:20,
+      marginBottom: 5,
+      paddingLeft: 20,
+      paddingBottom: 20,
+      paddingTop: 20,
+    },
+    cardTitle: {
+      fontSize: 24,
+      fontWeight: '700',
+      color: 'green',
+      paddingLeft: 12
+    },
+    cardSubtitle: {
+      fontSize: 18,
+      fontWeight: 'normal',
+      color: 'green',
+      paddingLeft: 12
     },
   });
 

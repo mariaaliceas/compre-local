@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-ico-material-design';
 import Checkbox from 'expo-checkbox';
 import axios from 'axios';
@@ -20,6 +20,35 @@ const FinalizarCompra = ({ route, navigation }) => {
         fetchData();
       }, []);
 
+    const finalizarCompra = () => {
+      var date = new Date().getDate().toString();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear().toString();
+      var hours = new Date().getHours().toString();
+      var min = new Date().getMinutes().toString();
+      var sec = new Date().getSeconds().toString();
+  
+      var codigo = year + month + date + hours + min + sec;
+      var tpParagamento = 'Pagamento na entrega';
+      var idUsuario = params.usuario;
+
+      axios.post('http://192.168.237.136:3002/compra/finalizar-pedido',{
+        codigo: codigo,
+        idUsuario: idUsuario,
+        tpParagamento: tpParagamento,
+      })
+      .then((res) => {
+        navigation.navigate('PedidoConfirmado', {
+          usuario: route.params.usuario,
+          comercio: comercio,
+          codigo: codigo
+        })
+      })
+      .catch ((err) => {
+        Alert.alert(err.response.data.err)
+      })
+    }
+
   return (
     <ScrollView automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.itemContainer}>
@@ -30,7 +59,7 @@ const FinalizarCompra = ({ route, navigation }) => {
         </View>
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
         <View style={{backgroundColor: 'lightgreen', width: '90%', marginLeft:20, marginTop: 10, borderRadius: 10}}>
-            <Text style={styles.title}>Total: R$ {route.params.total}</Text>
+            <Text style={styles.title}>Total: R$ {route.params.total.toFixed(2)}</Text>
         </View>
         <View style={{marginLeft:20, marginRight: 20}}>
             <View style={{backgroundColor: 'white', width: '100%', marginTop: 10, borderRadius: 5}}>
@@ -66,10 +95,7 @@ const FinalizarCompra = ({ route, navigation }) => {
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity 
                     style={{width: '90%', padding:10, backgroundColor: 'green', borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}
-                    onPress={() => navigation.navigate('PedidoConfirmado', {
-                        usuario: route.params.usuario,
-                        comercio: comercio
-                      })}
+                    onPress={() => {finalizarCompra()}}
                 >
                     <Text style={{color: 'white', fontSize: 24}}>Finalizar Compra</Text>
                     <Icon name="shopping-cart" height={20} width={20} color="white" />

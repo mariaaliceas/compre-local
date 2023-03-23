@@ -1,10 +1,22 @@
 import React from "react";
 import { Text, View, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import axios from "axios";
   
 const PedidoConfirmado = ({ route, navigation }) => {
   const params = route.params;
   const comercio = params.comercio;
+  const idCarrinho = comercio.idCarrinho;
+
+  axios.post('http://192.168.237.136:3002/compra/finalizar-carrinho-itens-compra',{
+    idCarrinho: idCarrinho,
+  })
+  .then((res) => {
+    navigation.navigate('Home')
+  })
+  .catch ((err) => {
+    Alert.alert(err.response.data.err)
+  })
 
   return (
     <ScrollView automaticallyAdjustKeyboardInsets={true}>
@@ -17,7 +29,7 @@ const PedidoConfirmado = ({ route, navigation }) => {
         <View style={{width: '90%', marginLeft:20, borderRadius: 10, height: 5, backgroundColor: 'green'}} />
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 50, paddingHorizontal: 10}}>
             <Text style={{color:'green', fontSize: 36, fontWeight: 'bold'}}>Pedido Confirmado!</Text>
-            <Text style={{color: 'green', fontSize:24}}>Código #202110180015</Text>
+            <Text style={{color: 'green', fontSize:24}}>Código #{params.codigo}</Text>
             <Text style={{color: 'green', textAlign: 'center', marginVertical: 10, fontSize: 18}}>
                 Você pode rever esse código no seu histórico de compras. quando receber seu pedido, confirme seu código com o do entregador
             </Text>
