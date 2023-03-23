@@ -1,34 +1,11 @@
 module.exports = (app) => {
     const get = async (req, res) => {
-        const comercios = await app.database("comercio").select("*");
+        const produtos = await app.database("produto")
+        .limit(10)
+        .join("comercio", "produto.idComercio", "comercio.idComercio")
+        .select("*");
 
-        return res.json(comercios);
-    }
-
-    const getComercioByTipo = async (req, res) => {
-        const tpComercio = req.params.tpComercio;
-
-        if (!tpComercio) {
-            return res.status(400).json({ err: "Tipo de comércio não informado" });
-        }
-
-        comercios = await app.database("comercio").where({ tpComercio: tpComercio });
-
-        if (!comercios) {
-            return res.status(200).json({ success: "Não foram encontrados comercios para o tipo informado" });
-        }
-
-        return res.json(comercios);
-    }
-
-    const filter = async (req,res) => {
-        const filter = { ...req.body };
-
-        // return res.json(filter.comercio);
-        comercios = await app.database("comercio")
-        .whereLike('nomeComercio', '%'+filter.comercio+'%')
-
-        return res.json(comercios);
+        return res.json(produtos);
     }
 
     const getById = async (req, res) => {
@@ -91,5 +68,5 @@ module.exports = (app) => {
         res.status(204).json({success: "Categoria excluída com sucesso"});
     }
 
-    return { get, getComercioByTipo, filter }
+    return { get }
 }

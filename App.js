@@ -10,8 +10,11 @@ import Cart from './screens/CartScreen';
 import ItensCarrinho from './screens/ItensCarrinho';
 import FinalizarCompra from './screens/FinalizarCompraScreen';
 import PedidoConfirmado from './screens/PedidoConfirmadoScreen';
+import Search from './screens/FilterScreen';
+
 import Comercio from './src/components/Comercio';
 import Servicos from './src/components/Servicos';
+import Produtos from './src/components/Produto';
 import axios from 'axios';
 
 var iconHeight = 26;
@@ -20,7 +23,14 @@ var userId = 1;
 
 const HomeScreen = ({ navigation }) => {
   const [usuarioInfo, setUser] = useState([]);
-  const [language, setLanguage] = useState("");
+  const [tpComercio, setTpComercio] = useState(null);
+  const [filterComercio, setFilterComercio] = useState(null);
+
+  const filtrarComercio = (filter) => {
+    navigation.navigate('Search', {
+      filter: filter,
+    })
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,8 +59,8 @@ const HomeScreen = ({ navigation }) => {
                   <RNPickerSelect
                     useNativeAndroidPickerStyle={false}
                     style={pickerStyle}
-                    selectedValue={language}
-                    onValueChange={(language) => setLanguage(language)}
+                    selectedValue={tpComercio}
+                    onValueChange={(tpComercio) => setTpComercio(tpComercio)}
                     placeholder={{
                       label: 'Escolha uma opção',
                       value: null,
@@ -64,64 +74,24 @@ const HomeScreen = ({ navigation }) => {
                     style={inputStyle}
                     placeholder="Digite sua busca"
                     keyboardType="default"
+                    onChangeText = {(filterComercio) => {setFilterComercio(filterComercio)}}
+                    onSubmitEditing={() => {filtrarComercio(filterComercio)}}
                   />
                 </View>
               
-                <Comercio usuario={usuarioInfo} />
+                {
+                tpComercio === null || tpComercio === 'comercio' 
+                ? <Comercio usuario={usuarioInfo} />
+                : null 
+                }
+
+                {
+                tpComercio === null || tpComercio === 'servico' 
+                ? <Servicos usuario={usuarioInfo} />
+                : null 
+                }
     
-                <Servicos usuario={usuarioInfo} />
-    
-                <View style={styles.card}>
-                  <Text style={styles.cardTitle}>Ofertas</Text>
-                  <Text style={styles.cardSubtitle}>Confira os melhores preços</Text>
-                  <View style={[{width: '90%', height: 5, backgroundColor: 'green', marginLeft: 10, marginBottom: 5, marginTop: 5}]} />
-                  <Text style={styles.cardSubtitle}>Destaques:</Text>
-                  <ScrollView 
-                    horizontal={true} 
-                    style={styles.horizontalContainer} 
-                    showsHorizontalScrollIndicator={false}
-                  >  
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/laranja_pera.jpg')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Laranja Pera</Text>
-                            <Text style={styles.textContainer.subtitle}>Capim Conveniencia</Text>
-                            <Text style={styles.textContainer.price}>R$ 3,40/kg (-15%)</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/batata_frita.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Proção Bata-frita G</Text>
-                            <Text style={styles.textContainer.subtitle}>Bar do Beto</Text>
-                            <Text style={styles.textContainer.price}>R$ 8,00/kg (-25%)</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-    
-                    <View style={styles.horizontalContainerContent}>
-                      <TouchableOpacity>
-                        <View style={styles.horizontalCardContainer}>
-                          <Image source={require('./assets/coca-cola.png')} style={styles.image} />
-                          <View style={styles.textContainer}>
-                            <Text style={styles.textContainer.text}>Refrigerante 350ml</Text>
-                            <Text style={styles.textContainer.subtitle}>Bar do Beto</Text>
-                            <Text style={styles.textContainer.price}>R$ 3,50</Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View> 
-    
-                  </ScrollView>
-                </View>
+                <Produtos />
               </View>
             </ScrollView>
           </SafeAreaView>
@@ -206,6 +176,13 @@ function App() {
             options={{
                 title: 'Pedido Confirmado',
             }} 
+        />
+        <Stack.Screen
+            name="Search"
+            component={Search}
+            options={{
+              title: 'Comércios'
+            }}
         />
       </Stack.Navigator>
     </NavigationContainer>

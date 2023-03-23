@@ -20,6 +20,9 @@ module.exports = (app) => {
     app.route("/carrinho/:idUsuario")
         .get(app.api.carrinho.get)
 
+    app.route("/filter/comercio")
+        .post(app.api.comercio.filter)
+
     app.route("/comercio/:tpComercio")
         .get(app.api.comercio.getComercioByTipo)
 
@@ -32,4 +35,7 @@ module.exports = (app) => {
 
     app.route("/compra/finalizar-carrinho-itens-compra")
         .post(app.api.pedido.alterCarrinho)
+
+    app.route("/produtos")
+        .get(app.api.produtos.get)
 }
