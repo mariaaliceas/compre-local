@@ -24,72 +24,69 @@ module.exports = (app) => {
     const filter = async (req,res) => {
         const filter = { ...req.body };
 
-        // return res.json(filter.comercio);
         comercios = await app.database("comercio")
         .whereLike('nomeComercio', '%'+filter.comercio+'%')
 
         return res.json(comercios);
     }
 
-    const getById = async (req, res) => {
-        const idCategory = req.params.id;
+    const getComercioById = async (req, res) => {
+        const idComercio = req.params.idComercio;
 
-        if(!idCategory) {
-            return res.status(400).json({ err: "Id da categoria não informado"});
+        if(!idComercio) {
+            return res.status(400).json({ err: "Id do comércio não informado"});
         }
 
-        category = await app.database("categories").where({ id: idCategory }).first();
+        comercio = await app.database("comercio").where({ idComercio: idComercio }).first();
 
-        if (!category){
-            return res.status(400).json({ err: "Categoria não encontrada"});
+        if (!comercio){
+            return res.status(400).json({ err: "Comércio não encontrado"});
         }
     
-        return res.json(category);
+        return res.json(comercio);
     }
 
     const save = async (req, res) => {
-        const category = { ...req.body };
+        const comercio = { ...req.body };
 
-        category.id = req.params.id ?? false;
+        comercio.idComercio = req.params.idComercio ?? false;
 
-        if(!category.name) {
-            return res.json({error: "Nome da categoria não informado"});
+        if(!comercio.cnpj) {
+            return res.json({error: "CNPJ do comércio não informado"});
         }
 
-        category.image = "category.jpg";
-
-        if (req.params.id) {
-            await app.database("categories")
-                .update(category)
-                .where({ id: category.id })
-                .then(() => res.status(200).json({success: "Categoria atualizada com sucesso!"}))
+        if (req.params.idComercio) {
+            await app.database("comercio")
+                .update(comercio)
+                .where({ idComercio: comercio.idComercio })
+                .then(() => res.status(200).json({success: "Comércio atualizado com sucesso!"}))
                 .catch((err) => res.status(500).send(err));
         } else {
-            await app.database("categories")
-                .insert(category)
-                .then(() => res.status(200).json({success: "Categoria cadastrada com sucesso!"}))
+            await app.database("comercio")
+                .insert(comercio)
+                .then(() => res.status(200).json({success: "Comércio cadastrado com sucesso!"}))
                 .catch((err) => res.status(500).send(err));
         }
     }
 
     const remove = async (req, res) => {
 
-        const idCategory = req.params.id;
+        const idComerio = req.params.idComerio;
 
-        if(!idCategory) {
-            return res.status(400).json({ err: "Id da categoria não informado"});
+        if(!idComerio) {
+            return res.status(400).json({ err: "Id do comércio não informado"});
         }
 
-        categoryExists = await app.database("categories").where({ id: idCategory }).first();
+        comercioExists = await app.database("comercio").where({ idComerio: idComerio }).first();
 
-        if (!categoryExists){
-            return res.status(400).json({ err: "Categoria não encontrada"});
+        if (!comercioExists){
+            return res.status(400).json({ err: "Comércio não encontrado"});
         }
 
-        await app.database("categories").where({ id: idCategory }).del();
+        await app.database("comercio").where({ idComerio: idComerio }).del();
 
-        res.status(204).json({success: "Categoria excluída com sucesso"});
+        res.status(204).json({success: "Comércio excluído com sucesso"});
     }
 
-    return { get, getComercioByTipo, filter }
+    return { get, getComercioByTipo, filter, getComercioById, save, remove }
 }

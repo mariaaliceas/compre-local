@@ -14,65 +14,63 @@ module.exports = (app) => {
         return res.json(comercios);
     }
 
-    const getById = async (req, res) => {
-        const idCategory = req.params.id;
+    const getCarrinhoById = async (req, res) => {
+        const idCarrinho = req.params.idUsuario;
 
-        if(!idCategory) {
-            return res.status(400).json({ err: "Id da categoria não informado"});
+        if (!idCarrinho) {
+            return res.status(400).json({ err: "Id do carrinho não informado"});
         }
 
-        category = await app.database("categories").where({ id: idCategory }).first();
+        carrinho = await app.database("carrinho").where({ idCarrinho: idCarrinho }).first();
 
-        if (!category){
-            return res.status(400).json({ err: "Categoria não encontrada"});
+        if (!carrinho){
+            return res.status(400).json({ err: "Carrinho não encontrado"});
         }
     
-        return res.json(category);
+        return res.json(carrinho);
     }
 
     const save = async (req, res) => {
-        const category = { ...req.body };
+        const carrinho = { ...req.body };
 
-        category.id = req.params.id ?? false;
+        carrinho.idCarrinho = req.params.idCarrinho ?? false;
 
-        if(!category.name) {
-            return res.json({error: "Nome da categoria não informado"});
+        if(!carrinho.idUsuario) {
+            return res.json({error: "Usuário não informado"});
         }
 
-        category.image = "category.jpg";
-
-        if (req.params.id) {
-            await app.database("categories")
-                .update(category)
-                .where({ id: category.id })
-                .then(() => res.status(200).json({success: "Categoria atualizada com sucesso!"}))
+        if (req.params.idCarrinho) {
+            await app.database("carrinho")
+                .update(carrinho)
+                .where({ idCarrinho: carrinho.idCarrinho })
+                .then(() => res.status(200).json({success: "Carrinho atualizado com sucesso!"}))
                 .catch((err) => res.status(500).send(err));
         } else {
-            await app.database("categories")
-                .insert(category)
-                .then(() => res.status(200).json({success: "Categoria cadastrada com sucesso!"}))
+            await app.database("carrinho")
+                .insert(carrinho)
+                .then(() => res.status(200).json({success: "Carrinho cadastrado com sucesso!"}))
                 .catch((err) => res.status(500).send(err));
         }
     }
 
     const remove = async (req, res) => {
 
-        const idCategory = req.params.id;
+        const idCarrinho = req.params.idCarrinho;
 
-        if(!idCategory) {
-            return res.status(400).json({ err: "Id da categoria não informado"});
+        if(!idCarrinho) {
+            return res.status(400).json({ err: "Id do carrinho não informado"});
         }
 
-        categoryExists = await app.database("categories").where({ id: idCategory }).first();
+        carrinhoExists = await app.database("carrinho").where({ idCarrinho: idCarrinho }).first();
 
-        if (!categoryExists){
-            return res.status(400).json({ err: "Categoria não encontrada"});
+        if (!carrinhoExists){
+            return res.status(400).json({ err: "Carrinho não encontrado"});
         }
 
-        await app.database("categories").where({ id: idCategory }).del();
+        await app.database("carrinho").where({ idCarrinho: idCarrinho }).del();
 
-        res.status(204).json({success: "Categoria excluída com sucesso"});
+        res.status(204).json({success: "Carrinho excluído com sucesso"});
     }
 
-    return { get }
+    return { get, getCarrinhoById, save, remove }
 }

@@ -17,8 +17,25 @@ module.exports = (app) => {
         .put(app.api.categories.save)
         .delete(app.api.categories.remove)
 
+    app.route("/carrinho")
+        .post(app.api.carrinho.save)
+
+    app.route("/carrinho/:idCarrinho")
+        .get(app.api.carrinho.getCarrinhoById)
+        .post(app.api.carrinho.save)
+        .delete(app.api.carrinho.remove)
+
     app.route("/carrinho/:idUsuario")
         .get(app.api.carrinho.get)
+
+    app.route("/comercio")
+        .get(app.api.comercio.get)
+        .post(app.api.comercio.save)
+
+    app.route("/comercio/:idComercio")
+        .get(app.api.comercio.getComercioById)
+        .post(app.api.comercio.save)
+        .delete(app.api.comercio.remove)
 
     app.route("/filter/comercio")
         .post(app.api.comercio.filter)
@@ -28,6 +45,19 @@ module.exports = (app) => {
 
     app.route("/itens-carrinho/:idCarrinho")
         .get(app.api.item_carrinho.getItensByIdCarrinho)
+        .post(app.api.item_carrinho.save)
+
+    app.route("/itens-carrinho/:idCarrinho/:idItemCompra")
+        .post(app.api.item_carrinho.save)
+        .delete(app.api.item_carrinho.remove)
+
+    app.route("/pedido")
+        .get(app.api.pedido.get)
+
+    app.route("/pedido/:idPedido")
+        .get(app.api.pedido.getPedidoById)
+        .post(app.api.pedido.save)
+        .delete(app.api.pedido.remove)
 
     app.route("/compra/finalizar-pedido")
         .get(app.api.pedido.get)
