@@ -3,6 +3,9 @@ module.exports = (app) => {
     app.route("/users")
         .get(app.api.users.get)
         .post(app.api.users.save)
+        
+    app.route("/users/login")    
+        .post(app.api.users.login)
 
     app.route("/users/:idUser")
         .get(app.api.users.getUserbyIdUser)
@@ -25,8 +28,8 @@ module.exports = (app) => {
         .post(app.api.carrinho.save)
         .delete(app.api.carrinho.remove)
 
-    app.route("/carrinho/:idUsuario")
-        .get(app.api.carrinho.get)
+    app.route("/carrinho/usuario/:idUsuario")
+        .get(app.api.carrinho.getCarrinhoByIdUsuario)
 
     app.route("/comercio")
         .get(app.api.comercio.get)
@@ -40,7 +43,7 @@ module.exports = (app) => {
     app.route("/filter/comercio")
         .post(app.api.comercio.filter)
 
-    app.route("/comercio/:tpComercio")
+    app.route("/comercios/:tpComercio")
         .get(app.api.comercio.getComercioByTipo)
 
     app.route("/itens-carrinho/:idCarrinho")

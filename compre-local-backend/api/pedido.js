@@ -73,13 +73,29 @@ module.exports = (app) => {
     const alterCarrinho = async (req, res) => {
         const data = { ...req.body };
 
-        await app.database("itemCompra")
-        .where({ idCarrinho: data.idCarrinho })
-        .del();
+        carrinhoExists = await app.database("carrinho").where({ idCarrinho: data.idCarrinho }).first();
 
-        await app.database("carrinho")
-        .where({ idCarrinho: data.idCarrinho })
-        .del();
+        if (!carrinhoExists) {
+            return res.status(404).json("Carrinho não encontrado");
+        }
+
+        try {
+            await app.database("itemCompra")
+            .where({ idCarrinho: data.idCarrinho })
+            .del();   
+        } catch (error) {
+            return res.status(404).json("Ocorreu um erro ao registrar o pedido.");
+        }
+
+        try {
+            await app.database("carrinho")
+            .where({ idCarrinho: data.idCarrinho })
+            .del();   
+        } catch (error) {
+            return res.status(404).json("Ocorreu um erro ao registrar o pedido.");
+        }
+
+        return res.status(200).json("Pedido finalizado com sucesso.")
     }
 
     return { get, getPedidoById, save, alterCarrinho, remove }

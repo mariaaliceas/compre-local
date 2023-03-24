@@ -79,7 +79,7 @@ const FinalizarCompra = ({ route, navigation }) => {
                 <Text style={styles.title}>Selecione o método de pagamento</Text>
                 <View style={{marginVertical: 5, flexDirection: 'row', alignItems: 'center'}}>
                     <Checkbox style={styles.checkbox} value={isChecked} onValueChange={setChecked} />
-                    <Text style={{color:'black', fontSize: 20}}>Cartão de crédito/débito</Text>
+                    <Text style={{color:'black', fontSize: 20}}>Pagamento na entrega</Text>
                 </View>
             </View>
 

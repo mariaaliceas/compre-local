@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const get = async (req, res) => {
+    const getCarrinhoByIdUsuario = async (req, res) => {
         const idUsuario = req.params.idUsuario;
 
         if (!idUsuario) {
@@ -72,5 +72,5 @@ module.exports = (app) => {
         res.status(204).json({success: "Carrinho excluído com sucesso"});
     }
 
-    return { get, getCarrinhoById, save, remove }
+    return { getCarrinhoByIdUsuario, getCarrinhoById, save, remove }
 }

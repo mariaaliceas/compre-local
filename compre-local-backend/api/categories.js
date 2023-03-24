@@ -27,7 +27,7 @@ module.exports = (app) => {
         category.id = req.params.id ?? false;
 
         if(!category.name) {
-            return res.json({error: "Nome da categoria não informado"});
+            return res.status(400).json({error: "Nome da categoria não informado"});
         }
 
         category.image = "category.jpg";

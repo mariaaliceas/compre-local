@@ -12,7 +12,7 @@ const Cart = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/carrinho/' + idUsuario);
+      const result = await axios.get('http://192.168.237.136:3002/carrinho/usuario/' + idUsuario);
       setData(result.data);
     };
 
@@ -21,7 +21,7 @@ const Cart = ({ route, navigation }) => {
 
   return (
     <View>
-      {data.map(item => (
+      {data.length > 0 ? data.map(item => (
         <View key={item.cnpj}>
           <TouchableOpacity style={styles.itemContainer}
           onPress={() => navigation.navigate('ItensCarrinho', {
@@ -39,7 +39,16 @@ const Cart = ({ route, navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-      ))}
+      )) : 
+      <View style={{
+        backgroundColor: 'lightgray', 
+        margin: 15, 
+        padding: 25,
+        borderRadius: 10,
+        }}>
+        <Text style={{fontSize : 20}}>Não foram encontrados itens no seu carrinho</Text>
+      </View>
+      }
     </View>
   )
 };

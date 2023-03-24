@@ -11,9 +11,6 @@ const PedidoConfirmado = ({ route, navigation }) => {
   axios.post('http://192.168.237.136:3002/compra/finalizar-carrinho-itens-compra',{
     idCarrinho: idCarrinho,
   })
-  .then((res) => {
-    navigation.navigate('Home')
-  })
   .catch ((err) => {
     Alert.alert(err.response.data.err)
   })
@@ -38,7 +35,7 @@ const PedidoConfirmado = ({ route, navigation }) => {
             <TouchableOpacity
             onPress={() => navigation.navigate('Home')}  
             >
-                <Text style={{color:'green', width: '80%', fontSize: 24, fontWeight: 'bold'}}>Ver pedido no seu histórico de compras</Text>
+                <Text style={{color:'green', width: '80%', fontSize: 24, fontWeight: 'bold'}}>Retornar a Home do App</Text>
                 <View style={styles.arrowContainer}>
                     <Ionicons name="arrow-forward-outline" size={40} color="#006600" />
                 </View>

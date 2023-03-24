@@ -1,15 +1,7 @@
 module.exports = (app) => {
-    const get = (req, res) => {
-        const users = [
-            {
-                "id": 1,
-                "name" : "Usuario 1"
-            },
-            {
-                "id": 2,
-                "name" : "Usuario 2"
-            }
-        ];
+    const get = async (req, res) => {
+        const users = await app.database("usuario")
+        .select("idUsuario","nome","email","telefone", "endereco");
 
         return res.json(users);
     }
@@ -37,5 +29,27 @@ module.exports = (app) => {
         return res.json(user)
     }
 
-    return { get, save, getUserbyIdUser }
+    const login = async (req, res) => {
+        const user = { ...req.body };
+
+        if(!user.email || !user.senha) {
+            res.status(404).json("Credenciais do usuario não informadas");
+        }
+
+        var usuario = await app.database("usuario")
+        .select('*')
+        .whereLike('email', '%'+user.email+'%')
+        .andWhereLike('senha', '%'+user.senha+'%')
+
+        if(!usuario) {
+            res.status(404).json("Usuário não encontrado");
+        }
+
+        return res.status(200).json({
+            message: "Login efetuado com sucesso",
+            user: usuario
+        })
+    }
+
+    return { get, save, getUserbyIdUser, login }
 }
