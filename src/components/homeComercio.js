@@ -58,7 +58,7 @@ export default function HomeComercio(navigation) {
             dataEntrega: '15/02/2023',
             volume: 'Kg',
             quantidade: '5',
-            produto:'Pão de ló',
+            produto:'Limão',
             pagamento: 'Cartão'
 
         }],

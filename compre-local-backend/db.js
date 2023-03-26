@@ -1,10 +1,27 @@
-async function connect(){
-    if(global.connection && global.connection.state !== 'disconnected')
-        return global.connection;
- 
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection("mysql://localhost:3306/compre-local");
-    console.log("Conectou no MySQL!");
-    global.connection = connection;
-    return connection;
-} 
+const MySql = require('sync-mysql');
+//const mysql = require('mysql2');
+
+class Database {
+    constructor() {
+        // this.connection = mysql.createConnection({
+        //     host: 'localhost',
+        //     user: 'root',
+        //     database: 'compre-local'
+        // });
+
+        this.connection = new MySql({
+            host: 'localhost',
+            database: 'compre-local',
+            user: 'root'
+            
+        });
+    }
+
+    consulta(query) {
+        return  this.connection.query('SELECT 1 + 1 AS solution');
+    }
+}
+
+
+
+module.exports = { singleton: new Database() }
