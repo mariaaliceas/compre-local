@@ -18,7 +18,7 @@ class Database {
     }
 
     consulta(query) {
-        return  this.connection.query('SELECT 1 + 1 AS solution');
+        return  this.connection.query(query);
     }
 }
 

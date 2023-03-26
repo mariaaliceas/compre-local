@@ -1,11 +1,17 @@
 const express = require('express');
-const {singleton} = require("./db");
+const ComercioDAO = require('./comercioDAO');
+const { singleton } = require("./db");
 const app = express();
 
 app.get('/', function (req, res) {
- // singleton.consulta();
-  console.log(singleton.consulta());
-  res.send('Hello World')
+  const comercioDAO = new ComercioDAO(singleton)
+  const comercio = comercioDAO.buscaComercio(1); //1 === id
+  const frete = comercioDAO.buscaFrete(1);
+  const produto = comercioDAO.buscarProduto(1);
+  comercio.frete = frete;
+  comercio.produto = produto;
+  console.log(produto);
+  res.send(comercio);
 })
 
 
