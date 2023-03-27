@@ -66,9 +66,6 @@ export default function Configs(parametros) {
                 <Button color='#00bb22' style={styles.opt} title="Encomendas" onPress={goToScreen8} />
             </View>
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Ver avaliações" />
-            </View>
-            <View style={styles.optA}>
                 <Button color='#00bb22' style={styles.opt} title="Ver histórico de venda" onPress={goToScreen11} />
             </View>
         </View>

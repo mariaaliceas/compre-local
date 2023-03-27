@@ -15,24 +15,28 @@ export default function detPedido(props) {
             <View>
                 <TextInput style={styles.input} defaultValue={pedido.produto}></TextInput>
             </View>
+            <Text style={styles.fontBlack}>Preço</Text>
             <View>
-                <Text style={styles.fontBlack}>Preço</Text>
-                <View style={styles.img}>
-                    <View style={styles.pl}>
-                        <TextInput style={styles.input} defaultValue={pedido.valor}></TextInput>
-                    </View>
-                    <View>
-                        <Text>Quantidade:{pedido.quantidade}</Text>
-                        <Text>Volume:{pedido.volume}</Text>
-                    </View>
-                </View>
+                <TextInput style={styles.input} defaultValue={pedido.valor}></TextInput>
             </View>
+            <Text style={styles.fontBlack}>Quantidade:
+                <Text style={styles.input}>{pedido.quantidade}</Text>
+            </Text>
+            <Text style={styles.fontBlack}>Volume:
+                <Text style={styles.input}>{pedido.volume}</Text>
+            </Text>
             <View>
                 <Text style={styles.fontBlack}>Detalhes:</Text>
-                <Text>Data da encomenda: {pedido.dataPedido}</Text>
-                <Text>Data da entrega: {pedido.dataEntrega}</Text>
-                <Text>Forma de Pagamento: {pedido.pagamento}</Text>
-                
+                <Text style={styles.fontBlack}>Data da encomenda:
+                    <Text style={styles.input}>{pedido.dataPedido}</Text>
+                </Text>
+                <Text style={styles.fontBlack}>Data da entrega:
+                    <Text style={styles.input}>{pedido.dataEntrega}</Text>
+                </Text>
+                <Text style={styles.fontBlack}>Forma de Pagamento:
+                    <Text style={styles.input}>{pedido.pagamento}</Text>
+                </Text>
+
             </View>
             <View style={styles.optA}>
                 <Button color='#FF8C00' style={styles.optD} title="Cancelar" />
@@ -59,21 +63,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 10
     },
-    texto: {
-        paddingLeft: 10
+    fontBlack: {
+        paddingLeft: 10,
+        marginBottom: 5
 
-    },
-    font: {
-        fontSize: 20
     },
     fonte: {
         fontSize: 15,
         color: '#00bb22'
     },
-    fontes: {
+    input: {
+        paddingLeft: 10,
         fontSize: 15,
         color: 'gray'
     },
+    optA: {
+        marginRight: 10,
+        marginLeft: 10,
+        marginBottom: 10,
+        marginTop: 10,
+        borderRadius: '3px',
+        color: '#00bb22',
+        height: 30,
+    }
 });
 
 

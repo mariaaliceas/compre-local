@@ -41,5 +41,8 @@ const styles = StyleSheet.create({
     },
     opt: {
         color: '#ffff',
+    },
+    fontBlack: {
+        paddingLeft: 10
     }
 })
