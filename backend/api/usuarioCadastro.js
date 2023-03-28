@@ -13,6 +13,7 @@ module.exports = (app) => {
         const query=await app.database("usuario").select("email").where({email:usuario.email})
         //const query=await app.database("usuario").select("email").where("email","=",usuario.email)
         const verifica=JSON.stringify(query)
+        const verificaSenha=usuario.senha
 
         
 
@@ -21,8 +22,13 @@ module.exports = (app) => {
             return res.status(400).json({error: "Email já cadastrado"});
         }
         else{
-            if(!usuario.email || !usuario.telefone || !usuario.nome ||!usuario.senha){
+            if(!usuario.email || !usuario.telefone || !usuario.nome ||!usuario.senha || !usuario.endereco|| !usuario.numero || !usuario.bairro){
                 return res.status(400).json({ err: "Preencha os campos corretamente!"});
+
+            }
+            else if(verificaSenha.length<8){
+                return res.json({err:"Digite uma senha com pelo menos 8 caracteres"})
+
 
             }
             else{

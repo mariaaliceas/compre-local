@@ -12,14 +12,21 @@ const cadastro=({navigation})=>{
     var email='';
     var telefone='';
     var senha='';
+    var endereco='';
+    var numero='';
+    var bairro='';
     const criar=()=>{
-     if((nome && telefone && email && senha)!='' && (senha.length>7)){
+     if((nome && telefone && email && senha && endereco && numero && bairro)!='' && (senha.length>7)){
         
         axios.put('http://192.168.1.11:3002/usuarioCadastro',{
             nome:nome,
             email:email,
+            endereco:endereco,
+            numero:numero,
+            bairro:bairro,
             telefone:telefone,
             senha:senha,
+
         })
         .then((res) => { 
                 
@@ -45,7 +52,7 @@ const cadastro=({navigation})=>{
             //console.log(err);
         });
     }
-    else if((nome || telefone || email || senha)==''){
+    else if((nome || telefone || email || senha || endereco || numero || bairro)==''){
         
         Alert.alert('Erro no cadastro', 'Preencha os campos corretamente!')
 
@@ -58,10 +65,17 @@ const cadastro=({navigation})=>{
         <View style={styles.container}>
         <Text style={styles.textoContainer}>Crie sua conta para começar</Text>
         <View style={styles.containerBotao}>
-        <TextInput style={styles.botao} placeholder='Nome Completo' onChangeText={text=>nome=text} />
-        <TextInput style={styles.botao} placeholder='Telefone'  onChangeText={text=>telefone=text}/>
-        <TextInput style={styles.botao} placeholder='Email'  onChangeText={text=>email=text}/>
-        <TextInput style={styles.botao} placeholder='Senha(Com no mínimo 8 caracteres)' secureTextEntry={true} onChangeText={text=>senha=text}/>
+        <TextInput style={styles.botao} placeholder='Nome Completo' onChangeText={text=>nome=text} maxLength={100} />
+        <TextInput style={styles.botao} placeholder='Telefone'  onChangeText={text=>telefone=text} maxLength={12}/>
+        <TextInput style={styles.botao} placeholder='Email'  onChangeText={text=>email=text} maxLength={100}/>
+        <View style={styles.containerEndereco}>
+        <TextInput style={styles.botaoEndereco} placeholder='Endereço'onChangeText={text=>endereco=text}   maxLength={100}
+/>
+        <TextInput style={styles.botaoEndereco} placeholder='Número' onChangeText={text=>numero=text}   maxLength={10}/>      
+        </View>
+        <TextInput style={styles.botao} placeholder='Bairro'  onChangeText={text=>bairro=text} maxLength={100}/>
+
+        <TextInput style={styles.botao} placeholder='Senha(Com no mínimo 8 caracteres)' secureTextEntry={true} onChangeText={text=>senha=text} maxLength={25}/>
         
        
 
@@ -97,7 +111,23 @@ const styles=StyleSheet.create({
     color:'white',
     fontSize:25
     },
-    
+    containerEndereco:{
+        display:'flex',
+        flexDirection:'row'
+        
+        
+    },
+
+    botaoEndereco:{
+        backgroundColor:'gray',
+        color:'white',
+        borderRadius:5,
+        padding:10,
+        width:110,
+        marginRight:40,
+        marginBottom:5
+        
+    },
     
     
     containerBotao2:{

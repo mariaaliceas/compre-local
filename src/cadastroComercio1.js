@@ -66,20 +66,23 @@ const cadastroComercio1=({navigation})=>{
         
         
         <View style={styles.containerBotao}>
-        <TextInput style={styles.botao} placeholder='Nome Empresa' onChangeText={text=>nome=text} />
+        <TextInput style={styles.botao} placeholder='Nome Empresa' onChangeText={text=>nome=text}   maxLength={100}
+ />
         
         <View style={styles.containerEndereco}>
-        <TextInput style={styles.botaoEndereco} placeholder='Endereço'onChangeText={text=>endereco=text} />
-        <TextInput style={styles.botaoEndereco} placeholder='Número' onChangeText={text=>numero=text}/>      
+        <TextInput style={styles.botaoEndereco} placeholder='Endereço'onChangeText={text=>endereco=text}   maxLength={100}
+/>
+        <TextInput style={styles.botaoEndereco} placeholder='Número' onChangeText={text=>numero=text}   maxLength={10}/>      
         </View>
         
-        <TextInput style={styles.botao} placeholder='Bairro' onChangeText={text=>bairro=text}/>
-        <TextInput style={styles.botao} placeholder='Email do usuario cadastrado' onChangeText={text=>emailPessoal=text}/>
-        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' onChangeText={text=>emailEmpresa=text}/>
-        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' onChangeText={text=>telefone=text}/>
-        <TextInput style={styles.botao} placeholder='CNPJ' onChangeText={text=>cnpj=text}/>
-        <TextInput style={styles.botao} placeholder='CPF do titular' onChangeText={text=>cpf=text}/>
-        <TextInput style={styles.botao} placeholder='RG do titular' onChangeText={text=>rg=text}/>
+        <TextInput style={styles.botao} placeholder='Bairro' onChangeText={text=>bairro=text}   maxLength={100}/>
+        <TextInput style={styles.botao} placeholder='Email do usuario cadastrado' onChangeText={text=>emailPessoal=text}   maxLength={100}
+/>
+        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' onChangeText={text=>emailEmpresa=text}   maxLength={100}/>
+        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' onChangeText={text=>telefone=text}   maxLength={12}/>
+        <TextInput style={styles.botao} placeholder='CNPJ' onChangeText={text=>cnpj=text}   maxLength={15}/>
+        <TextInput style={styles.botao} placeholder='CPF do titular' onChangeText={text=>cpf=text} maxLength={15}/>
+        <TextInput style={styles.botao} placeholder='RG do titular' onChangeText={text=>rg=text} maxLength={15}/>
        
 
         
