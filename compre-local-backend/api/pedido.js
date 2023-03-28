@@ -27,7 +27,12 @@ module.exports = (app) => {
 
         pedido.idPedido = req.params.idPedido ?? false;
 
-        if(!pedido.codigo) {
+        if(!pedido.codigo || pedido.codigo === "") {
+
+            if(!pedido.total || pedido.total < 0) {
+                return res.status(404).json({error: "Valores inválidos"});
+            }
+
             return res.status(404).json({error: "Código do pedido não informado"});
         }
 
@@ -35,8 +40,21 @@ module.exports = (app) => {
         .select('codigo')
         .whereLike('codigo', '%'+pedido.codigo+'%');
 
-        if (codigo.length > 0 && req.params.idPedido) {
+        if (codigo.length > 0) {
+
+            if(!pedido.total || pedido.total < 0) {
+                return res.status(404).json({error: "Valores inválidos"});
+            }
+
             return res.status(404).send({err: "Código de pedido já existe"});
+        }
+
+        if (pedido.codigo.length > 255) {
+            return res.status(404).send({err: "Código de pedido deve conter até 255 caracteres."});
+        }
+
+        if(!pedido.total === null || pedido.total < 0) {
+            return res.status(404).json({error: "O valor do pedido não foi informado"});
         }
 
         if (req.params.idPedido) {
