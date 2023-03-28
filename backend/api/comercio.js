@@ -10,9 +10,13 @@ module.exports = (app) => {
     const signup = async (req, res) => {
         
         const comercio = { ...req.body };
-        
-        if(!comercio.nome ||!comercio.cpf || !comercio.rg || !comercio.cnpj || !comercio.endereco){
-                return res.status(400).json({ err: "Preencha os campos obrigatórios corretamente!"});
+        const query=await app.database("usuario").select("email").where({email:comercio.idUsuario});
+        const verifica=JSON.stringify(query);
+        if(verifica=='[]'){
+            return res.status(400).json({error: "Email não cadastrado"});
+        }
+        else if(!comercio.nome ||!comercio.cpf || !comercio.bairro || !comercio.rg || !comercio.cnpj || !comercio.endereco || !comercio.numero || !comercio.idUsuario){
+                return res.status(400).json({ err: "Preencha os campos obrigatórios corretamente"});
 
             }
         else{

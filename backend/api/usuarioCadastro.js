@@ -18,7 +18,7 @@ module.exports = (app) => {
 
         //verificar se já existe um email cadastrado
         if(verifica!='[]') {
-            return res.json({error: "Email já cadastrado"});
+            return res.status(400).json({error: "Email já cadastrado"});
         }
         else{
             if(!usuario.email || !usuario.telefone || !usuario.nome ||!usuario.senha){

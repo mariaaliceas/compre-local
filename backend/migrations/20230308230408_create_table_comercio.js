@@ -5,8 +5,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable("comercio", (table) => {
         table.increments("idComercio").primary();
-        table.integer("idUsuario").unsigned();
-        table.foreign("idUsuario").references("usuario.idUsuario");
+        table.string("emailPessoal",100).notNullable;
+        table.string("emailEmpresa",100).notNullable;
         table.string("nome",100).notNullable;
         table.string("telefone",12);
         table.string("cnpj",14).notNullable;

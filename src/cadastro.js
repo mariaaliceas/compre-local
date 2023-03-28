@@ -12,10 +12,7 @@ const cadastro=({navigation})=>{
     var email='';
     var telefone='';
     var senha='';
-   
     const criar=()=>{
-
-    
      if((nome && telefone && email && senha)!='' && (senha.length>7)){
         
         axios.put('http://192.168.1.11:3002/usuarioCadastro',{
@@ -28,11 +25,17 @@ const cadastro=({navigation})=>{
                 
                 if (res.status !== 200) {
                     //console.log(jsonRes.message)
-                    Alert.alert('Erro no registro do cadastro','Email já cadastrado')
-                } else {
-                    
+                    if(res.status ==500){
+                        Alert.alert('Erro no registro do cadastro', 'Tente novamente ')
+                    }
+                    else{
+                        Alert.alert('Erro no registro do cadastro','Email já cadastrado')
+                    }
+                } 
+                else {
                     //console.log(jsonRes.message);
-                    //Alert.alert("Cadastro realizado")
+
+                    
                     return navigation.navigate('finalCadastro')
                 }
             

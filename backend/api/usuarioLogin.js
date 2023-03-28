@@ -13,7 +13,7 @@ module.exports=(app)=>{
         
         
         if(verifica!='[]'){
-            res.status(200).json({message: "Usuário logado com sucesso",verifica});
+            res.status(200).json({message: "Usuário logado com sucesso"});
         }
         else{
             return res.status(400).json({ err: "Verifique se os campos foram preenchidos corretamente"});

@@ -7,20 +7,40 @@ import axios from 'axios'
 const cadastroComercio1=({navigation})=>{
     var nome='';
     var endereco='';
+    var emailPessoal='';
+    var emailEmpresa='';
     var numero='';
     var bairro='';
     var cnpj='';
     var cpf='';
     var rg='';
+    var telefone='';
 
     const criar=()=>{
-        if((nome && endereco && numero && bairro && cnpj && cpf && rg)!=''){
-            axios.put('http://192.168.1.11:3002/comercio')
+        if((nome && endereco && numero && bairro && cnpj && cpf && rg && emailPessoal)!=''){
+            axios.put('http://192.168.1.11:3002/comercio',{
+                nome:nome,
+                endereco:endereco,
+                idUsuario:emailPessoal,
+                emailEmpresa:emailEmpresa,
+                numero:numero,
+                bairro:bairro,
+                cnpj:cnpj,
+                cpf:cpf,
+                rg:rg,
+                telefone:telefone,
+
+            })
         .then((res) => { 
                 
                 if (res.status !== 200) {
                     //console.log(jsonRes.message)
-                    Alert.alert('Erro no Cadastro','Tente novamente')
+                    if(res.status==500){
+                        Alert.alert('Erro no registro do cadastro', 'Tente novamente ')
+                    }
+                    else{
+                        Alert.alert('Erro no Cadastro','Verifique se o email pessoal cadastrado está correto')
+                    }
                 } else {
                     
                     //console.log(jsonRes.message);
@@ -30,7 +50,7 @@ const cadastroComercio1=({navigation})=>{
             
         })
         .catch((err) => {
-            Alert.alert('Erro no login','Não foi possível realizar o login')
+            Alert.alert('Erro no Cadastro','Não foi possível realizar o cadastro')
             //console.log(err);
         });
 
@@ -46,20 +66,20 @@ const cadastroComercio1=({navigation})=>{
         
         
         <View style={styles.containerBotao}>
-        <TextInput style={styles.botao} placeholder='Nome Empresa' />
+        <TextInput style={styles.botao} placeholder='Nome Empresa' onChangeText={text=>nome=text} />
         
         <View style={styles.containerEndereco}>
-        <TextInput style={styles.botaoEndereco} placeholder='Endereço' />
-        <TextInput style={styles.botaoEndereco} placeholder='Número' />      
+        <TextInput style={styles.botaoEndereco} placeholder='Endereço'onChangeText={text=>endereco=text} />
+        <TextInput style={styles.botaoEndereco} placeholder='Número' onChangeText={text=>numero=text}/>      
         </View>
         
-        <TextInput style={styles.botao} placeholder='Bairro' />
-
-        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' />
-        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' />
-        <TextInput style={styles.botao} placeholder='CNPJ' />
-        <TextInput style={styles.botao} placeholder='CPF do titular' />
-        <TextInput style={styles.botao} placeholder='RG do titular' />
+        <TextInput style={styles.botao} placeholder='Bairro' onChangeText={text=>bairro=text}/>
+        <TextInput style={styles.botao} placeholder='Email do usuario cadastrado' onChangeText={text=>emailPessoal=text}/>
+        <TextInput style={styles.botao} placeholder='Email Comercial(Opcional)' onChangeText={text=>emailEmpresa=text}/>
+        <TextInput style={styles.botao} placeholder='Telefone Comercial(Opcional)' onChangeText={text=>telefone=text}/>
+        <TextInput style={styles.botao} placeholder='CNPJ' onChangeText={text=>cnpj=text}/>
+        <TextInput style={styles.botao} placeholder='CPF do titular' onChangeText={text=>cpf=text}/>
+        <TextInput style={styles.botao} placeholder='RG do titular' onChangeText={text=>rg=text}/>
        
 
         
