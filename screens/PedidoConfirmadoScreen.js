@@ -8,7 +8,7 @@ const PedidoConfirmado = ({ route, navigation }) => {
   const comercio = params.comercio;
   const idCarrinho = comercio.idCarrinho;
 
-  axios.post('http://192.168.237.136:3002/compra/finalizar-carrinho-itens-compra',{
+  axios.post(global.api_ip + '/compra/finalizar-carrinho-itens-compra',{
     idCarrinho: idCarrinho,
   })
   .catch ((err) => {

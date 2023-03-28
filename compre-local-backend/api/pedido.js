@@ -35,7 +35,7 @@ module.exports = (app) => {
         .select('codigo')
         .whereLike('codigo', '%'+pedido.codigo+'%');
 
-        if (codigo.length > 0) {
+        if (codigo.length > 0 && req.params.idPedido) {
             return res.status(404).send({err: "Código de pedido já existe"});
         }
 
@@ -43,12 +43,12 @@ module.exports = (app) => {
             await app.database("pedido")
             .update(pedido)
             .then(() => res.status(200).json({success: "Pedido atualizado com sucesso!"}))
-            .catch((err) => res.status(500).send(err));
+            .catch((err) => res.status(500).json({error: "Ocorreu um erro ao atualizar produto."}))
         } else {
             await app.database("pedido")
             .insert(pedido)
             .then(() => res.status(200).json({success: "Pedido cadastrado com sucesso!"}))
-            .catch((err) => res.status(500).send(err));
+            .catch((err) => res.status(500).json({error: "Ocorreu um erro ao cadastrar produto."}))
         }
     }
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Image } from 'react-native';
 import axios from 'axios';
 
 const Search = ({ route, navigation }) => {
@@ -10,7 +9,7 @@ const Search = ({ route, navigation }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-          const result = await axios.post('http://192.168.237.136:3002/filter/comercio', {
+          const result = await axios.post(global.api_ip +'/filter/comercio', {
             comercio: comercio
           });
           setComercios(result.data);
@@ -35,39 +34,6 @@ const Search = ({ route, navigation }) => {
       );
 };
 
-const pickerStyle = {
-    inputIOS: {
-        color: 'black',
-        padding: 20,
-        marginBottom: 10,
-        marginTop: 20,
-        backgroundColor: 'white',
-        borderRadius: 5,
-        width: '100%'
-    },
-    placeholder: {
-        color: 'black',
-    },
-    inputAndroid: {
-      color: 'white',
-      padding: 20,
-      marginBottom: 10,
-      marginTop: 20,
-      backgroundColor: 'white',
-      borderRadius: 5,
-      width: '100%'
-    },
-};
-
-const inputStyle = {
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 5,
-    fontSize: 18,
-    width: '90%',
-    height: 100,
-    marginTop: 15
-};
 
 const styles = StyleSheet.create({
   itemContainer: {

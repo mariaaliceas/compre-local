@@ -23,7 +23,7 @@ const ItensCarrinho = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/itens-carrinho/' + idCarrinho);
+      const result = await axios.get(global.api_ip + '/itens-carrinho/' + idCarrinho);
       setData(result.data);
     };
 
@@ -48,7 +48,7 @@ const ItensCarrinho = ({ route, navigation }) => {
             key={item.idItemCompra}
             image={require('../assets/capim_conveniencia.png')}
             text={item.nome}
-            subtitle={item.preco + '/' + item.unidadeMedida}
+            subtitle={item.preco.toFixed(2) + '/' + item.unidadeMedida}
             quantidade={item.quantidade} />
           ))}
         </View>

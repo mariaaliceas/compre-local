@@ -19,9 +19,10 @@ import axios from 'axios';
 
 var iconHeight = 26;
 var iconWidth = 26;
-var userId = 1;
+var userId = 3;
 
 const HomeScreen = ({ navigation }) => {
+  global.api_ip = 'http://192.168.237.154:3002';
   const [usuarioInfo, setUser] = useState([]);
   const [tpComercio, setTpComercio] = useState(null);
   const [filterComercio, setFilterComercio] = useState(null);
@@ -34,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/users/' + userId);
+      const result = await axios.get(global.api_ip + '/users/' + userId);
       const user = result.data;
       setUser(user);
     };

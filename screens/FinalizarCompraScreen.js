@@ -12,7 +12,7 @@ const FinalizarCompra = ({ route, navigation }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-          const result = await axios.get('http://192.168.237.136:3002/users/' + params.usuario);
+          const result = await axios.get(global.api_ip+ '/users/' + params.usuario);
           const user = result.data;
           setUser(user);
         };
@@ -29,13 +29,14 @@ const FinalizarCompra = ({ route, navigation }) => {
       var sec = new Date().getSeconds().toString();
   
       var codigo = year + month + date + hours + min + sec;
-      var tpParagamento = 'Pagamento na entrega';
+      var tpPagamento = 'Pagamento na entrega';
       var idUsuario = params.usuario;
 
       axios.post('http://192.168.237.136:3002/compra/finalizar-pedido',{
         codigo: codigo,
         idUsuario: idUsuario,
-        tpParagamento: tpParagamento,
+        tpPagamento: tpPagamento,
+        total: route.params.total
       })
       .then((res) => {
         navigation.navigate('PedidoConfirmado', {

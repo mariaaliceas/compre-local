@@ -8,7 +8,7 @@ const Servicos = ( usuario ) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/comercios/servico');
+      const result = await axios.get(global.api_ip + '/comercios/servico');
       setData(result.data);
     };
 

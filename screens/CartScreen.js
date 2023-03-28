@@ -12,7 +12,7 @@ const Cart = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/carrinho/usuario/' + idUsuario);
+      const result = await axios.get(global.api_ip + '/carrinho/usuario/' + idUsuario);
       setData(result.data);
     };
 

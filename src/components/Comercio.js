@@ -8,7 +8,7 @@ const Comercio = ( usuario ) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.237.136:3002/comercios/comercio');
+      const result = await axios.get(global.api_ip +'/comercios/comercio');
       setData(result.data);
     };
 
