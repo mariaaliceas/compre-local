@@ -15,7 +15,7 @@ export default function HomeComercio(navigation) {
     useEffect(() => {
         if (teste) return 
         const fetchData = async () => {
-            const result = await axios.get('http://localhost:3000/1');
+            const result = await axios.get('http://localhost:3000/comercios/1');
             //console.log(result.data);
             setTeste(result.data);
         }

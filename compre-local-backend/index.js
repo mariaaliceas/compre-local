@@ -1,16 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-const ComercioDAO = require('./comercioDAO');
-const { singleton } = require("./db");
+const ComercioDAO = require('./dao/comercioDAO');
+const { singleton } = require("./database/db");
 const app = express();
+const FretesContoller = require ('./controller/frete-controller');
+const ComercioController = require('./controller/comercio-controller');
+
 app.use(cors());
 
-app.get('/:id', function (req, res) {
-  const idComercio = req.params.id;
-  const comercio = new ComercioDAO(singleton).retornaDadosComercio(idComercio);
-  res.send(comercio);
-  
+app.get('/comercios/:id', function (req, res) {
+  new ComercioController(singleton).buscaComercio(req, res)
 })
 
+app.put('/fretes', function (req, res){
+  new FretesController(singleton).atualizaFrete(req,res)
+})
 
 app.listen(3000)

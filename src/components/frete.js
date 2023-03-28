@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
+import axios from 'axios';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
@@ -8,17 +9,27 @@ Icon.loadFont();
 export default function Frete(props) {
     console.log(props);
     const frete = props.route.params.frete;
-    const [checked, setChecked] = useState(frete.valores.length === 0 ? 2: frete.valores.length > 1 ? 1 : 0);
-    
+    const [checked, setChecked] = useState(frete.valores.length === 0 ? 2 : frete.valores.length > 1 ? 1 : 0);
+    const [radioValue, trocaValorRadio] = useState(['Taxa fixa', 'Taxa variável', 'Frete grátis'][checked]);
+    const [textInput, alteraDistanciaMax] = useState(frete.distanciaMax);
+    const [textInputValor, alteraValor] = useState(frete.valores[0].valor);
+    const [textInputDistLim, alteraDistanciaLimite] = useState(frete.valores[0].distanciaLim);
+    const alteraFrete = () => {
+        const dados = {id:frete.id, tipo:radioValue, distanciaMax:textInput,valor:textInputValor, distanciaLim: textInputDistLim}; 
+        const result = axios.put('http://localhost:3000/fretes',{body:JSON.stringify(dados)});
+        console.log(result)
+    }
+
     return (
         <View>
             <Text style={styles.fontBlack} >Distância máxima</Text>
-            <TextInput style={styles.input} defaultValue={frete.distanciaMax}></TextInput>
+            <TextInput style={styles.input} onChangeText={text => alteraDistanciaMax(text)} defaultValue={frete.distanciaMax}></TextInput>
             {['Taxa fixa', 'Taxa variável', 'Frete grátis'].map((data, key) => {
                 return (
                     <View key={key}>
-                        {checked === key ?
+                        {checked === key ? 
                             <View style={styles.btnRadio}>
+                            {trocaValorRadio(data)}
                                 <RadioButton color='#00bb22'
                                     value="first" status='checked' />
                                 <Text style={styles.fntBtnRadio} >{data}</Text>
@@ -38,11 +49,11 @@ export default function Frete(props) {
                 return (<View style={styles.inLineView}>
                     <View style={styles.inLineValue}>
                         <Text style={styles.fntBtnRadio}>Valor</Text>
-                        <TextInput style={styles.inputA} defaultValue={valor.valor}></TextInput>
+                        <TextInput style={styles.inputA} onChangeText={text => alteraValor(text)} defaultValue={valor.valor}></TextInput>
                     </View>
                     <View>
                         <Text style={styles.fntBtnRadio}>Distância Limite</Text>
-                        <TextInput style={styles.inputA} defaultValue={valor.distanciaLim}></TextInput>
+                        <TextInput style={styles.inputA} onChangeText={text => alteraDistanciaLimite(text)} defaultValue={valor.distanciaLim}></TextInput>
                     </View>
                 </View>)
             }) : <></>}
@@ -50,12 +61,12 @@ export default function Frete(props) {
                 return (<View style={styles.inLineView}>
                     <View style={styles.inLineValue}>
                         <Text style={styles.fntBtnRadio}>Valor</Text>
-                        <TextInput style={styles.inputA} defaultValue={valor.valor}></TextInput>
+                        <TextInput style={styles.inputA} onChangeText={text => alteraValor(text)} defaultValue={valor.valor}></TextInput>
                     </View>
                 </View>)
             }) : <></>}
             <View style={styles.optA}>
-                <Button color='#00bb22' style={styles.opt} title="Salvar alterações" />
+                <Button color='#00bb22' style={styles.opt} title="Salvar alterações" onPress={ alteraFrete} />
             </View>
         </View>
     );
