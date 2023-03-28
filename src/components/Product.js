@@ -2,16 +2,12 @@ import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
-import { Categoria } from './categ';
 import { EditaProduto } from './editProduct';
 Icon.loadFont();
 
 export default function Product(props) {
     const navigation = props.navigation;
     const produtos = props.route.params.produtos;
-    const goToScreen3 = () => {
-        navigation.push("Categoria");
-    };
     const goToScreen5 = (produto) => {
         navigation.push("EditaProduto", {produto:produto});
 
@@ -21,9 +17,6 @@ export default function Product(props) {
     }
     return (
         <View nave={navigation}>
-            <View style={styles.prod}>
-                <Button color='#00bb22' title="Alterar configurações da categoria" onPress={goToScreen3} />
-            </View>
             {produtos.map((produto) => {
                 let img;
                 if (produto.imagem === 'orange') {

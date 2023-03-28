@@ -2,7 +2,6 @@ import React, { useState, useEffect, Component } from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
-import { Categoria } from './categ';
 import { EditaProduto } from './editProduct';
 
 Icon.loadFont();

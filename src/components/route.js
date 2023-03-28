@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Configs } from './Configs';
 import { Product } from './product';
-import { Categoria } from './categ';
 import { EditaProduto } from './editProduct';
 
 const Stack = createNativeStackNavigator();
@@ -18,8 +17,6 @@ export default function Route() {
                     component={Product} />
                 <Stack.Screen name="Configurações"
                     component={Configs} />
-                <Stack.Screen name="Categoria"
-                    component={Categoria} />
                 <Stack.Screen name="Edita Produto"
                     component={EditaProduto} />
             </Stack.Navigator>

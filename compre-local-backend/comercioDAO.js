@@ -44,9 +44,51 @@ class ComercioDAO {
             }
         })
     }
-    buscaSolicitacoesAtivas(idComercio){
-        let buscaIdSolicitacoesAtivas = this.connection.consulta('SELECT * FROM VENDA WHERE ID_COMERCIO = ' + idComercio);
+    buscaSolicitacoesAtivas(idComercio) {
+        let buscaIdSolicitacoesAtivas = this.connection.consulta("SELECT VENDA.ID, VENDA.TIPO, VENDA.VALOR, VENDA.DATA_PEDIDO, VENDA.DATA_ENTREGA, VENDA.VOLUME, VENDA.QUANTIDADE, VENDA.PAGAMENTO, PRODUTO.NOME FROM VENDA INNER JOIN PRODUTO ON VENDA.ID_PRODUTO = PRODUTO.ID WHERE VENDA.DATA_ENTREGA = '' AND VENDA.ID_COMERCIO = " + idComercio);
+        return buscaIdSolicitacoesAtivas.map(b => {
+            return {
+                tipoVenda: b.TIPO,
+                numero: b.ID,
+                valor: b.VALOR,
+                dataPedido: b.DATA_PEDIDO,
+                dataEntrega: b.DATA_ENTREGA,
+                volume: b.VOLUME,
+                quantidade: b.QUANTIDADE,
+                produto: b.NOME,
+                pagamento: b.PAGAMENTO
+            }
+        })
+    }
+    buscaHistoricoVenda(idComercio) {
+        let buscaIdSolicitacoesAtivas = this.connection.consulta("SELECT VENDA.ID, VENDA.TIPO, VENDA.VALOR, VENDA.DATA_PEDIDO, VENDA.DATA_ENTREGA, VENDA.VOLUME, VENDA.QUANTIDADE, VENDA.PAGAMENTO, PRODUTO.NOME FROM VENDA INNER JOIN PRODUTO ON VENDA.ID_PRODUTO = PRODUTO.ID WHERE VENDA.ID_COMERCIO = " + idComercio);
+        return buscaIdSolicitacoesAtivas.map(b => {
+            return {
+                tipoVenda: b.TIPO,
+                numero: b.ID,
+                valor: b.VALOR,
+                dataPedido: b.DATA_PEDIDO,
+                dataEntrega: b.DATA_ENTREGA,
+                volume: b.VOLUME,
+                quantidade: b.QUANTIDADE,
+                produto: b.NOME,
+                pagamento: b.PAGAMENTO
+            }
+        })
+    }
+    retornaDadosComercio(id) {
+        const comercio = this.buscaComercio(id); //1 === id
+        const frete = this.buscaFrete(id);
+        const produtos = this.buscarProduto(id);
+        const solicitacoesAtivas = this.buscaSolicitacoesAtivas(id);
+        const histVendas = this.buscaHistoricoVenda(id);
+        comercio.solicitacoesAtivas = solicitacoesAtivas;
+        comercio.histVendas = histVendas;
+        comercio.frete = frete;
+        comercio.produtos = produtos;
+        return comercio;
     }
 }
+
 
 module.exports = ComercioDAO;

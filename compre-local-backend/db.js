@@ -11,7 +11,7 @@ class Database {
 
         this.connection = new MySql({
             host: 'localhost',
-            database: 'compre-local',
+            database: 'back-compre-local',
             user: 'root'
             
         });
