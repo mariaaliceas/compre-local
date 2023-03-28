@@ -30,7 +30,7 @@ module.exports = (app) => {
         if(!pedido.codigo || pedido.codigo === "") {
 
             if(!pedido.total || pedido.total < 0) {
-                return res.status(404).json({error: "Valores inválidos"});
+                return res.status(404).json({error: "Valores inválidossss"});
             }
 
             return res.status(404).json({error: "Código do pedido não informado"});
@@ -53,7 +53,7 @@ module.exports = (app) => {
             return res.status(404).send({err: "Código de pedido deve conter até 255 caracteres."});
         }
 
-        if(!pedido.total === null || pedido.total < 0) {
+        if(pedido.total === null || pedido.total < 0) {
             return res.status(404).json({error: "O valor do pedido não foi informado"});
         }
 
