@@ -1,0 +1,5 @@
+const response1 = await insomnia.send();
+const data=JSON.parse(response1.data);
+expect(response1.status).to.equal(200); 
+
+Os casos testes foram derivados da resposta das requisições que foram testadas no Insomnia. Em cada caso teste foi enviado as variaveis do corpo da requisição com valores difentes para testar as respostas geradas. Quando o status da resposta for 200, significa que o cadastro do usuário foi realizado com sucesso, caso o status seja diferente, ele retorna uma mensagem de erro, sendo essa mensagem de acordo com o erro gerado de acordo do que foi enviado no corpo da requisição.
