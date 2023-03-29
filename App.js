@@ -11,6 +11,9 @@ import {
   Button,
   Alert,
 } from 'react-native';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import Periodicidade from './src/components/periodicidade';
+import DatePickerInput from './src/components/DatePickerInput';
 
 const App = () => {
   return (
@@ -32,19 +35,20 @@ const App = () => {
         </View>
         <View>
           <Text style={styles.campos}>Data de inicio da promoção</Text>
-        <TextInput style={styles.input} value={Date} placeholder="Insira data de inicio" keyboardType='numeric' />
+                      <DatePickerInput />
         </View>
         <View>
           <Text style={styles.campos}>Data de fim da promoção</Text>
-        <TextInput style={styles.input} value={Date} placeholder="Insira data de fim" keyboardType='numeric' />
+                      <DatePickerInput />
+                  
         </View>
         <View>
-          <Text style={styles.campos}>Porcentagem de desconto</Text>
-        <TextInput style={styles.input} value={Date} placeholder="Insira uma porcentagem de desconto" keyboardType='numeric' />
+                  <Text style={styles.campos}>Porcentagem de desconto</Text>
+                  <TextInput style={styles.input} value={Number} placeholder="Insira uma porcentagem de desconto" keyboardType='numeric' />
         </View>
         <View>
           <Text style={styles.campos}>Periodicidade</Text>
-        <TextInput style={styles.input} value={Date} placeholder="Escolha uma periodicidade" keyboardType='numeric' />
+          <Periodicidade />
         </View>
         <View style={styles.fixToText}>
         <Button
@@ -52,7 +56,15 @@ const App = () => {
           title="Salvar"
           onPress={() => Alert.alert('Right button pressed')}
         />
-      </View>
+              </View>
+
+        <View style={styles.fixToText}>
+            <Button
+              color="red"
+              title="Cancelar"
+              onPress={() => Alert.alert('Right button pressed')}
+            />
+              </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -102,8 +114,10 @@ const styles = StyleSheet.create({
   campos: {
     fontSize: 20,
   },
-  fixToText: {
-    justifyContent: 'center',
+    fixToText: {
+        marginTop: 20,
+        marginLeft: 6,
+        justifyContent: 'center',
     width: 150,
   },
 });
