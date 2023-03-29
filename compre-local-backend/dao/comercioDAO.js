@@ -1,3 +1,6 @@
+const FreteDAO = require("./freteDAO");
+const ProdutoDAO = require("./produtoDAO");
+
 class ComercioDAO {
     constructor(connection) {
         this.connection = connection;
@@ -17,33 +20,7 @@ class ComercioDAO {
             id: buscaIdComercio[0].ID
         }
     }
-    buscaFrete(idComercio) {
-        let buscaIdFrete = this.connection.consulta('SELECT * FROM FRETE WHERE ID_COMERCIO = ' + idComercio);
-        let buscaFreteValores = this.connection.consulta('SELECT * FROM VALOR_FRETE WHERE ID_FRETE = ' + buscaIdFrete[0].ID);
-        return {
-            distanciaMax: buscaIdFrete[0].DISTANCIA_MAXIMA,
-            tipo: buscaIdFrete[0].TIPO,
-            valores: buscaFreteValores.map(b => {
-                return {
-                    valor: b.VALOR,
-                    distanciaLim: b.DISTANCIA_LIMITE
-                }
-            })
-        }
-
-    }
-    buscarProduto(idComercio) {
-        let buscaIdProduto = this.connection.consulta('SELECT * FROM PRODUTO WHERE ID_COMERCIO = ' + idComercio);
-        return buscaIdProduto.map(b => {
-            return {
-                nome: b.NOME,
-                imagem: b.IMAGEM,
-                preco: b.PRECO,
-                estoque: b.ESTOQUE,
-                tipoVenda: b.TIPO_VENDA
-            }
-        })
-    }
+    
     buscaSolicitacoesAtivas(idComercio) {
         let buscaIdSolicitacoesAtivas = this.connection.consulta("SELECT VENDA.ID, VENDA.TIPO, VENDA.VALOR, VENDA.DATA_PEDIDO, VENDA.DATA_ENTREGA, VENDA.VOLUME, VENDA.QUANTIDADE, VENDA.PAGAMENTO, PRODUTO.NOME FROM VENDA INNER JOIN PRODUTO ON VENDA.ID_PRODUTO = PRODUTO.ID WHERE VENDA.DATA_ENTREGA = '' AND VENDA.ID_COMERCIO = " + idComercio);
         return buscaIdSolicitacoesAtivas.map(b => {
@@ -78,8 +55,8 @@ class ComercioDAO {
     }
     retornaDadosComercio(id) {
         const comercio = this.buscaComercio(id); //1 === id
-        const frete = this.buscaFrete(id);
-        const produtos = this.buscarProduto(id);
+        const frete = new FreteDAO(this.connection).buscaFrete(id);
+        const produtos = new ProdutoDAO(this.connection).buscarProduto(id);
         const solicitacoesAtivas = this.buscaSolicitacoesAtivas(id);
         const histVendas = this.buscaHistoricoVenda(id);
         comercio.solicitacoesAtivas = solicitacoesAtivas;

@@ -6,6 +6,7 @@ class FretesContoller {
     }
     atualizaFrete(req, res) {
         const {id, tipo, distanciaMax,valor, distanciaLim} = req.body;
+        console.log(req.body);
         const frete = new FreteDAO(this.connection).atualizaDadosFrete(id, tipo, distanciaMax, valor, distanciaLim);
         res.send(frete);
     }

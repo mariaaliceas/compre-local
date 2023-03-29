@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
+import axios from 'axios';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, Button, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-router-dom';
@@ -7,14 +8,27 @@ Icon.loadFont();
 
 export default function Product(props) {
     const navigation = props.navigation;
-    const produtos = props.route.params.produtos;
+    const comercio = props.route.params.comercio;
+    const [salvando, setSalvando] = useState(true);
+    const [produtos, setProdutos] = useState([]);
     const goToScreen5 = (produto) => {
-        navigation.push("EditaProduto", {produto:produto});
+        navigation.push("EditaProduto", { produto: produto, navigation });
 
     };
     const goToScreen6 = () => {
-        navigation.push("AdicionaProduto");
+        navigation.push("AdicionaProduto", {comercio, navigation });
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (!salvando) {
+                return
+            }
+            const result = await axios.get(`http://localhost:3000/produtos/comercio/${comercio.id}`);
+            setProdutos(result.data)
+        }
+        fetchData();
+    });
     return (
         <View nave={navigation}>
             {produtos.map((produto) => {
@@ -24,6 +38,12 @@ export default function Product(props) {
                 }
                 if (produto.imagem === 'lemon') {
                     img = require('../../assets/limao.png');
+                }
+                if (produto.imagem === 'leite') {
+                    img = require('../../assets/leite.png');
+                }
+                if (produto.imagem === 'maca') {
+                    img = require('../../assets/maca.png');
                 }
                 return (<View style={styles.img}>
                     <Image
@@ -40,7 +60,7 @@ export default function Product(props) {
                     </View>
                 </View>)
             })}
-            
+
             <View style={styles.prod}>
                 <Button color='#00bb22' title="Adicionar produto" onPress={goToScreen6} />
             </View>
