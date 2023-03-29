@@ -6,10 +6,12 @@ class ComercioController {
     }
     buscaComercio(req, res) {
         const idComercio = req.params.id;
-        const comercio = new ComercioDAO(this.connection).retornaDadosComercio(idComercio);
+        const comercio = this.getDAO().retornaDadosComercio(idComercio);
         res.send(comercio);
     }
-
+    getDAO() {
+        return new ComercioDAO(this.connection);
+    }
 }
 
 module.exports=ComercioController;
