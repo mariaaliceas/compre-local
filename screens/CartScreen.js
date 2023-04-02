@@ -6,7 +6,7 @@ import axios from 'axios';
 const Cart = ({ route, navigation }) => {
   const params = route.params;
   const usuario = params.usuario;
-  const idUsuario = usuario[0].idUsuario;
+  const idUsuario = usuario.idUsuario;
   
   const [data, setData] = useState([]);
 

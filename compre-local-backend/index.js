@@ -7,7 +7,7 @@ app.database = database;
 
 const consign = require('consign');
 consign()
-    .then('./api')
+    .then('./modules')
     .then('./routes/routes.js')
     .into(app)
 

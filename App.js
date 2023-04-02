@@ -19,7 +19,7 @@ import axios from 'axios';
 
 var iconHeight = 26;
 var iconWidth = 26;
-var userId = 3;
+var userId = 2;
 
 const HomeScreen = ({ navigation }) => {
   global.api_ip = 'http://192.168.237.154:3002';
@@ -48,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
           <SafeAreaView style={styles.containerSafeArea}>
             <ScrollView style={styles.container} >
               <View style={styles.greetingContainer}>
-                <Text style={styles.greetingText}>Olá, {usuarioInfo.map(user=>(user.nome))}</Text>
+                <Text style={styles.greetingText}>Olá, {usuarioInfo.nome}</Text>
                 <Image
                   style={styles.avatar}
                   source={require('./assets/avatar.png')} />

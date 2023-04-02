@@ -1,7 +1,9 @@
+const CategoriesDAO = require('../categories/categoriesDAO.js');
+
 module.exports = (app) => {
     const get = async (req, res) => {
-        const categories = await app.database("categories").select("*");
-
+        var Categories = getCategoriesDAO();
+        const categories = await Categories.get();
         return res.json(categories);
     }
 
@@ -12,7 +14,8 @@ module.exports = (app) => {
             return res.status(400).json({ err: "Id da categoria não informado"});
         }
 
-        category = await app.database("categories").where({ id: idCategory }).first();
+        var Categories = getCategoriesDAO();
+        const category = await Categories.getById(idCategory);
 
         if (!category){
             return res.status(400).json({ err: "Categoria não encontrada"});
@@ -32,17 +35,13 @@ module.exports = (app) => {
 
         category.image = "category.jpg";
 
+        var Categories = getCategoriesDAO();
         if (req.params.id) {
-            await app.database("categories")
-                .update(category)
-                .where({ id: category.id })
-                .then(() => res.status(200).json({success: "Categoria atualizada com sucesso!"}))
-                .catch((err) => res.status(500).send(err));
+            const response = await Categories.update(category);
+            return res.status(response.code).json(response.message);
         } else {
-            await app.database("categories")
-                .insert(category)
-                .then(() => res.status(200).json({success: "Categoria cadastrada com sucesso!"}))
-                .catch((err) => res.status(500).send(err));
+            const response = await Categories.insert(category);
+            return res.status(response.code).json(response.message);
         }
     }
 
@@ -63,6 +62,10 @@ module.exports = (app) => {
         await app.database("categories").where({ id: idCategory }).del();
 
         res.status(204).json({success: "Categoria excluída com sucesso"});
+    }
+
+    const getCategoriesDAO = () => {
+        return new CategoriesDAO(app);
     }
 
     return { get, getById, save, remove }

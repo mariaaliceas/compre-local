@@ -13,14 +13,14 @@ const FinalizarCompra = ({ route, navigation }) => {
     useEffect(() => {
         const fetchData = async () => {
           const result = await axios.get(global.api_ip+ '/users/' + params.usuario);
-          const user = result.data;
-          setUser(user);
+          const userInfo = result.data;
+          setUser(userInfo);
         };
     
         fetchData();
       }, []);
 
-    const finalizarCompra = () => {
+    const persistePedido = () => {
       var date = new Date().getDate().toString();
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear().toString();
@@ -32,7 +32,7 @@ const FinalizarCompra = ({ route, navigation }) => {
       var tpPagamento = 'Pagamento na entrega';
       var idUsuario = params.usuario;
 
-      axios.post('http://192.168.237.136:3002/compra/finalizar-pedido',{
+      axios.post(global.api_ip + '/compra/finalizar-pedido',{
         codigo: codigo,
         idUsuario: idUsuario,
         tpPagamento: tpPagamento,
@@ -46,6 +46,7 @@ const FinalizarCompra = ({ route, navigation }) => {
         })
       })
       .catch ((err) => {
+        console.log(err);
         Alert.alert(err.response.data.err)
       })
     }
@@ -71,7 +72,7 @@ const FinalizarCompra = ({ route, navigation }) => {
                     <Text style={styles.adress}>Endereco</Text>
                 </View>
                 <View style={{marginLeft: 10}}>
-                    <Text style={{fontSize:20}}>{user.map(item => item.endereco)}</Text>
+                    <Text style={{fontSize:20}}>{user.endereco}</Text>
                     <Text style={{color: 'green', fontSize: 20}}>(Frete: R$ 4,00)</Text>
                 </View>
             </View>
@@ -96,7 +97,7 @@ const FinalizarCompra = ({ route, navigation }) => {
             <View style={{marginBottom: 20}}>
                 <TouchableOpacity 
                     style={{width: '90%', padding:10, backgroundColor: 'green', borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}
-                    onPress={() => {finalizarCompra()}}
+                    onPress={() => {persistePedido()}}
                 >
                     <Text style={{color: 'white', fontSize: 24}}>Finalizar Compra</Text>
                     <Icon name="shopping-cart" height={20} width={20} color="white" />
