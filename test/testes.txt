@@ -1,0 +1,84 @@
+CASO DE TESTES 1
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.error;
+console.log(result);
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('Código do pedido não informado');
+
+CASO DE TESTES 2
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.error;
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('Código do pedido não informado');
+
+CASO DE TESTES 3
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.err;
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('Código do pedido já existe');
+
+CASO DE TESTES 4
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('string');
+expect(body).to.equal('Pedido inserido com sucesso');
+
+CASO DE TESTES 5
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.err;
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('Código de pedido deve conter até 255 caracteres.');
+
+CASO DE TESTES 6
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.success;
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('Valores inválidos');
+
+CASO DE TESTES 7
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+const result = body.err;
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('object');
+expect(result).to.be.an('string');
+expect(result).to.equal('O valor do pedido não foi informado');
+
+CASO DE TESTES 8
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('string');
+expect(body).to.equal('Pedido inserido com sucesso');
+
+CASO DE TESTES 9
+const response1 = await insomnia.send();
+console.log(response1);
+const body = JSON.parse(response1.data);
+expect(response1.status).to.equal(200);
+expect(body).to.be.an('string');
+expect(body).to.equal('Pedido inserido com sucesso');
