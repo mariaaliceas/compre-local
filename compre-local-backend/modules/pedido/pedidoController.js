@@ -93,9 +93,7 @@ module.exports = (app) => {
         const data = { ...req.body };
 
         var Carrinho = getCarrinhoDAO();
-        const carrinhoExists = Carrinho.getCarrinhoById(data.idCarrinho);
-
-        // carrinhoExists = await app.database("carrinho").where({ idCarrinho: data.idCarrinho }).first();
+        const carrinhoExists = await Carrinho.getCarrinhoById(data.idCarrinho);
 
         if (!carrinhoExists) {
             return res.status(404).json("Carrinho não encontrado");
@@ -104,19 +102,12 @@ module.exports = (app) => {
         try {
             const ItemCompra = getItemCompraDAO();
             await ItemCompra.remove(data.idCarrinho);
-            // await app.database("itemCompra")
-            // .where({ idCarrinho: data.idCarrinho })
-            // .del();   
         } catch (error) {
             return res.status(404).json("Ocorreu um erro ao registrar o pedido.");
         }
 
         try {
-            await Carrinho.remove(data.idCarrinho);
-            // return res.status(response.code).json(response.message);
-            // await app.database("carrinho")
-            // .where({ idCarrinho: data.idCarrinho })
-            // .del();   
+            await Carrinho.remove(data.idCarrinho); 
         } catch (error) {
             return res.status(404).json("Ocorreu um erro ao registrar o pedido.");
         }
