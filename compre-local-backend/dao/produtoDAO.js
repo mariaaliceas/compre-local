@@ -18,18 +18,13 @@ class ProdutoDAO {
         this.connection.consulta(`DELETE FROM PRODUTO WHERE ID = ${id}`)
 
     }
-    criaProduto(tipo,idComercio, nome, estoque, preco, tipoEstoque, tipoPreco) {
+    criaProduto(tipo, idComercio, nome, estoque, preco, tipoEstoque, tipoPreco) {
         const identificacao = this.connection.consulta(`SELECT MAX(ID) AS MAXIMO_ID FROM PRODUTO`);
-        console.log(`INSERT INTO PRODUTO 
-        (id, id_comercio, tipo, nome, estoque, preco) 
-        VALUES 
-        (${identificacao[0].MAXIMO_ID + 1}, ${tipo}, ${nome}, ${estoque}, ${preco})`);
-
         this.connection.consulta(`INSERT INTO PRODUTO 
         (id, id_comercio, tipo_venda, nome, estoque, preco) 
         VALUES 
         (${identificacao[0].MAXIMO_ID + 1}, '${idComercio}', '${tipo}', '${nome}', '${estoque}', '${preco}')`);
-        
+
     }
 
     buscarProduto(idComercio) {

@@ -6,19 +6,16 @@ class ProdutoContoller {
     }
     atualizaProduto(req, res) {
         const { id, tipo, nome, estoque, preco, tipoEstoque, tipoPreco } = req.body;
-        console.log(req.body);
         const produto = this.getDAO().atualizaDadosProduto(id, tipo, nome, estoque, preco, tipoEstoque, tipoPreco);
         res.send(produto);
     }
     excluiProduto(req, res) {
         const { id } = req.params;
-        console.log(req.params);
         const produto = this.getDAO().excluiProduto(id);
         res.send(produto);
     }
     criaProduto(req, res) {
         const { tipo, idComercio, nome, estoque, preco, tipoEstoque, tipoPreco } = req.body;
-        console.log(req.body);
         const produto = this.getDAO().criaProduto(tipo, idComercio, nome, estoque, preco, tipoEstoque, tipoPreco);
         res.send(produto);
     }
